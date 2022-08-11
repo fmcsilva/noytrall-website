@@ -12,7 +12,7 @@ type tProps = {
 };
 
 const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
-  const { title, qAndA, topics } = data;
+  const { title, qAndA, topics, relatedArticles } = data;
 
   const renderQAndA = () => {
     if (!qAndA) return null;
@@ -73,6 +73,23 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
     });
   };
 
+  const renderRelatedArticles = () => {
+    if (!relatedArticles) return null;
+
+    return (
+      <div className="uk-margin-large">
+        <h2>Related articles</h2>
+        <ul className="uk-list">
+          {relatedArticles.map(({ title, link }) => (
+            <li>
+              <a href={link}>{title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <div id="" className="uk-section uk-section-default uk-padding-small">
       <div className="uk-container uk-container-large">
@@ -86,7 +103,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
                 <ul data-uk-accordion>{renderQAndA()}</ul>
               </div>
               <div>{renderTopics()}</div>
-              {children}
+              {renderRelatedArticles()}
             </div>
           </div>
         </div>
@@ -102,7 +119,7 @@ const SideNavbar: React.FC = () => {
     return HELP_LIST.map(({ topics, qAndA, title, link }) => (
       <li
         key={title}
-        className={`uk-parent ${pathname === "link" ? "uk-open" : ""}`}
+        className={`uk-parent ${pathname === link ? "uk-open" : ""}`}
       >
         <a href="#">{title}</a>
         <ul className="uk-nav-sub">
@@ -146,7 +163,7 @@ const DidYouFindWhatYouWereLookingFor: React.FC = () => {
                 Did you find what you were looking for?
               </span>
               <br />
-              If not
+              If not{" "}
               <a type="button" uk-toggle="target: #dropaline">
                 drop us a line
               </a>
@@ -165,6 +182,11 @@ const DidYouFindWhatYouWereLookingFor: React.FC = () => {
               >
                 No
               </button>
+            </div>
+            <div className="uk-text-right">
+              <span className="uk-text-muted uk-text-small">
+                1 out of 4 found this helpful
+              </span>
             </div>
           </div>
         </div>

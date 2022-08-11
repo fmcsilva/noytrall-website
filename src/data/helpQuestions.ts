@@ -2,11 +2,14 @@ export type tHelpQuestion = { question: string; answer: string | string[] };
 
 export type tHelpTopic = { topic: string; qAndA: tHelpQuestion[] };
 
+export type tHelpRelatedArticles = { title: string; link: string };
+
 export type tHelpContent = {
   title: string;
   link: string;
   topics?: tHelpTopic[];
   qAndA?: tHelpQuestion[];
+  relatedArticles?: tHelpRelatedArticles[];
 };
 
 export const ABOUT_NOYTRALL: tHelpContent = {
@@ -43,6 +46,20 @@ export const ABOUT_NOYTRALL: tHelpContent = {
       question: "How does noytral make money?",
       answer:
         "While the app is free for guests, accommodations pay for our service.",
+    },
+  ],
+  relatedArticles: [
+    { title: "Can I book from noytrall?", link: "#" },
+    { title: "How can I access my reservation?", link: "#" },
+    { title: "May I change my reservation?", link: "#" },
+    {
+      title:
+        "How do I get more information about room or accommodation amenities?",
+      link: "#",
+    },
+    {
+      title: "I can't find my confirmation email. What should I do?",
+      link: "#",
     },
   ],
 };
@@ -182,6 +199,20 @@ export const GUESTS: tHelpContent = {
       ],
     },
   ],
+  relatedArticles: [
+    { title: "Can I book from noytrall?", link: "#" },
+    { title: "How can I access my reservation?", link: "#" },
+    { title: "May I change my reservation?", link: "#" },
+    {
+      title:
+        "How do I get more information about room or accommodation amenities?",
+      link: "#",
+    },
+    {
+      title: "I can't find my confirmation email. What should I do?",
+      link: "#",
+    },
+  ],
 };
 export const ACCOMODATIONS: tHelpContent = {
   title: "Accommodations",
@@ -266,6 +297,20 @@ export const ACCOMODATIONS: tHelpContent = {
     { topic: "About the data collected", qAndA: [] },
     { topic: "About the price", qAndA: [] },
   ],
+  relatedArticles: [
+    { title: "Can I book from noytrall?", link: "#" },
+    { title: "How can I access my reservation?", link: "#" },
+    { title: "May I change my reservation?", link: "#" },
+    {
+      title:
+        "How do I get more information about room or accommodation amenities?",
+      link: "#",
+    },
+    {
+      title: "I can't find my confirmation email. What should I do?",
+      link: "#",
+    },
+  ],
 };
 export const SUSTAINABLE_PARTNERS: tHelpContent = {
   title: "Sustainable partners",
@@ -287,6 +332,20 @@ export const SUSTAINABLE_PARTNERS: tHelpContent = {
         "Yes. Expanding the community is a great way to increase opportunities to be more sustainable. Please contact us through the email help@noytrall.pt.",
     },
   ],
+  relatedArticles: [
+    { title: "Can I book from noytrall?", link: "#" },
+    { title: "How can I access my reservation?", link: "#" },
+    { title: "May I change my reservation?", link: "#" },
+    {
+      title:
+        "How do I get more information about room or accommodation amenities?",
+      link: "#",
+    },
+    {
+      title: "I can't find my confirmation email. What should I do?",
+      link: "#",
+    },
+  ],
 };
 export const PRIVACY: tHelpContent = {
   title: "Privacy",
@@ -295,6 +354,20 @@ export const PRIVACY: tHelpContent = {
     { question: "What type of data does noytrall collect?", answer: "" },
     { question: "Why does noytrall need data from guests?", answer: "" },
     { question: "How does noytrall guarantee guest privacy?", answer: "" },
+  ],
+  relatedArticles: [
+    { title: "Can I book from noytrall?", link: "#" },
+    { title: "How can I access my reservation?", link: "#" },
+    { title: "May I change my reservation?", link: "#" },
+    {
+      title:
+        "How do I get more information about room or accommodation amenities?",
+      link: "#",
+    },
+    {
+      title: "I can't find my confirmation email. What should I do?",
+      link: "#",
+    },
   ],
 };
 

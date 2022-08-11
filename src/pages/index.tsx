@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { HeadFC } from "gatsby";
 
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -29,11 +29,13 @@ import facePedro from "../images/face-pedro.png";
 import DownloadTheApp from "../components/DownloadTheApp";
 
 import type { PageProps } from "gatsby";
+import Menu from "../components/Menu";
 
 const IndexPage = () => {
   return (
     <Layout>
       <Header />
+      <Menu />
       <Hero />
       <Reviews />
       <Statistics />

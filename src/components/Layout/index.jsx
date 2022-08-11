@@ -6,8 +6,9 @@ import React from "react";
 import "uikit/dist/css/uikit.css";
 // import UIkit from "uikit";
 // import Icons from "uikit/dist/js/uikit-icons";
+// UIkit.use(Icons); // See: https://getuikit.com/docs/webpack
 
-// import { StaticQuery, graphql } from "gatsby";
+import { StaticQuery, graphql } from "gatsby";
 
 /* const TemplateWrapper = ({
   children,
@@ -71,15 +72,15 @@ TemplateWrapper.propTypes = {
 }; */
 
 class MainLayout extends React.Component {
-  componentDidMount() {
-    try {
-      this.UIkit = require("uikit/dist/js/uikit");
-      this.Icons = require("uikit/dist/js/uikit-icons");
-      this.UIkit.use(this.Icons);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // componentDidMount() {
+  //   try {
+  //     this.UIkit = require("uikit/dist/js/uikit");
+  //     this.Icons = require("uikit/dist/js/uikit-icons");
+  //     this.UIkit.use(this.Icons);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
   render() {
     // const pageDescription =
     //   this.props.description !== undefined
@@ -134,6 +135,7 @@ class MainLayout extends React.Component {
           location={this.props.location}
           menu={this.props.data.menu.edges[0]}
         /> */}
+
         <div>{this.props.children}</div>
         {/* <Footer /> */}
       </div>

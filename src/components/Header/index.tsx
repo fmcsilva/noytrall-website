@@ -12,7 +12,7 @@ const Header: React.FC<tProps> = ({}) => {
     const list = [
       { path: "/", text: "FOR GUESTS" },
       { path: "/hotels", text: "FOR HOTELS" },
-      { path: "/partners", text: "FOR PARTNERS" },
+      // { path: "/partners", text: "FOR PARTNERS" },
       { path: "/providers", text: "FOR PROVIDERS" },
       { path: "/help", text: "HELP AND SUPPORT" },
     ];
