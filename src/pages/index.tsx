@@ -26,9 +26,9 @@ import faceMarco from "../images/face-marco.png";
 import faceMiguel from "../images/face-miguel.png";
 import facePedro from "../images/face-pedro.png";
 
-import googleStoreLogo from "../images/logo-google-store.png";
-import appleStoreLogo from "../images/logo-apple-store.png";
 import DownloadTheApp from "../components/DownloadTheApp";
+
+import type { PageProps } from "gatsby";
 
 const IndexPage = () => {
   return (

@@ -1,11 +1,13 @@
 import React from "react";
 
 import logo from "../../images/logo-noytrall-color.png";
+import { useLocation } from "@reach/router";
 
-const Header: React.FC = () => {
-  const {
-    location: { pathname },
-  } = window;
+type tProps = {};
+
+const Header: React.FC<tProps> = ({}) => {
+  const { pathname } = useLocation();
+
   const renderButtons = () => {
     const list = [
       { path: "/", text: "FOR GUESTS" },

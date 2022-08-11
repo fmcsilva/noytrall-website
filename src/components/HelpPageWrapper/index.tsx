@@ -4,6 +4,8 @@ import HELP_LIST, {
   tHelpQuestion,
 } from "../../data/helpQuestions";
 
+import { useLocation } from "@reach/router";
+
 type tProps = {
   data: tHelpContent;
   children?: any;
@@ -95,13 +97,10 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
 };
 
 const SideNavbar: React.FC = () => {
+  const { pathname } = useLocation();
   const renderContent = () => {
     return HELP_LIST.map(({ topics, qAndA, title, link }) => (
-      <li
-        className={`uk-parent ${
-          window.location.pathname === "link" ? "uk-open" : ""
-        }`}
-      >
+      <li className={`uk-parent ${pathname === "link" ? "uk-open" : ""}`}>
         <a href="#">{title}</a>
         <ul className="uk-nav-sub">
           {qAndA &&
