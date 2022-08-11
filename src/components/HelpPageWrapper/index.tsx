@@ -18,7 +18,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
     if (!qAndA) return null;
     return qAndA.map(({ question, answer }) => {
       return (
-        <li>
+        <li key={question}>
           <a className="uk-accordion-title" href="#">
             {question}
           </a>
@@ -28,7 +28,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
             ) : (
               <>
                 {answer.map((text) => (
-                  <p>{text}</p>
+                  <p key={text}>{text}</p>
                 ))}
               </>
             )}
@@ -43,12 +43,12 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
     if (!topics) return null;
     return topics.map(({ topic, qAndA }) => {
       return (
-        <>
+        <div key={topic}>
           <h3 className="uk-heading-bullet">{topic}</h3>
           <ul data-uk-accordion>
             {qAndA.map(({ question, answer }) => {
               return (
-                <li>
+                <li key={question}>
                   <a className="uk-accordion-title" href="#">
                     <span className="uk-h4">{question}</span>
                   </a>
@@ -58,7 +58,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
                     ) : (
                       <>
                         {answer.map((text) => (
-                          <p>{text}</p>
+                          <p key={text}>{text}</p>
                         ))}
                       </>
                     )}
@@ -68,7 +68,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
               );
             })}
           </ul>
-        </>
+        </div>
       );
     });
   };
@@ -100,18 +100,21 @@ const SideNavbar: React.FC = () => {
   const { pathname } = useLocation();
   const renderContent = () => {
     return HELP_LIST.map(({ topics, qAndA, title, link }) => (
-      <li className={`uk-parent ${pathname === "link" ? "uk-open" : ""}`}>
+      <li
+        key={title}
+        className={`uk-parent ${pathname === "link" ? "uk-open" : ""}`}
+      >
         <a href="#">{title}</a>
         <ul className="uk-nav-sub">
           {qAndA &&
             qAndA.map(({ question }) => (
-              <li>
+              <li key={question}>
                 <a href={link}>{question}</a>
               </li>
             ))}
           {topics &&
             topics.map(({ topic }) => (
-              <li>
+              <li key={topic}>
                 <a href={link}>{topic}</a>
               </li>
             ))}
@@ -204,7 +207,7 @@ const DropLineModal: React.FC = () => {
         <button
           className="uk-modal-close-default"
           type="button"
-          uk-close
+          data-uk-close
         ></button>
         <div className="uk-modal-header">
           <h2 className="uk-modal-title">Get support</h2>

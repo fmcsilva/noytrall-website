@@ -59,14 +59,14 @@ const Content: React.FC = () => {
   const renderItems = () => {
     return list.map(({ title, qAndA, link, topics }) => {
       return (
-        <div>
+        <div key={title}>
           <div>
             <h3 className="uk-card-title">{title}</h3>
             <ul className="uk-list uk-list-collapse">
               {qAndA &&
                 qAndA.map(({ question }) => {
                   return (
-                    <li>
+                    <li key={question}>
                       <a href={link}>{question}</a>
                     </li>
                   );
@@ -75,7 +75,7 @@ const Content: React.FC = () => {
                 <div>
                   {topics.map(({ topic }) => {
                     return (
-                      <li>
+                      <li key={topic}>
                         <a href={link}>{topic}</a>
                       </li>
                     );
