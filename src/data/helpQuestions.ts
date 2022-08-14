@@ -99,7 +99,7 @@ export const GUESTS: tHelpContent = {
       ],
     },
     {
-      topic: "Gamification & Rewards",
+      topic: "Rewards",
       qAndA: [
         {
           question: "How does the reward system work?",
@@ -313,13 +313,13 @@ export const ACCOMODATIONS: tHelpContent = {
   ],
 };
 export const SUSTAINABLE_PARTNERS: tHelpContent = {
-  title: "Sustainable partners",
+  title: "Sustainable Partners",
   link: "/help-details-partners",
   qAndA: [
     {
       question: "Why are we creating a sustainability community?",
       answer:
-        "Sustainability is a balance between environmental, economic and social concerns. In our mission to achieve a more sustainable tourism, we increase transparency and responsibility between guests and accommodations, but tourism isn’t just about guests and accommodations. Therefore, we must expand these relationships to encompass a sustainable community to achieve our goal. Local and global partners can interact to create opportunities to improve all pillars of tourism sustainability.",
+        "Sustainability is a balance between environmental, economic and social concerns. In our mission to achieve a more sustainable tourism, we increase transparency and responsibility between guests and accommodations, but tourism isn't just about guests and accommodations. Therefore, we must expand these relationships to encompass a sustainable community to achieve our goal. Local and global partners can interact to create opportunities to improve all pillars of tourism sustainability.",
     },
     {
       question: "What is needed to become a sustainable partner?",
@@ -372,9 +372,9 @@ export const PRIVACY: tHelpContent = {
 };
 
 const HELP_LIST: tHelpContent[] = [
-  ABOUT_NOYTRALL,
   GUESTS,
   ACCOMODATIONS,
+  ABOUT_NOYTRALL,
   SUSTAINABLE_PARTNERS,
   PRIVACY,
 ];

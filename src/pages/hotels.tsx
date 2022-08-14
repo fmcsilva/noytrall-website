@@ -1,7 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-
 import Layout from "../components/layout";
 
 import metrics from "../images/Metrics-bro.png";
@@ -26,14 +23,12 @@ Chart.register(...registerables);
 const Hotels: React.FC = () => {
   return (
     <Layout>
-      <Header />
       <Modal />
       <Hero />
       <Content />
       <Interaction />
       <Graph />
       <Table />
-      <Footer />
     </Layout>
   );
 };
@@ -41,17 +36,15 @@ const Hotels: React.FC = () => {
 const Hero: React.FC = () => {
   return (
     <div
-      className="uk-section uk-section-primary uk-padding-remove uk-flex uk-flex-center uk-flex-middle"
-      data-uk-height-viewport="offset-bottom: 30"
+      className="uk-section uk-section-primary uk-flex uk-flex-center uk-flex-middle"
+      data-uk-height-viewport="offset-top: true; offset-bottom: 20"
     >
       <div id="hero" className="uk-margin-auto uk-padding-large uk-flex-1">
         <div className="uk-container uk-container-large">
           <div>
-            <h1 className="uk-heading-medium">Be smart. Be noytrall.</h1>
+            <h1 className="uk-heading-medium">Save money with your guests.</h1>
             <h2 className="uk-margin-remove">
-              Until now there was no accurate to measure guests consumption.
-              <br />
-              Unknown consumption is unknown costs.
+              Accurate measure room consumption.
             </h2>
             <div className="uk-margin-large">
               <a
@@ -80,54 +73,9 @@ const Content: React.FC = () => {
         </div>
       </div>
 
-      <div id="learnMore" data-uk-modal>
-        <div className="uk-modal-dialog">
-          <button
-            className="uk-modal-close-default"
-            type="button"
-            data-uk-close
-          ></button>
-          <div className="uk-modal-header">
-            <h2 className="uk-modal-title">Energy consumption monitoring</h2>
-          </div>
-          <div className="uk-modal-body">
-            <div className="" data-uk-grid>
-              <div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </p>
-              </div>
-              <div>
-                <img
-                  src={undraw_visual_data_re_mxxo}
-                  width=""
-                  height=""
-                  data-uk-img
-                />
-              </div>
-            </div>
-          </div>
-          <div className="uk-modal-footer uk-text-right">
-            <button
-              className="uk-button uk-button-default uk-border-pill uk-modal-close"
-              type="button"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div className="uk-container uk-container-large uk-margin-large">
         <div className="uk-child-width-1-2@l" data-uk-grid>
-          <div>
+          <div className="uk-padding">
             <div className="uk-label uk-label-primary uk-background-muted">
               <span className="uk-text-muted">Measure</span>
             </div>
@@ -136,15 +84,15 @@ const Content: React.FC = () => {
             </h1>
             <div>
               <h3>Precise, remote and automated monitoring.</h3>
-              <p className="">
+              <h4 className="uk-text-muted uk-margin-remove">
                 Monitor <strong>water</strong> and <strong>energy</strong>{" "}
                 consumption 24/7, whether the room is free or occupied. See what
                 is happening in <strong>real-time</strong> and operate on
                 cloud-based IoT-connected room data.
-              </p>
+              </h4>
             </div>
           </div>
-          <div>
+          <div className="uk-flex uk-flex-bottom uk-flex-center uk-flex-first uk-flex-last@m">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               data-src={metrics}
@@ -155,9 +103,8 @@ const Content: React.FC = () => {
             />
           </div>
         </div>
-
         <div className="uk-child-width-1-2@l" data-uk-grid>
-          <div>
+          <div className="uk-flex uk-flex-center uk-flex-bottom">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               data-src={stats}
@@ -167,7 +114,8 @@ const Content: React.FC = () => {
               data-uk-img
             />
           </div>
-          <div>
+
+          <div className="uk-padding">
             <div className="uk-label uk-label-primary uk-background-muted">
               <span className="uk-text-muted">Manage</span>
             </div>
@@ -176,16 +124,16 @@ const Content: React.FC = () => {
             </h1>
             <div>
               <h3>Ensure effective resource management.</h3>
-              <p>
+              <h4 className="uk-text-muted uk-margin-remove">
                 Build personalized reusable reports within any time frame.
                 Reduce water and energy consumption and lower operating costs.{" "}
-              </p>
+              </h4>
             </div>
           </div>
         </div>
 
         <div className="uk-child-width-1-2@l" data-uk-grid>
-          <div>
+          <div className="uk-padding">
             <div className="uk-label uk-label-primary uk-background-muted">
               <span className="uk-text-muted">Interact</span>
             </div>
@@ -193,15 +141,15 @@ const Content: React.FC = () => {
               Gamify guests' impact.
             </h1>
             <div>
-              <h3 className="">Establish strong and durable relationships.</h3>
-              <p>
+              <h3>Establish strong and durable relationships.</h3>
+              <h4 className="uk-text-muted uk-margin-remove">
                 Interact with guests based on their behavior and award them for
                 being sustainable. Challenge your guests and create group events
                 to boost engagement.
-              </p>
+              </h4>
             </div>
           </div>
-          <div>
+          <div className="uk-flex uk-flex-bottom uk-flex-center uk-flex-first uk-flex-last@m">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               data-src={awards}
@@ -214,7 +162,7 @@ const Content: React.FC = () => {
         </div>
 
         <div className="uk-child-width-1-2@l" data-uk-grid>
-          <div>
+          <div className="uk-flex uk-flex-center uk-flex-bottom">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               data-src={socialMedia}
@@ -224,7 +172,7 @@ const Content: React.FC = () => {
               data-uk-img
             />
           </div>
-          <div>
+          <div className="uk-padding">
             <div className="uk-label uk-label-primary uk-background-muted">
               <span className="uk-text-muted">Transform</span>
             </div>
@@ -232,19 +180,19 @@ const Content: React.FC = () => {
               Revolutionize guests' sustainable experience.
             </h1>
             <div>
-              <h3 className="">Access a network of community partners.</h3>
-              <p>
+              <h3>Access a network of community partners.</h3>
+              <h4 className="uk-text-muted uk-margin-remove">
                 Build trust and loyalty with guests that identify with your
                 vision. Access a vast community of sustainable business offers
                 and grant your guests a truly sustainable experience from our
                 partners.
-              </p>
+              </h4>
             </div>
           </div>
         </div>
 
         <div className="uk-child-width-1-2@l" data-uk-grid>
-          <div>
+          <div className="uk-padding">
             <div className="uk-label uk-label-primary uk-background-muted">
               <span className="uk-text-muted">Improve</span>
             </div>
@@ -253,13 +201,13 @@ const Content: React.FC = () => {
             </h1>
             <div>
               <h3>Implement the hotel's ESG goals. Reduce your footprint.</h3>
-              <p>
+              <h4 className="uk-text-muted uk-margin-remove">
                 We help you accomplish environmental criteria results. Assess
                 stays impact as you reduce carbon emissions.
-              </p>
+              </h4>
             </div>
           </div>
-          <div>
+          <div className="uk-flex uk-flex-bottom uk-flex-center uk-flex-first uk-flex-last@m">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               data-src={happyEarth}
@@ -272,7 +220,7 @@ const Content: React.FC = () => {
         </div>
 
         <div className="uk-child-width-1-2@l" data-uk-grid>
-          <div>
+          <div className="uk-flex uk-flex-center uk-flex-bottom">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               data-src={pipeline}
@@ -282,7 +230,7 @@ const Content: React.FC = () => {
               data-uk-img
             />
           </div>
-          <div>
+          <div className="uk-padding">
             <div className="uk-label uk-label-primary uk-background-muted">
               <span className="uk-text-muted">Prevent</span>
             </div>
@@ -291,12 +239,12 @@ const Content: React.FC = () => {
             </h1>
             <div>
               <h3>Evaluate asset performance to prevent future damages.</h3>
-              <p>
+              <h4 className="uk-text-muted uk-margin-remove">
                 Preventive maintenance is designed to help determine the
                 condition of in-service equipment in order to assess when
                 maintenance should be performed. This approach promises cost
                 savings over routine or time-based preventive maintenance.
-              </p>
+              </h4>
             </div>
           </div>
         </div>
@@ -528,7 +476,7 @@ const Table: React.FC = () => {
                         <li>Full support</li>
                       </ul>
                       <a
-                        href="javascript:void(0);"
+                        href="#"
                         className="uk-button uk-button-primary uk-button-large uk-border-pill"
                       >
                         Request demo now

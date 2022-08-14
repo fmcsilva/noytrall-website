@@ -3,9 +3,6 @@ import type { HeadFC } from "gatsby";
 
 import Layout from "../components/layout";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-
 import heroImg from "../images/photo-1653624831607-d8077a17401b.webp";
 
 import revenue from "../images/Revenue-bro.png";
@@ -34,17 +31,14 @@ import Menu from "../components/Menu";
 const IndexPage = () => {
   return (
     <Layout>
-      <Header />
       <Menu />
       <Hero />
-      <Reviews />
-      <Statistics />
       <HowItWorks />
       <KeyFeatures />
-      <AvailableHotels />
-      <MeetTheTeam />
       <DownloadTheApp />
-      <Footer />
+      <AvailableHotels />
+      <Statistics />
+      <Reviews />
     </Layout>
   );
 };
@@ -106,7 +100,7 @@ const Reviews: React.FC = () => {
               data-uk-grid
             >
               <li>
-                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small">
+                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small ">
                   <div className="uk-card-badge uk-label">NEW</div>
                   <h3 className="uk-card-title">
                     Once you go noytrall you will never go back!
@@ -127,7 +121,7 @@ const Reviews: React.FC = () => {
                 </div>
               </li>
               <li>
-                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small">
+                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small ">
                   <div className="uk-card-badge uk-label">NEW</div>
                   <h3 className="uk-card-title">
                     No more averege rates. Just pay for what you consume!
@@ -148,7 +142,7 @@ const Reviews: React.FC = () => {
                 </div>
               </li>
               <li>
-                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small">
+                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small ">
                   <h3 className="uk-card-title">
                     Not paying for others consumption anymore.
                   </h3>
@@ -168,7 +162,7 @@ const Reviews: React.FC = () => {
                 </div>
               </li>
               <li>
-                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small">
+                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small ">
                   <h3 className="uk-card-title">
                     Wow! Saving a lot of money on my stays.
                   </h3>
@@ -188,7 +182,7 @@ const Reviews: React.FC = () => {
                 </div>
               </li>
               <li>
-                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small">
+                <div className="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-small ">
                   <h3 className="uk-card-title">
                     Thank you! Same hotel, lowest charge ever.
                   </h3>
@@ -217,14 +211,11 @@ const Reviews: React.FC = () => {
 
 const Statistics: React.FC = () => {
   return (
-    <div
-      id="stats"
-      className="uk-section uk-section-xsmall uk-section-secondary"
-    >
+    <div id="stats" className="uk-section uk-section-xsmall uk-section-primary">
       <div className="uk-container uk-container-large">
         <div
           className="uk-position-relative"
-          data-uk-slideshow="autoplay: true; animation: pull; autoplay-interval: 3000; max-height: 300"
+          data-uk-slideshow="autoplay: true; animation: pull; autoplay-interval: 3000; min-height: 100; max-height: 400"
         >
           <ul className="uk-slideshow-items">
             <li>
@@ -245,7 +236,7 @@ const Statistics: React.FC = () => {
               </div>
             </li>
             <li>
-              <div className="uk-position-center uk-position-small uk-text-center uk-light">
+              <div className="uk-position-center uk-position-small uk-text-center">
                 <div>
                   <h1 className="uk-heading-medium uk-text-primary uk-margin-remove-vertical">
                     <span className="uk-text-bold">73%</span>
@@ -262,7 +253,7 @@ const Statistics: React.FC = () => {
               </div>
             </li>
             <li>
-              <div className="uk-position-center uk-position-small uk-text-center uk-light">
+              <div className="uk-position-center uk-position-small uk-text-center">
                 <div>
                   <h1 className="uk-heading-medium uk-text-primary uk-margin-remove-vertical">
                     <span className="uk-text-bold">61%</span>
@@ -289,7 +280,7 @@ const Statistics: React.FC = () => {
 const HowItWorks: React.FC = () => {
   return (
     <div id="how" className="uk-section uk-section-default">
-      <div className="uk-container uk-container-small">
+      <div className="uk-container uk-container-large">
         <h1 className="uk-heading-small uk-text-bold uk-text-center uk-margin-large">
           How it works
         </h1>
@@ -312,6 +303,7 @@ const HowItWorks: React.FC = () => {
             />
           </div>
         </div>
+
         <div className="uk-child-width-1-2@m" data-uk-grid>
           <div className="uk-flex uk-flex-center uk-flex-bottom">
             <img
@@ -332,6 +324,7 @@ const HowItWorks: React.FC = () => {
             </h4>
           </div>
         </div>
+
         <div className="uk-child-width-1-2@m" data-uk-grid>
           <div className="uk-padding">
             <h2>Earn while enjoying your stay.</h2>
@@ -453,7 +446,14 @@ const AvailableHotels: React.FC = () => {
     return list.map(({ img }) => {
       return (
         <div key={img}>
-          <img data-src={img} width="500" height="500" alt="" data-uk-img />
+          <img
+            style={{ background: "none" }}
+            data-src={img}
+            width="500"
+            height="500"
+            alt=""
+            data-uk-img
+          />
         </div>
       );
     });

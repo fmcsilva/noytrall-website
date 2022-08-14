@@ -1,8 +1,11 @@
 import React from "react";
 import Helmet from "react-helmet";
 
+import Footer from "./Footer";
+import Header from "./Header";
+
 import "../css/uikit.min.css";
-// import "../css/custom-style-noy.css";
+import "../css/custom-style-noy.css";
 // import "../js/uikit.min.js";
 // import "../js/uikit-icons.min.js";
 
@@ -40,58 +43,21 @@ class MainLayout extends React.Component {
 
     return (
       <div>
-        <Helmet
-        // title={this.props.title}
-        // defaultTitle={this.props.title}
-        // titleTemplate="%s | Bay Phillips"
-        // meta={[
-        //   { name: "description", content: pageDescription },
-        //   { name: "keywords", content: pageKeywords },
-        //   { name: "og:title", content: this.props.title },
-        //   { name: "og:description", content: pageDescription },
-        //   { name: "og:url", content: canonicalUrl },
-        //   {
-        //     name: "og:image",
-        //     content: `https:${this.props.previewImageUrl}`,
-        //   },
-        //   { name: "twitter:card", content: "summary" },
-        //   { name: "twitter:creator", content: "@bayphillips" },
-        //   { name: "twitter:site", content: "@bayphillips" },
-        //   { name: "twitter:image:alt", content: this.props.title },
-        //   {
-        //     name: "google-site-verification",
-        //     content: googleSiteVerification,
-        //   },
-        // ]}
-        // script={[
-        //   {
-        //     type: "application/ld+json",
-        //     innerHTML: `${JSON.stringify(this.props.structuredDataJson)}`,
-        //   },
-        // ]}
-        >
-          <html lang="en" />
+        <Helmet>
           <link
             rel="stylesheet"
             href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
           />
-
           <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+          {/* <script src="js/rangeslider-js.min.js"></script> */}
         </Helmet>
-        {/* <NavigationBar
-            location={this.props.location}
-            menu={this.props.data.menu.edges[0]}
-          /> */}
 
+        <Header />
         <div>{this.props.children}</div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }
 }
-
-// export default function Layout({ children }) {
-//   return <div>{children}</div>;
-// }
 
 export default MainLayout;

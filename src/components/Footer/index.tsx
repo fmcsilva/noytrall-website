@@ -12,33 +12,23 @@ const Footer: React.FC = () => {
             <div>
               <ul className="uk-list uk-list-collapse">
                 <li>
-                  <a className="" href="#">
-                    Download the App
+                  <a className="" href="/">
+                    For Guests
                   </a>
                 </li>
                 <li>
-                  <a className="" href="#">
-                    How it works
+                  <a className="" href="/hotels">
+                    For Hotels
                   </a>
                 </li>
                 <li>
-                  <a className="" href="#">
-                    Key Features
+                  <a className="" href="/providers">
+                    For Providers
                   </a>
                 </li>
                 <li>
-                  <a className="" href="#">
-                    Meet the team
-                  </a>
-                </li>
-                <li>
-                  <a className="" href="/business">
-                    For Business
-                  </a>
-                </li>
-                <li>
-                  <a className="" href="/parners">
-                    For Partners
+                  <a className="" href="/help">
+                    Help and Support
                   </a>
                 </li>
               </ul>
@@ -46,18 +36,13 @@ const Footer: React.FC = () => {
             <div>
               <ul className="uk-list uk-list-collapse">
                 <li>
-                  <a className="" href="/help">
-                    Help and Support
+                  <a className="" href="#">
+                    About us
                   </a>
                 </li>
                 <li>
                   <a className="" href="/privacy">
                     Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a className="" href="#">
-                    Corporate
                   </a>
                 </li>
               </ul>
@@ -103,7 +88,7 @@ const Footer: React.FC = () => {
           <div className="uk-margin-large" data-uk-grid>
             <div>
               <img
-                src={iapmei}
+                data-src={iapmei}
                 width="100"
                 height=""
                 alt="iapmei"
@@ -112,7 +97,8 @@ const Footer: React.FC = () => {
             </div>
             <div>
               <img
-                src={portugal2020}
+                style={{ background: "none" }}
+                data-src={portugal2020}
                 width="350"
                 height=""
                 alt="portugal2020"

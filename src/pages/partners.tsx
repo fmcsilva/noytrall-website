@@ -1,18 +1,14 @@
 import React from "react";
 import DownloadTheApp from "../components/DownloadTheApp";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 
 import Layout from "../components/layout";
 
 const Partners: React.FC = () => {
   return (
     <Layout>
-      <Header />
       <Hero />
       <Content />
       <DownloadTheApp />
-      <Footer />
     </Layout>
   );
 };

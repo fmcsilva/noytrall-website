@@ -1,17 +1,15 @@
 import React from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import DownloadTheApp from "../components/DownloadTheApp";
 
 import Layout from "../components/layout";
 
 const Providers: React.FC = () => {
   return (
     <Layout>
-      <Header />
       <Hero />
       <Content />
       <Form />
-      <Footer />
+      <DownloadTheApp />
     </Layout>
   );
 };
@@ -19,8 +17,8 @@ const Providers: React.FC = () => {
 const Hero: React.FC = () => {
   return (
     <div
-      className="uk-section uk-section-primary uk-padding-remove uk-flex uk-flex-center uk-flex-middle"
-      data-uk-height-viewport="offset-bottom: 30"
+      className="uk-section uk-section-primary uk-flex uk-flex-center uk-flex-middle"
+      data-uk-height-viewport="offset-top: true; offset-bottom: 20"
     >
       <div id="hero" className="uk-margin-auto uk-padding-large uk-flex-1">
         <div className="uk-container uk-container-large">
