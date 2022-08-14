@@ -25,7 +25,6 @@ import facePedro from "../images/face-pedro.png";
 
 import DownloadTheApp from "../components/DownloadTheApp";
 
-import type { PageProps } from "gatsby";
 import Menu from "../components/Menu";
 
 const IndexPage = () => {
@@ -46,8 +45,8 @@ const IndexPage = () => {
 const Hero: React.FC = () => {
   return (
     <div
-      className="uk-section uk-section-muted uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-background-fixed uk-background-center-center uk-background-image@s"
-      data-uk-height-viewport="offset-top: true;"
+      className="uk-section uk-section-primary uk-padding-remove uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-background-fixed uk-background-center-center uk-background-image@s"
+      data-uk-height-viewport="offset-top: true; offset-bottom: 20"
       style={{
         backgroundImage: `url(${heroImg})`,
       }}
