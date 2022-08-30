@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
             <div>
               <ul className="uk-list uk-list-collapse">
                 <li>
-                  <a className="" href="#">
+                  <a className="" href="/aboutus">
                     About us
                   </a>
                 </li>
