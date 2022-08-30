@@ -3,9 +3,12 @@ import DownloadTheApp from "../components/DownloadTheApp";
 
 import Layout from "../components/layout";
 
+import Menu from "../components/Menu";
+
 const Partners: React.FC = () => {
   return (
     <Layout>
+      <Menu/>
       <Hero />
       <Content />
       <DownloadTheApp />

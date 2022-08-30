@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import HELP_LIST, { tHelpContent } from "../data/helpQuestions";
 
+import Menu from "../components/Menu";
+
 const Help: React.FC = () => {
   return (
     <Layout>
+      <Menu/>
       <Hero />
       <Content />
     </Layout>

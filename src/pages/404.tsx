@@ -1,48 +1,47 @@
 import * as React from "react"
 import { Link, HeadFC } from "gatsby"
 
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
+import Layout from "../components/layout";
+import Menu from "../components/Menu";
 
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
+import errorPageNotFound from "../images/404 Error Page not Found with people connecting a plug-bro.png" ;
 
 const NotFoundPage = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
+    <Layout>
+      <Menu/>
+      <Main/>
+    </Layout>
   )
 }
+
+const Main: React.FC = () => {
+  return (
+    <div className="uk-section uk-section-default">
+    <div id="404" className="uk-flex uk-flex-center uk-flex-middle uk-flex-1">
+      <div className="uk-container uk-container-small">
+        <div className="uk-text-center">
+          <div>
+            <h1 className="uk-heading-medium">Nothing to see in here.</h1>
+            <p className="uk-text-large uk-text-muted">The page you were looking for could not be found.<br/>It might have been removed, renamed, or did not exist in the first place.</p>
+          </div>
+          <img 
+          className="uk-align-center" 
+          data-src={errorPageNotFound}
+          width="500" 
+          height="" 
+          alt="404. Page not found." 
+          data-uk-img/>
+          <div>
+            <a href="#" className="uk-button uk-button-default uk-border-pill">Go Back</a>
+            <a href="index.htm" className="uk-button uk-button-primary uk-border-pill uk-margin-left">Take me home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  );
+};
 
 export default NotFoundPage
 

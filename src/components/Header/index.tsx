@@ -42,9 +42,8 @@ const Header: React.FC<tProps> = ({}) => {
             <div className="uk-navbar-left">
               <a
                 className="uk-navbar-toggle uk-hidden@m"
-                data-uk-toggle
+                data-uk-toggle="target: #offmenuid"
                 data-uk-navbar-toggle-icon
-                href="#offmenuid"
               ></a>
               <a className="uk-navbar-item uk-logo" href="/">
                 <img data-src={logo} width="250" data-uk-img />

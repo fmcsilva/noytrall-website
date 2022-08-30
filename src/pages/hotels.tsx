@@ -18,11 +18,14 @@ import {
 
 import { Bar } from "react-chartjs-2";
 
+import Menu from "../components/Menu";
+
 Chart.register(...registerables);
 
 const Hotels: React.FC = () => {
   return (
     <Layout>
+      <Menu/>
       <Modal />
       <Hero />
       <Content />
@@ -49,8 +52,7 @@ const Hero: React.FC = () => {
             <div className="uk-margin-large">
               <a
                 className="uk-button uk-button-primary uk-button-large uk-border-pill"
-                href="#modal-simulator-stack"
-                data-uk-toggle
+                data-uk-toggle="target: #modal-simulator-stack"
               >
                 Estimate your savings now
               </a>
@@ -336,8 +338,7 @@ const Interaction: React.FC = () => {
           <div className="uk-flex uk-flex-center uk-margin-large">
             <a
               className="uk-button uk-button-primary uk-button-large uk-border-pill"
-              href="#modal-simulator-stack"
-              data-uk-toggle
+              data-uk-toggle="target: #modal-simulator-stack"
             >
               Calculate Estimate Now
             </a>
@@ -719,23 +720,14 @@ const Modal: React.FC = () => {
             </div>
             <div className="uk-modal-footer uk-text-right">
               <a
-                href="#modal-simulator-stack"
                 className="uk-button uk-button-link uk-modal-close uk-margin-right"
-                data-uk-toggle
+                data-uk-toggle="target: #modal-simulator-stack"
               >
                 Cancel
               </a>
-              <button
-                type="submit"
-                data-uk-toggle="target: #modal-simulator-success"
-                className="uk-button uk-button-primary uk-border-pill"
-              >
-                Estimate now
-              </button>
               <a
-                href="#modal-simulator-success"
                 className="uk-button uk-button-primary uk-border-pill"
-                data-uk-toggle
+                data-uk-toggle="target: #modal-simulator-success"
               >
                 Estimate now
               </a>
@@ -776,16 +768,14 @@ const Modal: React.FC = () => {
           </div>
           <div className="uk-modal-footer uk-text-right">
             <a
-              href="#"
               className="uk-button uk-button-link uk-margin-right uk-modal-close"
-              data-uk-toggle
+              data-uk-toggle="target: #"
             >
               Close
             </a>
             <a
-              href="#"
               className="uk-button uk-button-primary uk-border-pill"
-              data-uk-toggle
+              data-uk-toggle="target: #"
             >
               Book a demo and send Report by email
             </a>
