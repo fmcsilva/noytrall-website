@@ -86,66 +86,86 @@ const Form: React.FC = () => {
         </div>
       </div>
 
-      <div id="" className="uk-section uk-section-default">
-        <div className="uk-container uk-container-large uk-flex uk-flex-center">
-          <form className="uk-form-stacked">
-            <div className="uk-margin">
-              <label className="uk-form-label">Name</label>
-              <div className="uk-form-controls">
-                <input
-                  className="uk-input uk-form-width-large"
-                  id=""
-                  type="text"
-                  placeholder="Large"
+      <div className="uk-container uk-container-large uk-flex uk-flex-center">
+        <form style={{width: "90vw", marginLeft: "28vw"}} className="uk-form-stacked" data-parsley-validate>
+          <div className="uk-margin">
+            <label className="uk-form-label" >Name</label>
+            <div className="uk-form-controls">
+              <input 
+              style={{maxWidth: "72%"}} 
+              className="uk-input uk-form-width-large" 
+              id="" 
+              type="text" 
+              placeholder="Name"
+              required=""
+              minLength={5}
+              />
+            </div>
+          </div>
+
+          <div className="uk-margin">
+            <label className="uk-form-label" >Text Area</label>
+            <div className="uk-form-controls">
+              <textarea 
+              className="uk-textarea uk-form-width-large heigh uk-resize-vertical" 
+              style={{minHeight: "90px", maxWidth: "72%" }}
+              rows={3} 
+              placeholder="Text Area"
+              required=""
+              minLength={10}
+              ></textarea>
+            </div>
+          </div>
+
+          <div className="uk-margin">
+            <label className="uk-form-label" >Select</label>
+            <div className="uk-form-controls">
+              <select className="uk-select uk-form-width-medium" id="" required="">
+                <option>Option 01</option>
+                <option>Option 02</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="uk-margin">
+            <div className="uk-form-label">Radio</div>
+            <div className="uk-form-controls" required="">
+              <label className="uk-display-block">
+                <input 
+                className="uk-radio uk-margin-small-right" 
+                type="radio" 
+                name="radio1"
                 />
-              </div>
+                Option 01
+              </label>
+              <label className="uk-display-block">
+                <input 
+                className="uk-radio uk-margin-small-right" 
+                type="radio" 
+                name="radio1"
+                />
+                Option 02
+              </label>
             </div>
+          </div>
 
-            <div className="uk-margin">
-              <label className="uk-form-label">Tex Area</label>
-              <div className="uk-form-controls">
-                <textarea
-                  className="uk-textarea uk-form-width-large heigh uk-resize-vertical"
-                  style={{ minHeight: "90px" }}
-                  rows={3}
-                  placeholder="Textarea"
-                ></textarea>
-              </div>
-            </div>
+          <div style={{maxWidth: "50%"}}  className="uk-modal-footer uk-text-right">
+            <a
+          className="uk-button uk-button-link uk-modal-close uk-margin-right"
+          data-uk-toggle="target: #modal-simulator-stack"
+        >
+          Cancel
+        </a>
+        <a
+          className="uk-button uk-button-primary uk-border-pill"
+          data-uk-toggle="target: #modal-simulator-success"
+          value="validate"
+        >
+          Send now
+        </a>
+          </div>
 
-            <div className="uk-margin">
-              <label className="uk-form-label">Select</label>
-              <div className="uk-form-controls">
-                <select className="uk-select uk-form-width-medium" id="">
-                  <option>Option 01</option>
-                  <option>Option 02</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="uk-margin">
-              <div className="uk-form-label">Radio</div>
-              <div className="uk-form-controls">
-                <label className="uk-display-block">
-                  <input
-                    className="uk-radio uk-margin-small-right"
-                    type="radio"
-                    name="radio1"
-                  />
-                  Option 01
-                </label>
-                <label className="uk-display-block">
-                  <input
-                    className="uk-radio uk-margin-small-right"
-                    type="radio"
-                    name="radio1"
-                  />
-                  Option 02
-                </label>
-              </div>
-            </div>
-          </form>
-        </div>
+        </form>
       </div>
     </>
   );
