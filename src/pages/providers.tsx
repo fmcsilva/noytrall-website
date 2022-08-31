@@ -120,7 +120,7 @@ const Form: React.FC = () => {
           <div className="uk-margin">
             <label className="uk-form-label" >Select</label>
             <div className="uk-form-controls">
-              <select className="uk-select uk-form-width-medium" id="" required="">
+              <select style={{maxWidth: "72%"}} className="uk-select uk-form-width-medium" id="" required="">
                 <option>Option 01</option>
                 <option>Option 02</option>
               </select>
