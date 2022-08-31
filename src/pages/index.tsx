@@ -37,7 +37,7 @@ const IndexPage = () => {
       <DownloadTheApp />
       <AvailableHotels />
       <Statistics />
-      <Reviews />
+      {/* <Reviews /> */}
     </Layout>
   );
 };
@@ -462,7 +462,7 @@ const AvailableHotels: React.FC = () => {
     <div id="hotels" className="uk-section uk-section-default">
       <div className="uk-container uk-container-large">
         <h1 className="uk-heading-small uk-text-bold uk-text-center uk-margin-large">
-          Available on the following
+          Coming soon to the following
         </h1>
 
         <div

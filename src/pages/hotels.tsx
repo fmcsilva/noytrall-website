@@ -8,6 +8,7 @@ import socialMedia from "../images/Social media-bro.png";
 import happyEarth from "../images/Happy Earth-bro.png";
 import pipeline from "../images/Pipeline maintenance-bro.png";
 import undraw_visual_data_re_mxxo from "../images/undraw_visual_data_re_mxxo.png";
+
 import {
   Chart,
   ChartConfiguration,
@@ -31,6 +32,7 @@ const Hotels: React.FC = () => {
       <Content />
       <Interaction />
       <Graph />
+      <TrustContent/>
       <Table />
     </Layout>
   );
@@ -70,7 +72,7 @@ const Content: React.FC = () => {
       <div className="uk-container uk-container-large">
         <div className="uk-margin-large">
           <h1 className="uk-heading-medium uk-text-center">
-            The sustainable platform to reduce hotel costs.
+          The sustainability platform to reduce hotel water and energy costs.
           </h1>
         </div>
       </div>
@@ -321,7 +323,7 @@ const Interaction: React.FC = () => {
   };
 
   return (
-    <div id="interaction" className="uk-section uk-section-default">
+    <div id="interaction" className="uk-section uk-section-muted">
       <div className="uk-container uk-container-large">
         <div className="uk-margin-large">
           <h1 className="uk-text-center">Estimate your performance savings</h1>
@@ -413,7 +415,7 @@ const Graph: React.FC = () => {
   };
 
   return (
-    <div id="graph" className="uk-section uk-section-muted">
+    <div id="graph" className="uk-section uk-section-default">
       <div className="uk-container uk-container-large">
         <div className="uk-text-center">
           <h1 className="uk-heading-medium">Control your costs. Save money.</h1>
@@ -432,6 +434,120 @@ const Graph: React.FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const TrustContent: React.FC = () => {
+  return (
+    <div className="uk-text-center uk-padding uk-section uk-section-muted">
+  <div className="uk-container uk-container-large uk-margin-large">
+
+      <div>
+        <h1>{"WIP-> trust-content"}</h1>
+      </div>
+
+      <div className="trust-content">
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+      width="100" height="" alt="The Easy Phygital Solution." data-uk-img/>
+      <h2 className="uk-text-large uk-margin-remove-top">The Easy "Phygital" Solution.</h2>
+    </div>
+  </div>
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="Optimal Savings." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">Optimal Savings.</h2>
+      </div>
+    </div>
+  </div>
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="Self-Installs." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">Self-Installs.</h2>
+      </div>
+    </div>
+  </div>
+
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="On-site Install Supervision." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">On-site Install Supervision.</h2>
+      </div>
+    </div>
+  </div>
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="Fully Automated." data-uk-img/>
+        <h1 className="uk-text-large uk-margin-remove-top">Fully Automated.</h1>
+      </div>
+  </div>
+  </div>
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="At Your Own Pace Of Investment." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">At Your Own Pace Of Investment.</h2>
+      </div>
+    </div>
+  </div>
+
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="Complete Coverage." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">Complete Coverage.</h2>
+      </div>
+    </div>
+  </div>
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="Fast Default Payback." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">Fast Default Payback</h2>
+      </div>
+    </div>
+  </div>
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+        width="100" height="" alt="Performance Success Assistance." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">Performance Success Assistance.</h2>
+      </div>
+    </div>
+  </div>
+
+  <div uk-grid>
+    <div className="uk-width-expand">
+      <div>
+        <img uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true" data-src={metrics}
+          width="100" height="" alt="Human Technical Support." data-uk-img/>
+        <h2 className="uk-text-large uk-margin-remove-top">Human Technical Support.</h2>
+      </div>
+    </div>
+  </div>
+      </div>
+<div>
+  <a href="hotels-trust-content" 
+  className="uk-button uk-button-primary uk-button-large uk-border-pill">
+  More Information</a>
+</div>
+
+
+  </div>
+</div>
   );
 };
 

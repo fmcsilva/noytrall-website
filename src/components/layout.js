@@ -6,6 +6,9 @@ import Header from "./Header";
 
 import "../css/uikit.min.css";
 import "../css/custom-style-noy.css";
+import "../css/parsley.css";
+import "../css/trust-content.css";
+
 // import "../js/uikit.min.js";
 // import "../js/uikit-icons.min.js";
 
@@ -48,8 +51,15 @@ class MainLayout extends React.Component {
             rel="stylesheet"
             href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
           />
+          <link
+            rel="stylesheet"
+            href="../css/parsley.css"
+          />
           <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
           {/* <script src="js/rangeslider-js.min.js"></script> */}
+
+          <script src="jquery.js"></script>
+          <script src="parsley.min.js"></script>
         </Helmet>
 
         <Header />
