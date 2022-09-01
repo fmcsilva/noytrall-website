@@ -86,7 +86,7 @@ const Form: React.FC = () => {
         </div>
       </div>
 
-      <div className="uk-container uk-container-large uk-flex uk-flex-center" data-parsley-validate>
+      <div className="uk-container uk-container-large uk-flex uk-flex-center">
         <form style={{width: "90vw", marginLeft: "28vw"}} className="uk-form-stacked">
           <div className="uk-margin">
             <label className="uk-form-label" >Name</label>
@@ -97,8 +97,6 @@ const Form: React.FC = () => {
               id="" 
               type="text" 
               placeholder="Name"
-              required=""
-              minLength={5}
               />
             </div>
           </div>
@@ -111,8 +109,6 @@ const Form: React.FC = () => {
               style={{minHeight: "90px", maxWidth: "72%" }}
               rows={3} 
               placeholder="Text Area"
-              required=""
-              minLength={10}
               ></textarea>
             </div>
           </div>
@@ -120,7 +116,7 @@ const Form: React.FC = () => {
           <div className="uk-margin">
             <label className="uk-form-label" >Select</label>
             <div className="uk-form-controls">
-              <select style={{maxWidth: "72%"}} className="uk-select uk-form-width-medium" id="" required="">
+              <select style={{maxWidth: "72%"}} className="uk-select uk-form-width-medium" id="">
                 <option>Option 01</option>
                 <option>Option 02</option>
               </select>
@@ -129,7 +125,7 @@ const Form: React.FC = () => {
 
           <div className="uk-margin">
             <div className="uk-form-label">Radio</div>
-            <div className="uk-form-controls" required="">
+            <div className="uk-form-controls">
               <label className="uk-display-block">
                 <input 
                 className="uk-radio uk-margin-small-right" 
@@ -151,19 +147,17 @@ const Form: React.FC = () => {
 
           <div style={{maxWidth: "50%"}}  className="uk-modal-footer uk-text-right">
             <a
-          className="uk-button uk-button-link uk-modal-close uk-margin-right"
-          data-uk-toggle="target: #modal-simulator-stack"
-        >
-          Cancel
-        </a>
-        <a 
-          className="uk-button uk-button-primary uk-border-pill"
-          data-uk-toggle="target: #modal-simulator-success"
-          value="validate"
-
-        >
-          Send
-        </a>
+              className="uk-button uk-button-link uk-modal-close uk-margin-right"
+              data-uk-toggle="target: #modal-simulator-stack"
+            >
+              Cancel
+            </a>
+            <a 
+              className="uk-button uk-button-primary uk-border-pill"
+              data-uk-toggle="target: #modal-simulator-success"
+            >
+              Send
+            </a>
           </div>
 
         </form>
