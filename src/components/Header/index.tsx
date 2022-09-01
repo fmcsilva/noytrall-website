@@ -46,7 +46,7 @@ const Header: React.FC<tProps> = ({}) => {
                 data-uk-navbar-toggle-icon
               ></a>
               <a className="uk-navbar-item uk-logo" href="/">
-                <img data-src={logo} width="250" data-uk-img />
+                <img data-src={logo} className="headerLogoSize" data-uk-img />
               </a>
             </div>
             <div className="uk-navbar-right">

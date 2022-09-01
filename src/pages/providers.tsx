@@ -86,8 +86,8 @@ const Form: React.FC = () => {
         </div>
       </div>
 
-      <div className="uk-container uk-container-large uk-flex uk-flex-center">
-        <form style={{width: "90vw", marginLeft: "28vw"}} className="uk-form-stacked" data-parsley-validate>
+      <div className="uk-container uk-container-large uk-flex uk-flex-center" data-parsley-validate>
+        <form style={{width: "90vw", marginLeft: "28vw"}} className="uk-form-stacked">
           <div className="uk-margin">
             <label className="uk-form-label" >Name</label>
             <div className="uk-form-controls">
@@ -156,12 +156,13 @@ const Form: React.FC = () => {
         >
           Cancel
         </a>
-        <a
+        <a 
           className="uk-button uk-button-primary uk-border-pill"
           data-uk-toggle="target: #modal-simulator-success"
           value="validate"
+
         >
-          Send now
+          Send
         </a>
           </div>
 

@@ -4,10 +4,13 @@ import Helmet from "react-helmet";
 import Footer from "./Footer";
 import Header from "./Header";
 
+import jquery from "../../node_modules/jquery/src/jquery.js";
+
 import "../css/uikit.min.css";
 import "../css/custom-style-noy.css";
 import "../css/parsley.css";
 import "../css/trust-content.css";
+import "../css/header.css";
 
 // import "../js/uikit.min.js";
 // import "../js/uikit-icons.min.js";
@@ -58,8 +61,8 @@ class MainLayout extends React.Component {
           <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
           {/* <script src="js/rangeslider-js.min.js"></script> */}
 
-          <script src="jquery.js"></script>
-          <script src="parsley.min.js"></script>
+          <script src="../../node_modules/jquery/src/jquery.js"></script>
+          <script src="../js/parsley.min.js"></script>
         </Helmet>
 
         <Header />
