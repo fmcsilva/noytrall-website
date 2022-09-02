@@ -9,6 +9,8 @@ import "../css/custom-style-noy.css";
 import "../css/parsley.css";
 import "../css/trust-content.css";
 import "../css/header.css";
+import "../css/notification.css";
+import { GlobalContextProvider } from "../context/GlobalContext";
 
 // import "../js/uikit.min.js";
 // import "../js/uikit-icons.min.js";
@@ -55,10 +57,13 @@ class MainLayout extends React.Component {
           <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
           {/* <script src="js/rangeslider-js.min.js"></script> */}
         </Helmet>
-
-        <Header />
-        <div>{this.props.children}</div>
-        <Footer />
+        <GlobalContextProvider>
+          <div style={{ position: "relative" }}>
+            <Header />
+            <div>{this.props.children}</div>
+            <Footer />
+          </div>
+        </GlobalContextProvider>
       </div>
     );
   }

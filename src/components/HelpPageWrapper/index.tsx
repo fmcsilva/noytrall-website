@@ -1,25 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import HELP_LIST, {
   tHelpContent,
   tHelpQuestion,
 } from "../../data/helpQuestions";
 
 import { useLocation } from "@reach/router";
+import { iQuestion } from "../../models/question";
+import axios from "axios";
+import UIkit from "uikit";
+import { notification } from "../../utils/notification";
+import DropLineModal from "./DropLineModal";
 
 type tProps = {
   data: tHelpContent;
   children?: any;
 };
 
-const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
+const HelpPageWrapper: React.FC<tProps> = ({ data }) => {
+  const [selectedQuestion, setSelectedQuestion] = useState<null | string>(null);
   const { title, qAndA, topics, relatedArticles } = data;
+
+  console.log("selectedQuestion", selectedQuestion);
+  const onClickQuestion = (question: string) => () => {
+    setSelectedQuestion((prev) => (prev === question ? null : question));
+  };
 
   const renderQAndA = () => {
     if (!qAndA) return null;
     return qAndA.map(({ question, answer }) => {
       return (
         <li key={question}>
-          <a className="uk-accordion-title" href="#">
+          <a
+            className="uk-accordion-title"
+            href="#"
+            onClick={onClickQuestion(question)}
+          >
             {question}
           </a>
           <div className="uk-accordion-content">
@@ -32,7 +47,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
                 ))}
               </>
             )}
-            <DidYouFindWhatYouWereLookingFor />
+            <DidYouFindWhatYouWereLookingFor {...{ question }} />
           </div>
         </li>
       );
@@ -49,7 +64,11 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
             {qAndA.map(({ question, answer }) => {
               return (
                 <li key={question}>
-                  <a className="uk-accordion-title" href="#">
+                  <a
+                    className="uk-accordion-title"
+                    onClick={onClickQuestion(question)}
+                    href="#"
+                  >
                     <span className="uk-h4">{question}</span>
                   </a>
                   <div className="uk-accordion-content">
@@ -62,7 +81,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
                         ))}
                       </>
                     )}
-                    <DidYouFindWhatYouWereLookingFor />
+                    <DidYouFindWhatYouWereLookingFor question={question} />
                   </div>
                 </li>
               );
@@ -81,7 +100,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
         <h2>Related articles</h2>
         <ul className="uk-list">
           {relatedArticles.map(({ title, link }) => (
-            <li>
+            <li key={title}>
               <a href={link}>{title}</a>
             </li>
           ))}
@@ -108,7 +127,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ children, data }) => {
           </div>
         </div>
       </div>
-      <DropLineModal />
+      <DropLineModal question={selectedQuestion} />
     </div>
   );
 };
@@ -152,7 +171,29 @@ const SideNavbar: React.FC = () => {
   );
 };
 
-const DidYouFindWhatYouWereLookingFor: React.FC = () => {
+type tDidYouFindWhatYouWereLookingForProps = {
+  question: iQuestion;
+};
+const DidYouFindWhatYouWereLookingFor: React.FC<
+  tDidYouFindWhatYouWereLookingForProps
+> = ({ question }) => {
+  const handleQuestionHasHelpful = () => {
+    axios
+      .post(`website/support-question/helpful`, { question })
+      .then((res) => {
+        console.log("res", res);
+        notification("Noytrall appreciates your feedback.", {
+          status: "success",
+        });
+      })
+      .catch((err) => {
+        console.log("err", err);
+        notification("We couldn't save your feedback. Please try again.", {
+          status: "danger",
+        });
+      });
+  };
+
   return (
     <div className="uk-margin">
       <div className="uk-placeholder">
@@ -172,7 +213,14 @@ const DidYouFindWhatYouWereLookingFor: React.FC = () => {
           </div>
           <div>
             <div className="uk-text-right">
-              <button className="uk-button uk-button-default" type="button">
+              <button
+                className="uk-button uk-button-default"
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleQuestionHasHelpful();
+                }}
+              >
                 Yes
               </button>
               <button
@@ -218,59 +266,6 @@ const SearchForm: React.FC = () => {
           </div>
         </div>
       </form>
-    </div>
-  );
-};
-
-const DropLineModal: React.FC = () => {
-  return (
-    <div id="dropaline" data-uk-modal="esc-close: false; bg-close: false">
-      <div className="uk-modal-dialog">
-        <button
-          className="uk-modal-close-default"
-          type="button"
-          data-uk-close
-        ></button>
-        <div className="uk-modal-header">
-          <h2 className="uk-modal-title">Get support</h2>
-        </div>
-        <div className="uk-modal-body">
-          <form className="uk-form-stacked">
-            <div className="uk-margin">
-              <label className="uk-form-label">Name</label>
-              <div className="uk-text-small uk-text-muted uk-margin-small-bottom">
-                description
-              </div>
-              <div className="uk-form-controls">
-                <input className="uk-input" type="text" placeholder="Input" />
-              </div>
-            </div>
-
-            <div className="uk-margin">
-              <label className="uk-form-label">What can we do for you?</label>
-              <div className="uk-text-small uk-text-muted uk-margin-small-bottom">
-                Please describe your question as thoroughly as possible.
-              </div>
-              <div className="uk-form-controls">
-                <textarea
-                  className="uk-textarea uk-resize-vertical"
-                  rows={10}
-                  placeholder="Describe your problem."
-                ></textarea>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div className="uk-modal-footer uk-text-right">
-          <a
-            href="#modal-simulator-1-4"
-            className="uk-button uk-button-link uk-modal-close uk-margin-right"
-          >
-            Cancel
-          </a>
-          <a className="uk-button uk-button-primary">Send your question</a>
-        </div>
-      </div>
     </div>
   );
 };

@@ -26,6 +26,8 @@ import facePedro from "../images/face-pedro.png";
 import DownloadTheApp from "../components/DownloadTheApp";
 
 import Menu from "../components/Menu";
+import axios from "axios";
+import { notification } from "../utils/notification";
 
 const IndexPage = () => {
   return (
@@ -42,44 +44,137 @@ const IndexPage = () => {
   );
 };
 
+type tState = {
+  email: string;
+  error: null | string;
+  status: "idle" | "pending" | "resolved" | "rejected";
+};
+const initialState: tState = {
+  email: "",
+  error: null,
+  status: "idle",
+};
+
+type tAction =
+  | {
+      type: "resolved";
+    }
+  | { type: "rejected"; error: string }
+  | { type: "pending" }
+  | { type: "change email"; email: string };
+
+const reducer = (state: tState, action: tAction): tState => {
+  switch (action.type) {
+    case "change email": {
+      const { email } = action;
+      return { ...state, email, error: null };
+    }
+
+    case "pending": {
+      return { ...state, status: "pending", error: null };
+    }
+    case "resolved": {
+      return { ...state, status: "resolved", error: null };
+    }
+    case "rejected": {
+      const { error } = action;
+      return { ...state, status: "rejected", error };
+    }
+    default:
+      return { ...state };
+  }
+};
+
 const Hero: React.FC = () => {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  const { email, status } = state;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: "change email", email: e.target.value });
+  };
+
+  const handleNotifyMe = () => {
+    axios
+      .post(`/website/notify-guest`, { email })
+      .then((res) => {
+        console.log("res", res);
+        notification("Email saved", {
+          status: "success",
+        });
+      })
+      .catch((err) => {
+        console.log("err", err);
+        notification(`${err.response.data.message}`, {
+          status: "danger",
+        });
+      });
+  };
+
   return (
-    <div
-      className="uk-section uk-section-primary uk-padding-remove uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-background-fixed uk-background-center-center uk-background-image@s"
-      data-uk-height-viewport="offset-top: true; offset-bottom: 20"
-      style={{
-        backgroundImage: `url(${heroImg})`,
-      }}
-    >
-      <div id="hero" className="uk-margin-auto uk-padding-large uk-flex-1">
-        <div className="uk-container uk-container-large">
-          <div className="">
-            <h1 className="uk-heading-medium">Stay smart.</h1>
-            <h2 className="uk-margin-remove">IoT for hotels and guests.</h2>
-            <div className="uk-width-1-1@s uk-width-1-1@m uk-width-2-3@l uk-margin-large">
-              <form action="#" id="notify-form" className="uk-form-stacked">
-                <div className="uk-grid-small" data-uk-grid>
-                  <div className="uk-width-expand@s uk-first-column">
-                    <div className="uk-inline uk-width-1-1">
-                      <span
-                        className="uk-form-icon"
-                        data-uk-icon="icon: mail"
-                      ></span>
-                      <input
-                        id="notify-email"
-                        type="email"
-                        className="uk-input uk-form-large uk-width-1-1 uk-border-pill"
-                        placeholder="youremail@domain.com"
-                      />
+    <div>
+      {/* {status === "idle" && (
+        <div
+          className="uk-position-cover"
+          style={{
+            //   position: "absolute",
+            //   height: "100%",
+            //   width: "100%",
+            //   display: "flex",
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            zIndex: 10,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <div data-uk-spinner />
+        </div>
+      )} */}
+      <div
+        className="uk-section uk-section-primary uk-padding-remove uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-background-fixed uk-background-center-center uk-background-image@s"
+        data-uk-height-viewport="offset-top: true; offset-bottom: 20"
+        style={{
+          backgroundImage: `url(${heroImg})`,
+        }}
+      >
+        <div id="hero" className="uk-margin-auto uk-padding-large uk-flex-1">
+          <div className="uk-container uk-container-large">
+            <div className="">
+              <h1 className="uk-heading-medium">Stay smart.</h1>
+              <h2 className="uk-margin-remove">IoT for hotels and guests.</h2>
+              <div className="uk-width-1-1@s uk-width-1-1@m uk-width-2-3@l uk-margin-large">
+                <form action="#" id="notify-form" className="uk-form-stacked">
+                  <div className="uk-grid-small" data-uk-grid>
+                    <div className="uk-width-expand@s uk-first-column">
+                      <div className="uk-inline uk-width-1-1">
+                        <span
+                          className="uk-form-icon"
+                          data-uk-icon="icon: mail"
+                        ></span>
+                        <input
+                          value={email}
+                          onChange={handleChange}
+                          id="notify-email"
+                          type="email"
+                          className="uk-input uk-form-large uk-width-1-1 uk-border-pill"
+                          placeholder="youremail@domain.com"
+                        />
+                      </div>
+                    </div>
+                    <div className="uk-width-1-1 uk-width-auto@s">
+                      <button
+                        className="uk-button uk-button-primary uk-button-large uk-border-pill"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNotifyMe();
+                        }}
+                      >
+                        notify me
+                      </button>
                     </div>
                   </div>
-                  <div className="uk-width-1-1 uk-width-auto@s">
-                    <button className="uk-button uk-button-primary uk-button-large uk-border-pill">
-                      notify me
-                    </button>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
