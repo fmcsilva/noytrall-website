@@ -110,26 +110,61 @@ const Hero: React.FC = () => {
         });
       });
   };
+  if (false)
+    return (
+      <div
+        className="uk-section uk-section-primary uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-background-fixed uk-background-center-center uk-background-image@s"
+        uk-height-viewport="offset-top: true; offset-bottom: 20"
+        style={{
+          backgroundImage: `url(${heroImg})`,
+        }}
+      >
+        <div id="hero" className="uk-margin-auto uk-padding-small uk-flex-1">
+          <div className="uk-container uk-container-large">
+            <div className="">
+              <h1 className="uk-heading-medium">Stay smart.</h1>
+              <h2 className="uk-margin-remove">IoT for hotels and guests.</h2>
+              <div className="uk-width-1-1@s uk-width-1-1@m uk-width-2-3@l uk-margin-large">
+                <form action="#" id="notify-form" className="uk-form-stacked">
+                  <div className="uk-grid-small" uk-grid>
+                    <div className="uk-width-expand@s uk-first-column">
+                      <div className="uk-inline uk-width-1-1">
+                        <span
+                          className="uk-form-icon"
+                          uk-icon="icon: mail"
+                        ></span>
+                        <input
+                          value={email}
+                          onChange={handleChange}
+                          id="notify-email"
+                          type="email"
+                          className="uk-input uk-form-large uk-width-1-1 uk-border-pill"
+                          placeholder="youremail@domain.com"
+                        />
+                      </div>
+                    </div>
+                    <div className="uk-width-1-1 uk-width-auto@s">
+                      <button
+                        className="uk-button uk-button-primary uk-button-large uk-border-pill"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNotifyMe();
+                        }}
+                      >
+                        notify me
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div>
-      {/* {status === "idle" && (
-        <div
-          className="uk-position-cover"
-          style={{
-            //   position: "absolute",
-            //   height: "100%",
-            //   width: "100%",
-            //   display: "flex",
-            //   justifyContent: "center",
-            //   alignItems: "center",
-            zIndex: 10,
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
-        >
-          <div data-uk-spinner />
-        </div>
-      )} */}
       <div
         className="uk-section uk-section-primary uk-padding-remove uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-background-fixed uk-background-center-center uk-background-image@s"
         data-uk-height-viewport="offset-top: true; offset-bottom: 20"
