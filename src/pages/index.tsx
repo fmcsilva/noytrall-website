@@ -36,10 +36,11 @@ const IndexPage = () => {
       <Hero />
       <HowItWorks />
       <KeyFeatures />
+      <FAQS />
       <DownloadTheApp />
       <AvailableHotels />
       <Statistics />
-      {/* <Reviews /> */}
+      <Reviews />
     </Layout>
   );
 };
@@ -110,58 +111,6 @@ const Hero: React.FC = () => {
         });
       });
   };
-  if (false)
-    return (
-      <div
-        className="uk-section uk-section-primary uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-background-fixed uk-background-center-center uk-background-image@s"
-        uk-height-viewport="offset-top: true; offset-bottom: 20"
-        style={{
-          backgroundImage: `url(${heroImg})`,
-        }}
-      >
-        <div id="hero" className="uk-margin-auto uk-padding-small uk-flex-1">
-          <div className="uk-container uk-container-large">
-            <div className="">
-              <h1 className="uk-heading-medium">Stay smart.</h1>
-              <h2 className="uk-margin-remove">IoT for hotels and guests.</h2>
-              <div className="uk-width-1-1@s uk-width-1-1@m uk-width-2-3@l uk-margin-large">
-                <form action="#" id="notify-form" className="uk-form-stacked">
-                  <div className="uk-grid-small" uk-grid>
-                    <div className="uk-width-expand@s uk-first-column">
-                      <div className="uk-inline uk-width-1-1">
-                        <span
-                          className="uk-form-icon"
-                          uk-icon="icon: mail"
-                        ></span>
-                        <input
-                          value={email}
-                          onChange={handleChange}
-                          id="notify-email"
-                          type="email"
-                          className="uk-input uk-form-large uk-width-1-1 uk-border-pill"
-                          placeholder="youremail@domain.com"
-                        />
-                      </div>
-                    </div>
-                    <div className="uk-width-1-1 uk-width-auto@s">
-                      <button
-                        className="uk-button uk-button-primary uk-button-large uk-border-pill"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleNotifyMe();
-                        }}
-                      >
-                        notify me
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
 
   return (
     <div>
@@ -172,7 +121,7 @@ const Hero: React.FC = () => {
           backgroundImage: `url(${heroImg})`,
         }}
       >
-        <div id="hero" className="uk-margin-auto uk-padding-large uk-flex-1">
+        <div id="hero" className="uk-margin-auto uk-padding-small uk-flex-1">
           <div className="uk-container uk-container-large">
             <div className="">
               <h1 className="uk-heading-medium">Stay smart.</h1>
@@ -414,14 +363,14 @@ const HowItWorks: React.FC = () => {
           How it works
         </h1>
         <div className="uk-child-width-1-2@m" data-uk-grid>
-          <div className="uk-padding">
+          <div className="uk-padding uk-padding-remove-top">
             <h2>Book an hotel.</h2>
             <h4 className="uk-text-muted uk-margin-remove">
               Choose a noytrall accommodation and reduce the impact of your
               stay. Go sustainable on your next trip and save money.
             </h4>
           </div>
-          <div className="uk-flex uk-flex-bottom uk-flex-center uk-flex-first uk-flex-last@m">
+          <div className="uk-flex uk-flex-bottom uk-flex-left uk-flex-first uk-flex-last@m">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               data-src={datePicker}
@@ -434,7 +383,7 @@ const HowItWorks: React.FC = () => {
         </div>
 
         <div className="uk-child-width-1-2@m" data-uk-grid>
-          <div className="uk-flex uk-flex-center uk-flex-bottom">
+          <div className="uk-flex uk-flex-right uk-flex-bottom">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               className="uk-align-left"
@@ -445,7 +394,7 @@ const HowItWorks: React.FC = () => {
               data-uk-img
             />
           </div>
-          <div className="uk-padding">
+          <div className="uk-padding uk-padding-remove-top">
             <h2>Keep track of your metrics in real-time and save money.</h2>
             <h4 className="uk-text-muted uk-margin-remove">
               Know precisely what you are consuming and compare it to real-life
@@ -455,14 +404,14 @@ const HowItWorks: React.FC = () => {
         </div>
 
         <div className="uk-child-width-1-2@m" data-uk-grid>
-          <div className="uk-padding">
+          <div className="uk-padding uk-padding-remove-top">
             <h2>Earn while enjoying your stay.</h2>
             <h4 className="uk-text-muted uk-margin-remove">
               Your experience will be more fun and immersive as you gain access
               to products and experiences from our community partners.
             </h4>
           </div>
-          <div className="uk-flex uk-flex-bottom uk-flex-center uk-flex-first uk-flex-last@m">
+          <div className="uk-flex uk-flex-bottom uk-flex-left uk-flex-first uk-flex-last@m">
             <img
               data-uk-scrollspy="cls:uk-animation-slide-top-medium; repeat: true"
               className="uk-align-right"
@@ -482,79 +431,111 @@ const HowItWorks: React.FC = () => {
 const KeyFeatures: React.FC = () => {
   return (
     <div id="keyfeatures" className="uk-section uk-section-default">
-      <div className="uk-container uk-container-large uk-margin-large">
-        <h1 className="uk-heading-small uk-text-bold uk-text-center">
-          Key features
-        </h1>
-      </div>
-
-      <div className="uk-section uk-section-muted uk-padding-remove-bottom">
-        <div className="uk-container uk-container-small">
-          <div className="uk-child-width-1-2@s" data-uk-grid>
-            <div className="uk-flex uk-flex-center uk-flex-top">
-              <i
-                data-uk-scrollspy="cls:uk-animation-slide-left-medium; repeat: true"
-                className="las la-10x la-chart-line"
-              ></i>
+      <div className="uk-section uk-section-muted">
+        <div className="uk-container uk-container-large">
+          <h1 className="uk-heading-small uk-text-bold uk-text-center uk-margin-large">
+            Key features
+          </h1>
+          <div className="uk-width-1-2@m uk-width-1-3@l uk-align-center">
+            <div className="uk-margin-medium">
+              <i className="las la-8x la-chart-line"></i>
+              <h2 className="uk-margin-remove-top">
+                Stay monitoring and ecological footprint rating
+              </h2>
+              <h4 className="uk-margin-remove uk-text-muted">
+                You will be able to monitor your consumption in real-time. The
+                water and energy you spend and the biomass and waste you produce
+                so you can adjust your routines as you see fit and save you
+                money.
+              </h4>
             </div>
-            <div>
-              <h2>Stay monitoring and ecolological footprint rating</h2>
-              <div className="uk-text-muted uk-h4">
-                <p>
-                  You will be able to monitor your consumption in real-time. The
-                  water and energy you spend and the biomass and waste you
-                  produce so you can adjust your routines as you see fit and
-                  save you money.
-                </p>
-              </div>
+
+            <div className="uk-margin-medium">
+              <i className="las la-8x la-tasks"></i>
+              <h2 className="uk-margin-remove-top">
+                Improvement tips and suggestions
+              </h2>
+              <h4 className="uk-margin-remove uk-text-muted">
+                Through data analysis you will be given tips and suggestions to
+                upgrade your ecological performance and minimize your stay
+                impact and save money.
+              </h4>
+            </div>
+
+            <div className="uk-margin-medium">
+              <i className="las la-8x la-gamepad"></i>
+              <h2 className="uk-margin-remove-top">Rewards and community</h2>
+              <h4 className="uk-margin-remove uk-text-muted">
+                You earn points by managing sustainability level. As you level
+                up you can make use of our community partners around the world
+                to trade those points with their products, services and
+                experiences.
+              </h4>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+};
 
-      <div className="uk-section uk-section-default uk-padding-remove-bottom">
-        <div className="uk-container uk-container-small">
-          <div className="uk-child-width-1-2@s" data-uk-grid>
-            <div>
-              <h2>Improvement tips and suggestions</h2>
-              <div className="uk-text-muted uk-h4 uk-margin-remove">
-                <p>
-                  Through data analysis you will be given tips and suggestions
-                  to upgrade your ecological performance and minimize your stay
-                  impact and save money.
-                </p>
-              </div>
-            </div>
-            <div className="uk-flex uk-flex-center uk-flex-top">
-              <i
-                data-uk-scrollspy="cls:uk-animation-slide-left-medium; repeat: true"
-                className="las la-10x la-tasks"
-              ></i>
-            </div>
+const FAQS: React.FC = () => {
+  return (
+    <div id="faqs" className="uk-section uk-section-default">
+      <div className="uk-container uk-container-small">
+        <div className="uk-margin-large">
+          <div className="uk-text-center">
+            <h1 className="uk-heading-small">Frequently asked questions.</h1>
+            <p className="uk-text-large">Ask away.</p>
           </div>
-        </div>
-      </div>
+          <div className="uk-align-center">
+            <ul uk-accordion="multiple: true">
+              <li className="uk-open">
+                <a className="uk-accordion-title" href="#">
+                  How can I start using it ?
+                </a>
+                <div className="uk-accordion-content">
+                  <p>It's just as easy as installing noytrall's App.</p>
+                </div>
+              </li>
 
-      <div className="uk-section uk-section-muted uk-padding-remove-bottom">
-        <div className="uk-container uk-container-small">
-          <div className="uk-child-width-1-2@s" data-uk-grid>
-            <div className="uk-flex uk-flex-center uk-flex-top">
-              <i
-                data-uk-scrollspy="cls:uk-animation-slide-left-medium; repeat: true"
-                className="las la-10x la-gamepad"
-              ></i>
-            </div>
-            <div>
-              <h2>Rewards and community</h2>
-              <div className="uk-text-muted uk-h4 uk-margin-remove">
-                <p>
-                  You earn points by managing sustainability level. As you level
-                  up you can make use of our community partners around the world
-                  to trade those points with their products, services and
-                  experiences.
-                </p>
-              </div>
-            </div>
+              <li>
+                <a className="uk-accordion-title" href="#">
+                  Do I continue to use my normal booking channels?
+                </a>
+                <div className="uk-accordion-content">
+                  <p>Yes.</p>
+                </div>
+              </li>
+              <li>
+                <a className="uk-accordion-title" href="#">
+                  Will I pay less ?
+                </a>
+                <div className="uk-accordion-content">
+                  <p>Nor.</p>
+                </div>
+              </li>
+
+              <li>
+                <a className="uk-accordion-title" href="#">
+                  Will I get rewarded for being sustainable ?
+                </a>
+                <div className="uk-accordion-content">
+                  <p>Yes.</p>
+                </div>
+              </li>
+
+              <li>
+                <a className="uk-accordion-title" href="#">
+                  Will I save the planet ?
+                </a>
+                <div className="uk-accordion-content">
+                  <p>
+                    You will surely help to reduce CO<sub>2</sub> emissions.
+                  </p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -592,7 +573,7 @@ const AvailableHotels: React.FC = () => {
     <div id="hotels" className="uk-section uk-section-default">
       <div className="uk-container uk-container-large">
         <h1 className="uk-heading-small uk-text-bold uk-text-center uk-margin-large">
-          Coming soon to the following
+          Available on the following
         </h1>
 
         <div
