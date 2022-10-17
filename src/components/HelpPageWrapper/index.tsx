@@ -115,7 +115,7 @@ const HelpPageWrapper: React.FC<tProps> = ({ data }) => {
         <div className="" data-uk-grid>
           <SideNavbar />
           <div className="uk-width-2-3">
-            <SearchForm />
+            {/* <SearchForm /> */}
             <div>
               <div>
                 <h2>{title}</h2>
