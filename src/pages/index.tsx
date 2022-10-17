@@ -29,6 +29,8 @@ import Menu from "../components/Menu";
 import axios from "axios";
 import { notification } from "../utils/notification";
 
+import JustValidate from "just-validate";
+
 const IndexPage = () => {
   return (
     <Layout>
@@ -75,7 +77,7 @@ const reducer = (state: tState, action: tAction): tState => {
       return { ...state, status: "pending", error: null };
     }
     case "resolved": {
-      return { ...state, status: "resolved", error: null };
+      return { ...state, status: "resolved", error: null, email: "" };
     }
     case "rejected": {
       const { error } = action;
@@ -87,30 +89,59 @@ const reducer = (state: tState, action: tAction): tState => {
 };
 
 const Hero: React.FC = () => {
+  const [validation, setValidation] = React.useState<JustValidate | null>(null);
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const { email, status } = state;
-
+  const isLoading = status === "pending";
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: "change email", email: e.target.value });
   };
 
   const handleNotifyMe = () => {
+    if (!(validation && validation.isSubmitted && validation.isValid)) return;
+
+    dispatch({ type: "pending" });
     axios
       .post(`/website/notify-guest`, { email })
       .then((res) => {
         console.log("res", res);
+        dispatch({ type: "resolved" });
         notification("Email saved", {
           status: "success",
         });
       })
       .catch((err) => {
         console.log("err", err);
-        notification(`${err.response.data.message}`, {
+        const error = err.response.data.message;
+        dispatch({ type: "rejected", error });
+        notification(`${error}`, {
           status: "danger",
         });
       });
   };
+
+  React.useEffect(() => {
+    setValidation(new JustValidate("#notify-form"));
+  }, []);
+
+  React.useEffect(() => {
+    console.log("validation", validation);
+    if (validation) {
+      if (Object.keys(validation.fields).length === 0) {
+        validation.addField("#notify-email", [
+          {
+            rule: "required",
+            errorMessage: "Email is required",
+          },
+          {
+            rule: "email",
+            errorMessage: "Email is invalid!",
+          },
+        ]);
+      }
+    }
+  }, [validation]);
 
   return (
     <div>
@@ -127,7 +158,15 @@ const Hero: React.FC = () => {
               <h1 className="uk-heading-medium">Stay smart.</h1>
               <h2 className="uk-margin-remove">IoT for hotels and guests.</h2>
               <div className="uk-width-1-1@s uk-width-1-1@m uk-width-2-3@l uk-margin-large">
-                <form action="#" id="notify-form" className="uk-form-stacked">
+                <form
+                  action="#"
+                  id="notify-form"
+                  className="uk-form-stacked"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleNotifyMe();
+                  }}
+                >
                   <div className="uk-grid-small" data-uk-grid>
                     <div className="uk-width-expand@s uk-first-column">
                       <div className="uk-inline uk-width-1-1">
@@ -136,6 +175,7 @@ const Hero: React.FC = () => {
                           data-uk-icon="icon: mail"
                         ></span>
                         <input
+                          disabled={isLoading}
                           value={email}
                           onChange={handleChange}
                           id="notify-email"
@@ -148,10 +188,9 @@ const Hero: React.FC = () => {
                     <div className="uk-width-1-1 uk-width-auto@s">
                       <button
                         className="uk-button uk-button-primary uk-button-large uk-border-pill"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleNotifyMe();
-                        }}
+                        {...(isLoading
+                          ? { disabled: true, style: { opacity: 0.5 } }
+                          : {})}
                       >
                         notify me
                       </button>
