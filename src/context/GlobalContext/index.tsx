@@ -42,7 +42,8 @@ const GlobalContextProvider: React.FC<nGlobal.iContextProps> = ({
     useReducer(reducer, initialState);
 
   useEffect(() => {
-    axios.defaults.baseURL = "http://192.168.1.8:5000";
+    axios.defaults.baseURL =
+      "https://edogsxxila.execute-api.eu-west-1.amazonaws.com";
     console.log("Global Context");
   }, []);
 
