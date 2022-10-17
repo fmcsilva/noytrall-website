@@ -36,6 +36,48 @@ const Header: React.FC<tProps> = ({}) => {
       <div className="uk-container uk-container-large">
         <div
           className=""
+          data-uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky"
+        >
+          <nav className="uk-navbar-container uk-navbar-muted" data-uk-navbar>
+            <div className="uk-navbar-left">
+              <a
+                className="uk-navbar-toggle uk-hidden@m"
+                data-uk-toggle="target: #offmenuid"
+                data-uk-navbar-toggle-icon
+              ></a>
+
+              <a className="uk-navbar-item uk-logo" href="/">
+                <img data-src={logo} className="headerLogoSize" data-uk-img />
+              </a>
+            </div>
+            <div className="uk-navbar-right">
+              <ul className="uk-navbar-nav uk-visible@m">{renderButtons()}</ul>
+              <div className="uk-navbar-item">
+                <a
+                  href="#modal-book-demo-step-1"
+                  className="uk-button uk-button-default uk-button-primary uk-border-pill"
+                  data-uk-toggle
+                >
+                  Book a demo
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
+
+  return (
+    <header
+      id="header"
+      className="uk-background-muted"
+      data-uk-sticky
+      style={{ zIndex: 990 }}
+    >
+      <div className="uk-container uk-container-large">
+        <div
+          className=""
           data-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky"
         >
           <nav className="uk-navbar-container uk-navbar-muted" data-uk-navbar>
