@@ -30,11 +30,11 @@ import axios from "axios";
 import { notification } from "../utils/notification";
 
 import JustValidate from "just-validate";
+import useJustValidate from "../hooks/useJustValidate";
 
 const IndexPage = () => {
   return (
     <Layout>
-      <Menu />
       <Hero />
       <HowItWorks />
       <KeyFeatures />
@@ -89,7 +89,21 @@ const reducer = (state: tState, action: tAction): tState => {
 };
 
 const Hero: React.FC = () => {
-  const [validation, setValidation] = React.useState<JustValidate | null>(null);
+  const { formIsValid } = useJustValidate("notify-form", [
+    {
+      field: "#notify-email",
+      rules: [
+        {
+          rule: "required",
+          errorMessage: "Email is required",
+        },
+        {
+          rule: "email",
+          errorMessage: "Email is invalid!",
+        },
+      ],
+    },
+  ]);
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const { email, status } = state;
@@ -99,7 +113,7 @@ const Hero: React.FC = () => {
   };
 
   const handleNotifyMe = () => {
-    if (!(validation && validation.isSubmitted && validation.isValid)) return;
+    if (!formIsValid()) return;
 
     dispatch({ type: "pending" });
     axios
@@ -120,28 +134,6 @@ const Hero: React.FC = () => {
         });
       });
   };
-
-  React.useEffect(() => {
-    setValidation(new JustValidate("#notify-form"));
-  }, []);
-
-  React.useEffect(() => {
-    console.log("validation", validation);
-    if (validation) {
-      if (Object.keys(validation.fields).length === 0) {
-        validation.addField("#notify-email", [
-          {
-            rule: "required",
-            errorMessage: "Email is required",
-          },
-          {
-            rule: "email",
-            errorMessage: "Email is invalid!",
-          },
-        ]);
-      }
-    }
-  }, [validation]);
 
   return (
     <div>

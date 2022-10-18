@@ -54,9 +54,8 @@ const Header: React.FC<tProps> = ({}) => {
               <ul className="uk-navbar-nav uk-visible@m">{renderButtons()}</ul>
               <div className="uk-navbar-item">
                 <a
-                  href="#modal-book-demo-step-1"
                   className="uk-button uk-button-default uk-button-primary uk-border-pill"
-                  data-uk-toggle
+                  data-uk-toggle="target: #modal-book-demo-step-1"
                 >
                   Book a demo
                 </a>
