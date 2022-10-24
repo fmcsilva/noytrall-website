@@ -1,10 +1,17 @@
 import JustValidate from "just-validate";
-import { FieldRuleInterface } from "just-validate/dist/modules/interfaces";
+import {
+  FieldConfigInterface,
+  FieldRuleInterface,
+} from "just-validate/dist/modules/interfaces";
 import { useEffect, useState } from "react";
 
 const useJustValidate = (
   formId: string,
-  fields: { field: string; rules: FieldRuleInterface[] }[] = [],
+  fields: {
+    field: string;
+    rules: FieldRuleInterface[];
+    config?: FieldConfigInterface | undefined;
+  }[] = [],
   { onSuccess }: { onSuccess?: () => void } = { onSuccess: () => {} }
 ) => {
   const [validation, setValidation] = useState<JustValidate | null>(null);
@@ -16,8 +23,8 @@ const useJustValidate = (
   useEffect(() => {
     if (validation) {
       if (Object.keys(validation.fields).length === 0) {
-        for (const { field, rules } of fields) {
-          validation.addField(field, rules);
+        for (const { field, rules, config } of fields) {
+          validation.addField(field, rules, config);
         }
       }
     }

@@ -102,6 +102,7 @@ const Hero: React.FC = () => {
           errorMessage: "Email is invalid!",
         },
       ],
+      config: { errorsContainer: ".error-container-email" },
     },
   ]);
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -176,6 +177,7 @@ const Hero: React.FC = () => {
                           placeholder="youremail@domain.com"
                         />
                       </div>
+                      <div className="error-container-email"></div>
                     </div>
                     <div className="uk-width-1-1 uk-width-auto@s">
                       <button

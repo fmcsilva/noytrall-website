@@ -1,6 +1,8 @@
+import { isString } from "lodash";
 import React, { useEffect } from "react";
 import UIkit from "uikit";
 import useJustValidate from "../../../hooks/useJustValidate";
+import { urlRegex } from "../../../utils/regex";
 
 const JOB_TITLES: string[] = [
   "Owner",
@@ -30,7 +32,15 @@ const BookADemo1: React.FC = () => {
           rule: "required",
           errorMessage: "Name is required",
         },
+        {
+          rule: "minLength",
+          value: 3,
+        },
       ],
+
+      config: {
+        errorsContainer: ".error-container-name",
+      },
     },
     {
       field: "#book-demo-step-1-form-email",
@@ -44,8 +54,41 @@ const BookADemo1: React.FC = () => {
           errorMessage: "Email is invalid",
         },
       ],
+      config: {
+        errorsContainer: ".error-container-email",
+      },
+    },
+    {
+      field: "#book-demo-step-1-form-jobtitle",
+      rules: [
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? JOB_TITLES.includes(value)
+                : false
+              : true,
+          errorMessage: "Invalid job title",
+        },
+      ],
+      config: { errorsContainer: ".error-container-jobtitle" },
+    },
+    {
+      field: "#book-demo-step-1-form-hotelname",
+      rules: [{ rule: "minLength", value: 5 }],
+      config: { errorsContainer: ".error-container-hotelname" },
+    },
+    {
+      field: "#book-demo-step-1-form-website",
+      rules: [
+        { rule: "customRegexp", value: urlRegex, errorMessage: "Invalid URL" },
+      ],
+      config: {
+        errorsContainer: ".error-container-website",
+      },
     },
   ]);
+
   useEffect(() => {
     const func = () => {
       if (!formIsValid()) return;
@@ -56,7 +99,7 @@ const BookADemo1: React.FC = () => {
       }
     };
 
-    const b = document.getElementById("BUTBUT");
+    const b = document.getElementById("goto-book-demo-2");
     b?.addEventListener("click", func);
 
     const form = document.getElementById("book-demo-step-1-form");
@@ -104,6 +147,7 @@ const BookADemo1: React.FC = () => {
                     id="book-demo-step-1-form-name"
                   />
                 </div>
+                <div className="error-container-name"></div>
               </div>
 
               <div className="uk-margin">
@@ -119,6 +163,7 @@ const BookADemo1: React.FC = () => {
                     placeholder="Email Address"
                   />
                 </div>
+                <div className="error-container-email"></div>
               </div>
 
               <div className="uk-margin">
@@ -128,17 +173,20 @@ const BookADemo1: React.FC = () => {
                     className="uk-select uk-form-width-large"
                     id="book-demo-step-1-form-jobtitle"
                     placeholder="Job Title"
-                    value={0}
+                    value={""}
                     onChange={(e) => {
                       console.log("e", e);
                     }}
                   >
-                    <option disabled>Select an option</option>
+                    <option value="" disabled>
+                      Select an option
+                    </option>
                     {JOB_TITLES.map((title) => (
                       <option key={title}>{title}</option>
                     ))}
                   </select>
                 </div>
+                <div className="error-container-jobtitle"></div>
               </div>
 
               <div className="uk-margin">
@@ -154,6 +202,7 @@ const BookADemo1: React.FC = () => {
                     placeholder="Hotel Name"
                   />
                 </div>
+                <div className="error-container-hotelname"></div>
               </div>
 
               <div className="uk-margin">
@@ -169,6 +218,7 @@ const BookADemo1: React.FC = () => {
                     placeholder="Website"
                   />
                 </div>
+                <div className="error-container-website"></div>
               </div>
             </div>
           </div>
@@ -177,7 +227,7 @@ const BookADemo1: React.FC = () => {
               close
             </a>
             <button
-              id="BUTBUT"
+              id="goto-book-demo-2"
               className="uk-button uk-button-primary uk-border-pill"
             >
               Next
