@@ -28,6 +28,20 @@ class MainLayout extends React.Component {
     return (
       <div>
         <Helmet>
+          <title>For Accommodations. noytrall. Stay Smart.</title>
+
+          <link rel="shortcut icon" href="favicon.ico" />
+
+          <meta charset="utf-8" />
+
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          <meta
+            name="description"
+            content="For Accommodations. noytrall. Stay Smart."
+          />
+
+          <meta name="author" content="nøytrall" />
           <link
             rel="stylesheet"
             href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
