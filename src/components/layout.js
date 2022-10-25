@@ -58,7 +58,17 @@ class MainLayout extends React.Component {
             <Header />
             <Menu />
             <BookADemo />
-            <div>{this.props.children}</div>
+            <div>
+              {this.props.children}
+              <a
+                className="uk-border-circle uk-light uk-background-primary uk-box-shadow-small uk-position uk-position-fixed uk-position-medium uk-position-bottom-left uk-flex uk-flex-center uk-flex-middle"
+                id="toTop"
+                href="#"
+                data-uk-totop
+                data-uk-scroll
+              ></a>
+            </div>
+
             <Footer />
           </div>
         </GlobalContextProvider>

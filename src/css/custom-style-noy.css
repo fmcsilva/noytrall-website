@@ -35,6 +35,19 @@ img[data-src][src*="data:image"] {
   }
 }
 
+#toTop {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+#toTop svg {
+  color: #fff;
+}
+
+#toTop:hover svg {
+  color: #ccc;
+}
+
 .noytrall-green {
   color: #40bfb4; /* #00BFA6 */
 }
