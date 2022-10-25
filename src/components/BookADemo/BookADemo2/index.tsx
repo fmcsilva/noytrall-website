@@ -228,7 +228,8 @@ const BookADemo2: React.FC = () => {
   return (
     <div
       id="modal-book-demo-step-2"
-      uk-modal="esc-close: false; bg-close: false; stack: true;"
+      uk-modal="esc-close: true; bg-close: true; stack: true;"
+      style={{ zIndex: 10001 }}
     >
       <div className="uk-modal-dialog uk-margin-auto-vertical">
         <form action="#" id="book-demo-step-2-form" className="uk-form-stacked">
