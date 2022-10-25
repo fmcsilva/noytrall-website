@@ -27,21 +27,35 @@ const useJustValidate = (
           justValidate.addField(field, rules, config);
         }
       }
-    }
-    return () => {
-      if (justValidate) {
+      return () => {
         Object.keys(justValidate.fields).forEach((field) =>
           justValidate.removeField(field)
         );
-      }
-    };
+      };
+    }
   }, [justValidate]);
 
-  const formIsValid = () => {
-    return justValidate && justValidate.isSubmitted && justValidate.isValid;
+  const validateField = async (field: string) => {
+    console.log("justValidate", justValidate);
+    const valid = await justValidate?.revalidateField(field);
+    console.log("valid", valid);
+    return valid;
   };
 
-  return { formIsValid, justValidate };
+  const formIsValid = async () => {
+    console.log("justValidate", justValidate);
+
+    try {
+      const valid = await justValidate?.revalidate();
+      console.log("valid", valid);
+      return valid;
+    } catch (err) {
+      console.log("err", err);
+      return false;
+    }
+  };
+
+  return { formIsValid, justValidate, validateField };
 };
 
 export default useJustValidate;
