@@ -12,22 +12,22 @@ const Footer: React.FC = () => {
             <div>
               <ul className="uk-list uk-list-collapse">
                 <li>
-                  <a className="" href="index.htm">
+                  <a className="" href="/">
                     For Guests
                   </a>
                 </li>
                 <li>
-                  <a className="" href="hotels.htm">
+                  <a className="" href="/hotels">
                     For Hotels
                   </a>
                 </li>
                 <li>
-                  <a className="" href="providers.htm">
+                  <a className="" href="/providers">
                     For Providers
                   </a>
                 </li>
                 <li>
-                  <a className="" href="help.htm">
+                  <a className="" href="/help">
                     Help and Support
                   </a>
                 </li>
@@ -36,17 +36,17 @@ const Footer: React.FC = () => {
             <div>
               <ul className="uk-list uk-list-collapse">
                 <li>
-                  <a className="" href="aboutus.htm">
+                  <a className="" href="/aboutus">
                     About us
                   </a>
                 </li>
                 <li>
-                  <a className="" href="mission.htm">
+                  <a className="" href="/mission">
                     Mission and Values
                   </a>
                 </li>
                 <li>
-                  <a className="" href="privacy.htm">
+                  <a className="" href="/privacy">
                     Privacy Policy
                   </a>
                 </li>
