@@ -519,16 +519,20 @@ const FAQS: React.FC = () => {
         <div className="uk-margin-large">
           <div className="uk-text-center">
             <h1 className="uk-heading-small">Frequently asked questions.</h1>
-            <p className="uk-text-large">Ask away.</p>
+            <p className="uk-text-large">You ask. We answer.</p>
           </div>
           <div className="uk-align-center">
             <ul uk-accordion="multiple: true">
-              <li className="uk-open">
+              <li>
                 <a className="uk-accordion-title" href="#">
-                  How can I start using it ?
+                  Can I start using it as of now?
                 </a>
                 <div className="uk-accordion-content">
-                  <p>It's just as easy as installing noytrall's App.</p>
+                  <p>
+                    We're launching the App in a couple of weeks. Then you can
+                    start using it on any noytrall-enabled hotels and
+                    accommodations.
+                  </p>
                 </div>
               </li>
 
@@ -537,24 +541,37 @@ const FAQS: React.FC = () => {
                   Do I continue to use my normal booking channels?
                 </a>
                 <div className="uk-accordion-content">
-                  <p>Yes.</p>
+                  <p>
+                    Yes. The booking is done through your preferred booking
+                    platform as you would usually do.
+                  </p>
                 </div>
               </li>
               <li>
                 <a className="uk-accordion-title" href="#">
-                  Will I pay less ?
+                  Will I pay less for my stays?
                 </a>
                 <div className="uk-accordion-content">
-                  <p>Nor.</p>
+                  <p>
+                    Our goal is to implement a pay-for-your-consumption model.
+                    Right now, the gamification system is the reward system you
+                    will benefit from.
+                  </p>
                 </div>
               </li>
 
               <li>
                 <a className="uk-accordion-title" href="#">
-                  Will I get rewarded for being sustainable ?
+                  How will I get rewarded for being sustainable ?
                 </a>
                 <div className="uk-accordion-content">
-                  <p>Yes.</p>
+                  <p>
+                    For being sustainable you will get noytrall points. The more
+                    sustainable you are, the more points you get. You also get
+                    more points by using the noytrall app, progressing through
+                    levels and fulfilling challenges. These points can then be
+                    used to redeem rewards with our community.
+                  </p>
                 </div>
               </li>
 
@@ -564,13 +581,20 @@ const FAQS: React.FC = () => {
                 </a>
                 <div className="uk-accordion-content">
                   <p>
-                    You will surely help to reduce CO<sub>2</sub> emissions.
+                    By staying in a noytrall smart room, you will know how much
+                    water and energy you are consuming during your stay and the
+                    carbon footprint of your impact. The less you consume, the
+                    less CO<sub>2</sub> you emit. And the planet thanks you.
                   </p>
                 </div>
               </li>
             </ul>
           </div>
         </div>
+        <p>
+          You can find more helpful topics on Guests support in our
+          <a href="help.htm"> help and support</a> page.
+        </p>
       </div>
     </div>
   );
