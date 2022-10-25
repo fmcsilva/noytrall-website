@@ -14,34 +14,34 @@ const useJustValidate = (
   }[] = [],
   { onSuccess }: { onSuccess?: () => void } = { onSuccess: () => {} }
 ) => {
-  const [validation, setValidation] = useState<JustValidate | null>(null);
+  const [justValidate, setJustValidate] = useState<JustValidate | null>(null);
 
   useEffect(() => {
-    setValidation(new JustValidate(`#${formId}`));
+    setJustValidate(new JustValidate(`#${formId}`));
   }, []);
 
   useEffect(() => {
-    if (validation) {
-      if (Object.keys(validation.fields).length === 0) {
+    if (justValidate) {
+      if (Object.keys(justValidate.fields).length === 0) {
         for (const { field, rules, config } of fields) {
-          validation.addField(field, rules, config);
+          justValidate.addField(field, rules, config);
         }
       }
     }
     return () => {
-      if (validation) {
-        Object.keys(validation.fields).forEach((field) =>
-          validation.removeField(field)
+      if (justValidate) {
+        Object.keys(justValidate.fields).forEach((field) =>
+          justValidate.removeField(field)
         );
       }
     };
-  }, [validation]);
+  }, [justValidate]);
 
   const formIsValid = () => {
-    return validation && validation.isSubmitted && validation.isValid;
+    return justValidate && justValidate.isSubmitted && justValidate.isValid;
   };
 
-  return { formIsValid };
+  return { formIsValid, justValidate };
 };
 
 export default useJustValidate;

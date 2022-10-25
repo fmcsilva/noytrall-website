@@ -1,8 +1,9 @@
-import { isString } from "lodash";
+import { isBoolean, isString } from "lodash";
 import React, { useEffect } from "react";
 import UIkit from "uikit";
 import useJustValidate from "../../../hooks/useJustValidate";
 import { urlRegex } from "../../../utils/regex";
+import { normalizeString } from "../../../utils/strings";
 
 const JOB_TITLES: string[] = [
   "Owner",
@@ -31,6 +32,18 @@ const BookADemo1: React.FC = () => {
         {
           rule: "required",
           errorMessage: "Name is required",
+        },
+        {
+          validator: (value) => {
+            if (isBoolean(value)) return value;
+            const l = value.split("").filter((c) => {
+              return !"abcdefghijklmnopqrstucwxyz -ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                .split("")
+                .includes(normalizeString(c));
+            });
+            return l.length === 0;
+          },
+          errorMessage: "Invalid character",
         },
         {
           rule: "minLength",
@@ -75,7 +88,7 @@ const BookADemo1: React.FC = () => {
     },
     {
       field: "#book-demo-step-1-form-hotelname",
-      rules: [{ rule: "minLength", value: 5 }],
+      rules: [{ rule: "minLength", value: 3 }],
       config: { errorsContainer: ".error-container-hotelname" },
     },
     {

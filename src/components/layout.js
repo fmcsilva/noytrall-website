@@ -33,6 +33,11 @@ class MainLayout extends React.Component {
             href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
           />
           <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+          <script
+            type="text/javascript"
+            src="https://assets.calendly.com/assets/external/widget.js"
+            async
+          ></script>
         </Helmet>
         <GlobalContextProvider>
           <div style={{ position: "relative" }}>

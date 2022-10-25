@@ -12,7 +12,7 @@ export const isValidUrl = (urlString: string) => {
   return urlRegex.test(urlString);
 };
 
-export const phoneNumberRegex = new RegExp(/^\+(?:[0-9] ?){6,14}[0-9]$/);
+export const phoneNumberRegex = new RegExp(/^(\+)?(?:[0-9] ?){6,14}[0-9]$/);
 
 export const isValidPhoneNumber = (phoneNumber: string) => {
   return phoneNumberRegex.test(phoneNumber);
