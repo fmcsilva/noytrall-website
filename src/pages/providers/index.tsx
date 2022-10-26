@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-import DownloadTheApp from "../components/DownloadTheApp";
+import DownloadTheApp from "../../components/DownloadTheApp";
 
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 
-import Menu from "../components/Menu";
+import Menu from "../../components/Menu";
+import CommunityPartnerModal from "./CommunityPartnerModal";
 
 const Providers: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Providers: React.FC = () => {
       <FillDetails />
       <FAQS />
       <DownloadTheApp />
+      <CommunityPartnerModal />
     </Layout>
   );
 };

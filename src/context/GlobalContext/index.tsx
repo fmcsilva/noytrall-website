@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useReducer, useEffect } from "react";
+import { endpoint } from "../../utils/api";
 import { nGlobal } from "./interfaces";
 
 const GlobalDispatchContext = React.createContext<
@@ -42,9 +43,7 @@ const GlobalContextProvider: React.FC<nGlobal.iContextProps> = ({
     useReducer(reducer, initialState);
 
   useEffect(() => {
-    axios.defaults.baseURL =
-      "https://edogsxxila.execute-api.eu-west-1.amazonaws.com";
-    console.log("Global Context");
+    axios.defaults.baseURL = endpoint();
   }, []);
 
   return (

@@ -155,7 +155,7 @@ export const GUESTS: tHelpContent = {
       ],
     },
     {
-      topic: "Accomodation conditions",
+      topic: "Accommodation conditions",
       qAndA: [
         {
           question:
@@ -214,7 +214,7 @@ export const GUESTS: tHelpContent = {
     },
   ],
 };
-export const ACCOMODATIONS: tHelpContent = {
+export const ACCOMMODATIONS: tHelpContent = {
   title: "Accommodations",
   link: "/help-details-hotels",
   qAndA: [{ question: "How does noytrall rate accommodations?", answer: "" }],
@@ -373,7 +373,7 @@ export const PRIVACY: tHelpContent = {
 
 const HELP_LIST: tHelpContent[] = [
   GUESTS,
-  ACCOMODATIONS,
+  ACCOMMODATIONS,
   ABOUT_NOYTRALL,
   SUSTAINABLE_PARTNERS,
   PRIVACY,

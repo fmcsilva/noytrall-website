@@ -100,7 +100,7 @@ const views: tView[] = [
     ],
   },
   {
-    view: "Accomodations",
+    view: "Accommodations",
     content: [
       {
         questions: [
