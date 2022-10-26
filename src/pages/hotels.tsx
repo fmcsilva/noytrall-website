@@ -827,7 +827,7 @@ const FAQS: React.FC = () => {
 
         <p>
           You can find more helpful topics on Accommodations support in our
-          <a href="help.htm"> help and support</a> page.
+          <a href="/help"> help and support</a> page.
         </p>
       </div>
     </div>

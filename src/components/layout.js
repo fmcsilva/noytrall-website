@@ -60,13 +60,13 @@ class MainLayout extends React.Component {
             <BookADemo />
             <div>
               {this.props.children}
-              <a
+              <div
                 className="uk-border-circle uk-light uk-background-primary uk-box-shadow-small uk-position uk-position-fixed uk-position-medium uk-position-bottom-left uk-flex uk-flex-center uk-flex-middle"
                 id="toTop"
-                href="#"
+                style={{ cursor: "pointer" }}
                 data-uk-totop
                 data-uk-scroll
-              ></a>
+              ></div>
             </div>
 
             <Footer />

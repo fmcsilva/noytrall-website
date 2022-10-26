@@ -593,7 +593,7 @@ const FAQS: React.FC = () => {
         </div>
         <p>
           You can find more helpful topics on Guests support in our
-          <a href="help.htm"> help and support</a> page.
+          <a href="/help"> help and support</a> page.
         </p>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { COUNTRIES } from "../../../utils/countries";
 import { isValidPhoneNumber } from "../../../utils/regex";
 
 const BUSINESS_TYPES = [
-  "Accomodation Business",
+  "Accommodation Business",
   "Consulting Company",
   "Architecture Office",
   "Interior Design Firm",
@@ -21,7 +21,7 @@ const MANAGEMENT_TYPE = [
   "Other",
 ];
 
-const ACCOMODATION_TYPES = [
+const ACCOMMODATION_TYPES = [
   "Hotel",
   "Conference Hotel",
   "Resort",
@@ -40,7 +40,7 @@ interface iState {
   phoneNumber?: string;
   country?: string;
   businessType?: string;
-  accomodationType?: string;
+  accommodationType?: string;
   managementType?: string;
 }
 type tAction = { type: "change"; key: string; value: any };
@@ -49,7 +49,7 @@ const initialState: iState = {
   phoneNumber: "",
   country: "",
   businessType: "",
-  accomodationType: "",
+  accommodationType: "",
   managementType: "",
 };
 
@@ -72,7 +72,7 @@ const BookADemo2: React.FC = () => {
     phoneNumber,
     businessType,
     managementType,
-    accomodationType,
+    accommodationType,
     country,
   } = state;
   const { formIsValid, justValidate } = useJustValidate(
@@ -101,7 +101,7 @@ const BookADemo2: React.FC = () => {
             validator: (value) =>
               value
                 ? isString(value)
-                  ? COUNTRIES.map(({ name }) => name).includes(value)
+                  ? COUNTRIES.map(({ code }) => code).includes(value)
                   : false
                 : true,
             errorMessage: "Invalid job title",
@@ -129,20 +129,20 @@ const BookADemo2: React.FC = () => {
         },
       },
       {
-        field: "#book-demo-step-2-accomodation",
+        field: "#book-demo-step-2-accommodation",
         rules: [
           {
             validator: (value) =>
               value
                 ? isString(value)
-                  ? ACCOMODATION_TYPES.includes(value)
+                  ? ACCOMMODATION_TYPES.includes(value)
                   : false
                 : true,
-            errorMessage: "Invalid accomodation",
+            errorMessage: "Invalid accommodation",
           },
         ],
         config: {
-          errorsContainer: ".error-container-accomodation",
+          errorsContainer: ".error-container-accommodation",
         },
       },
       {
@@ -182,7 +182,7 @@ const BookADemo2: React.FC = () => {
       { id: "book-demo-step-2-phone", key: "phoneNumber" },
       { id: "book-demo-step-2-country", key: "country" },
       { id: "book-demo-step-2-business", key: "businessType" },
-      { id: "book-demo-step-2-accomodation", key: "accomodationType" },
+      { id: "book-demo-step-2-accommodation", key: "accommodationType" },
       { id: "book-demo-step-2-management", key: "managementType" },
     ];
 
@@ -278,7 +278,7 @@ const BookADemo2: React.FC = () => {
                     placeholder="Country"
                   >
                     <option disabled value="">
-                      Select an option
+                      Select your country
                     </option>
                     {COUNTRIES.map(({ code, name }) => (
                       <option key={code} value={code}>
@@ -303,7 +303,7 @@ const BookADemo2: React.FC = () => {
                     placeholder="Business Type"
                   >
                     <option value="" disabled>
-                      Select an option
+                      Select your business type
                     </option>
                     {BUSINESS_TYPES.map((value) => (
                       <option key={value} value={value}>
@@ -320,23 +320,23 @@ const BookADemo2: React.FC = () => {
                 <div className="uk-form-controls uk-inline">
                   <select
                     onChange={handleChange}
-                    value={accomodationType || ""}
-                    disabled={businessType !== "Accomodation Business"}
+                    value={accommodationType || ""}
+                    disabled={businessType !== "Accommodation Business"}
                     className="uk-select uk-form-width-large"
-                    id="book-demo-step-2-accomodation"
+                    id="book-demo-step-2-accommodation"
                     placeholder="Accommodation Category"
                   >
                     <option value="" disabled>
-                      Select an option
+                      Select your accommodation type
                     </option>
-                    {ACCOMODATION_TYPES.map((value) => (
+                    {ACCOMMODATION_TYPES.map((value) => (
                       <option value={value} key={value}>
                         {value}
                       </option>
                     ))}
                   </select>
                 </div>
-                <div className="error-container-accomodation"></div>
+                <div className="error-container-accommodation"></div>
               </div>
 
               <div className="uk-margin">
@@ -344,13 +344,13 @@ const BookADemo2: React.FC = () => {
                 <div className="uk-form-controls uk-inline">
                   <select
                     value={managementType || ""}
-                    disabled={businessType !== "Accomodation Business"}
+                    disabled={businessType !== "Accommodation Business"}
                     className="uk-select uk-form-width-large"
                     id="book-demo-step-2-management"
                     placeholder="Management Type"
                   >
                     <option value="" disabled>
-                      Select an option
+                      Select your management type
                     </option>
                     {MANAGEMENT_TYPE.map((value) => (
                       <option key={value} value={value}>

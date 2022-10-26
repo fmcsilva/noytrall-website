@@ -78,12 +78,9 @@ const DropALine: React.FC<iProps> = ({ question }) => {
 
   useEffect(() => {
     const listener = (id: string) => async (e: any) => {
-      console.log("id", id);
       validateField(`#${id}`);
     };
-
     nameRef.current?.addEventListener("keyup", listener("dropaline-form-name"));
-    nameRef.current?.addEventListener("", listener("dropaline-form-name"));
     descriptionRef.current?.addEventListener(
       "keyup",
       listener("dropaline-form-description")

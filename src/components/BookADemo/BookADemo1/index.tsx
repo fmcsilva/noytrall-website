@@ -187,13 +187,10 @@ const BookADemo1: React.FC = () => {
                     className="uk-select uk-form-width-large"
                     id="book-demo-step-1-form-jobtitle"
                     placeholder="Job Title"
-                    value={""}
-                    onChange={(e) => {
-                      console.log("e", e);
-                    }}
+                    defaultValue={""}
                   >
                     <option value="" disabled>
-                      Select an option
+                      Select your job title
                     </option>
                     {JOB_TITLES.map((title) => (
                       <option key={title}>{title}</option>
@@ -244,7 +241,7 @@ const BookADemo1: React.FC = () => {
               id="goto-book-demo-2"
               className="uk-button uk-button-primary uk-border-pill"
             >
-              Next
+              Optional Info
             </button>
           </div>
         </form>
