@@ -664,45 +664,15 @@ const Interaction: React.FC = () => {
               style={{ position: "relative" }}
             >
               <Bar options={config.options} data={config.data} />
-              {/* <canvas id="myChart"></canvas> */}
             </div>
           </div>
 
           <div className="uk-margin-large uk-text-center">
             <a
               className="uk-button uk-button-primary uk-button-large uk-border-pill"
-              href="#modal-simulator-stack"
-              data-uk-toggle
-            >
-              Estimate savings now
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <div id="interaction" className="uk-section uk-section-muted">
-      <div className="uk-container uk-container-large">
-        <div className="uk-margin-large">
-          <h1 className="uk-text-center">Estimate your performance savings</h1>
-
-          <div className="uk-container uk-container-xsmall">
-            <div
-              className="uk-align-center"
-              style={{ position: "relative", width: "100%" }}
-            >
-              <Bar options={config.options} data={config.data} />
-            </div>
-          </div>
-
-          <div className="uk-flex uk-flex-center uk-margin-large">
-            <a
-              className="uk-button uk-button-primary uk-button-large uk-border-pill"
               data-uk-toggle="target: #modal-simulator-stack"
             >
-              Calculate Estimate Now
+              Estimate savings now
             </a>
           </div>
         </div>
