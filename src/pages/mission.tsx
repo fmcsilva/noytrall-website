@@ -3,7 +3,7 @@ import MainLayout from "../components/layout";
 
 const Mission: React.FC = () => {
   return (
-    <MainLayout>
+    <MainLayout title="Mission and Values. noytrall. Stay Smart.">
       <Content />
     </MainLayout>
   );

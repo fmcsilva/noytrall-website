@@ -14,7 +14,7 @@ import faceMarco from "../images/face-marco.png";
 
 const AboutUsPage = () => {
   return (
-    <Layout>
+    <Layout title="About Us. noytrall. Stay Smart.">
       <Menu />
       <Content />
       <MeetTheTeam />
@@ -26,9 +26,11 @@ const Content: React.FC = () => {
   return (
     <div id="" className="uk-section uk-section-default">
       <div className="uk-container uk-container-large">
-        <div className="uk-child-width-1-2@l" data-uk-grid>
-          <div>
-            <h1>About us</h1>
+        <div className="uk-width-1-2@l">
+          <div className="uk-margin-medium">
+            <h1>About Us</h1>
+
+            <div></div>
           </div>
         </div>
       </div>

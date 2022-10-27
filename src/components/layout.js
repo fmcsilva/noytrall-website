@@ -14,7 +14,6 @@ import "../css/notification.css";
 import { GlobalContextProvider } from "../context/GlobalContext";
 import Menu from "./Menu";
 import BookADemo from "./BookADemo";
-
 class MainLayout extends React.Component {
   componentDidMount() {
     try {
@@ -29,18 +28,10 @@ class MainLayout extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>For Accommodations. noytrall. Stay Smart.</title>
-
-          {/* <link rel="shortcut icon" href="favicon.ico" /> */}
-
+          <title>{this.props.title}</title>
           <meta charset="utf-8" />
 
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-          <meta
-            name="description"
-            content="For Accommodations. noytrall. Stay Smart."
-          />
 
           <meta name="author" content="nøytrall" />
           <link

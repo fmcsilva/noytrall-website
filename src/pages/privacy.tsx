@@ -6,8 +6,8 @@ import Menu from "../components/Menu";
 
 const Privacy: React.FC = () => {
   return (
-    <Layout>
-      <Menu/>
+    <Layout title="Privacy Policy. noytrall. Stay Smart.">
+      <Menu />
       <Content />
     </Layout>
   );

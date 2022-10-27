@@ -14,15 +14,19 @@ const Header: React.FC<tProps> = ({}) => {
   const renderButtons = () => {
     const list = [
       { path: "/", text: "FOR GUESTS" },
-      { path: "/hotels", text: "FOR HOTELS" },
-      // { path: "/partners", text: "FOR PARTNERS" },
-      { path: "/providers", text: "FOR PROVIDERS" },
-      { path: "/help", text: "HELP AND SUPPORT" },
+      { path: "/hotels/", text: "FOR HOTELS" },
+      { path: "/providers/", text: "FOR PROVIDERS" },
+      { path: "/help/", text: "HELP AND SUPPORT" },
     ];
 
     return list.map(({ path, text }) => {
+      const bool =
+        pathname === "/" || path === "/"
+          ? pathname === path
+          : path.indexOf(pathname) >= 0 || pathname.indexOf(path) >= 0;
+
       return (
-        <li key={path} className={path === pathname ? "uk-active" : ""}>
+        <li key={path} className={bool ? "uk-active" : ""}>
           <a href={path}>{text}</a>
         </li>
       );

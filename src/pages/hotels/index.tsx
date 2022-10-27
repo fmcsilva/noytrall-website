@@ -27,7 +27,7 @@ Chart.register(...registerables);
 
 const Hotels: React.FC = () => {
   return (
-    <MainLayout>
+    <MainLayout title="For Accommodations. noytrall. Stay Smart.">
       <Menu />
       <EstimateSavingsModal />
       {/* <Modal /> */}

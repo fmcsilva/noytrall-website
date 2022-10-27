@@ -3,9 +3,9 @@ import UIkit from "uikit";
 export const notification = (
   message: string,
   {
-    status,
-    pos,
-    timeout,
+    status = "primary",
+    pos = "top-right",
+    timeout = 5000,
   }: {
     status?: "success" | "danger" | "primary" | "warning";
     pos?:
@@ -16,7 +16,7 @@ export const notification = (
       | "bottom-center"
       | "bottom-right";
     timeout?: number;
-  } = { status: "primary", pos: "top-center", timeout: 5000 }
+  } = {}
 ) => {
   UIkit.notification({
     message,

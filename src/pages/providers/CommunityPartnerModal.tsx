@@ -203,7 +203,7 @@ const ApplyModal: React.FC = () => {
   return (
     <div
       id="modal-apply-partner"
-      uk-modal="esc-close: false; bg-close: false;  stack: true;"
+      uk-modal="esc-close: false; bg-close: false;  stack: false;"
     >
       <div className="uk-modal-dialog uk-margin-auto-vertical">
         <form

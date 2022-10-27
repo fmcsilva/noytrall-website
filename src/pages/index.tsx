@@ -25,16 +25,14 @@ import facePedro from "../images/face-pedro.png";
 
 import DownloadTheApp from "../components/DownloadTheApp";
 
-import Menu from "../components/Menu";
 import axios from "axios";
 import { notification } from "../utils/notification";
 
-import JustValidate from "just-validate";
 import useJustValidate from "../hooks/useJustValidate";
 
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout title="For Guests. noytrall. Stay Smart.">
       <Hero />
       <HowItWorks />
       <KeyFeatures />
@@ -113,8 +111,8 @@ const Hero: React.FC = () => {
     dispatch({ type: "change email", email: e.target.value });
   };
 
-  const handleNotifyMe = () => {
-    if (!formIsValid()) return;
+  const handleNotifyMe = async () => {
+    if (!(await formIsValid())) return;
 
     dispatch({ type: "pending" });
     axios

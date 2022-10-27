@@ -7,8 +7,6 @@ const BookADemoCalendar: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { bookDemoData: data } = useBookDemoDataState();
 
-  console.log("CALENDAR data", data);
-
   useEffect(() => {
     function isCalendlyEvent(e: any) {
       return (
@@ -23,10 +21,6 @@ const BookADemoCalendar: React.FC = () => {
         const {
           data: { event, payload },
         } = e;
-
-        /* Example to get the name of the event */
-        console.log("Event name:", event);
-        console.log("data", data);
 
         if (event === "date_and_time_selected") {
           // @ts-ignore
@@ -76,7 +70,6 @@ const BookADemoCalendar: React.FC = () => {
   const dataUrl = `https://calendly.com/${calendlyAccount}/30min?hide_landing_page_details=1&hide_event_type_details=1&hide_gdpr_banner=1&primary_color=40bfb4${
     data.name ? `&name=${data.name.replace(" ", "%20")}` : ""
   }${data.email ? `&email=${data.email}` : ""}`;
-  console.log("dataUrl", dataUrl);
 
   return (
     <div

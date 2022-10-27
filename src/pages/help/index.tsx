@@ -6,7 +6,7 @@ import Menu from "../../components/Menu";
 
 const Help: React.FC = () => {
   return (
-    <Layout>
+    <Layout title="Help and Support. noytrall. Stay Smart.">
       <Menu />
       <Hero />
       <Content />
@@ -431,7 +431,15 @@ const Content: React.FC = () => {
           key={view}
           {...(activeView === i ? { className: "uk-active" } : {})}
         >
-          <a href="#" onClick={() => setActiveView(i)}>
+          <a
+            className="uk-visible uk-hidden@s"
+            style={{ paddingLeft: "5px", paddingRight: "5px" }}
+            href="#"
+            onClick={() => setActiveView(i)}
+          >
+            {view}
+          </a>
+          <a className="uk-visible@s" href="#" onClick={() => setActiveView(i)}>
             {view}
           </a>
         </li>
