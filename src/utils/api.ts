@@ -3,6 +3,6 @@ const SERVERLESS_ENDPOINT =
 const LOCAL_ENDPOINT = "http://192.168.56.1:5000";
 
 export const endpoint = () => {
-  return SERVERLESS_ENDPOINT;
-  // return LOCAL_ENDPOINT;
+  // return SERVERLESS_ENDPOINT;
+  return LOCAL_ENDPOINT;
 };

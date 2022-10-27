@@ -122,11 +122,14 @@ const ApplyModal: React.FC = () => {
 
   useEffect(() => {
     const listener = async () => {
+      console.log("LISTENER [BEGIN]");
       setLoading(true);
       if (!(await revalidate())) {
+        console.log("LISTENER [INVALID]");
         setLoading(false);
         return;
       }
+      console.log("LISTENER [AXIOS]");
 
       const name = nameRef.current?.value;
       const email = emailRef.current?.value;
@@ -152,7 +155,7 @@ const ApplyModal: React.FC = () => {
           const nextIdModal = "modal-apply-partner-success";
           const modal = document.getElementById(nextIdModal);
           if (modal) {
-            // UIkit.modal(modal).show();
+            UIkit.modal(modal).show();
           }
         })
         .catch((err) => {
@@ -170,7 +173,7 @@ const ApplyModal: React.FC = () => {
     return () => {
       submitButton?.removeEventListener("click", listener);
     };
-  }, []);
+  }, [revalidate]);
 
   useEffect(() => {
     const listener = (id: string) => async (e: any) => {

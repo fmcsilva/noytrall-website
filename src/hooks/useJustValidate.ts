@@ -36,18 +36,13 @@ const useJustValidate = (
   }, [justValidate]);
 
   const validateField = async (field: string) => {
-    console.log("justValidate", justValidate);
     const valid = await justValidate?.revalidateField(field);
-    console.log("valid", valid);
     return valid || false;
   };
 
   const formIsValid = async () => {
-    console.log("justValidate", justValidate);
-
     try {
       const valid = await justValidate?.revalidate();
-      console.log("valid", valid);
       return valid || false;
     } catch (err) {
       console.log("err", err);
@@ -56,7 +51,11 @@ const useJustValidate = (
   };
 
   const revalidate = async () => {
-    return justValidate ? await justValidate?.revalidate() : false;
+    if (!justValidate) return false;
+    const valid = await justValidate.revalidate();
+
+    console.log("valid", valid);
+    return valid;
   };
 
   return { formIsValid, justValidate, validateField, revalidate };
