@@ -6,11 +6,12 @@ const Menu: React.FC = () => {
 
   const renderButtons = () => {
     const list = [
-      { path: "/", text: "FOR GUESTS" },
-      { path: "/hotels", text: "FOR HOTELS" },
-      // { path: "/partners", text: "FOR PARTNERS" },
-      { path: "/providers", text: "FOR PROVIDERS" },
-      { path: "/help", text: "HELP AND SUPPORT" },
+      { path: "/", text: "For Guests" },
+      { path: "/hotels", text: "For Hotels" },
+      { path: "/providers", text: "For Providers" },
+      { path: "/help", text: "Help and support" },
+      { path: "/aboutus", text: "About us" },
+      { path: "/privacy", text: "Privacy Policy" },
     ];
 
     return list.map(({ path, text }) => {
@@ -21,18 +22,46 @@ const Menu: React.FC = () => {
       );
     });
   };
+
   return (
-    <div id="offmenuid" data-uk-offcanvas="mode: reveal; overlay: true">
-    <div className="uk-offcanvas-bar">
-      <button className="uk-offcanvas-close" type="button" data-uk-close></button>
-      <ul className="uk-nav uk-nav-default" data-uk-scrollspy-nav="closest: li; scroll: true">
-        <li className="uk-nav-header">Menu</li>
-        {renderButtons()}
-      </ul>
+    <div id="offmenuid" uk-offcanvas="mode: reveal; overlay: true">
+      <div className="uk-offcanvas-bar">
+        <button
+          className="uk-offcanvas-close"
+          type="button"
+          data-uk-close
+        ></button>
+
+        <ul
+          className="uk-nav uk-nav-default"
+          uk-scrollspy-nav="closest: li; scroll: true"
+        >
+          <li className="uk-nav-header">Menu</li>
+
+          {renderButtons()}
+        </ul>
+      </div>
     </div>
-  </div>
   );
 
+  return (
+    <div id="offmenuid" data-uk-offcanvas="mode: reveal; overlay: true">
+      <div className="uk-offcanvas-bar">
+        <button
+          className="uk-offcanvas-close"
+          type="button"
+          data-uk-close
+        ></button>
+        <ul
+          className="uk-nav uk-nav-default"
+          data-uk-scrollspy-nav="closest: li; scroll: true"
+        >
+          <li className="uk-nav-header">Menu</li>
+          {renderButtons()}
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 export default Menu;

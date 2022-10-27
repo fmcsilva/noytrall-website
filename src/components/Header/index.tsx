@@ -51,16 +51,23 @@ const Header: React.FC<tProps> = ({}) => {
 
               <a
                 className="uk-navbar-item uk-logo uk-visible uk-hidden@s"
-                href="index"
+                href="/"
               >
-                <img data-src={logoSmall} width="41" height="53" data-uk-img />
+                <img
+                  style={{ background: "none" }}
+                  data-src={logoSmall}
+                  width="41"
+                  height="53"
+                  data-uk-img
+                />
               </a>
 
               <a
                 className="uk-navbar-item uk-logo uk-visible@s uk-hidden@m"
-                href="index"
+                href="/"
               >
                 <img
+                  style={{ background: "none" }}
                   data-src={logoMedium}
                   width="128"
                   height="53"
@@ -68,8 +75,14 @@ const Header: React.FC<tProps> = ({}) => {
                 />
               </a>
 
-              <a className="uk-navbar-item uk-logo uk-visible@m" href="index">
-                <img data-src={logo} width="250" height="53" data-uk-img />
+              <a className="uk-navbar-item uk-logo uk-visible@m" href="/">
+                <img
+                  style={{ background: "none" }}
+                  data-src={logo}
+                  width="250"
+                  height="53"
+                  data-uk-img
+                />
               </a>
             </div>
             <div className="uk-navbar-right">
