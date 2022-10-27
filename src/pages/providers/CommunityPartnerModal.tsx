@@ -23,20 +23,33 @@ const PRODUCTS_SERVICES = [{ service: "Option 01" }, { service: "Option 02" }];
 
 const ApplyModal: React.FC = () => {
   const [loading, setLoading] = useState(false);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const countryRef = useRef<HTMLSelectElement>(null);
+  const websiteRef = useRef<HTMLInputElement>(null);
+  const bioRef = useRef<HTMLTextAreaElement>(null);
+  const businessRef = useRef<HTMLSelectElement>(null);
+  const productsRef = useRef<HTMLSelectElement>(null);
   const { revalidate, validateField } = useJustValidate(
     "modal-apply-partner-form",
     [
       {
+        ref: nameRef,
         field: "#partner-name",
         rules: [{ rule: "required" }, { rule: "minLength", value: 3 }],
         config: { errorsContainer: ".error-container-partner-name" },
       },
       {
+        ref: emailRef,
         field: "#partner-email",
         rules: [{ rule: "required" }, { rule: "email" }],
         config: { errorsContainer: ".error-container-partner-email" },
       },
       {
+        ref: countryRef,
         field: "#partner-country",
         rules: [
           { rule: "required" },
@@ -53,6 +66,7 @@ const ApplyModal: React.FC = () => {
         config: { errorsContainer: ".error-container-partner-country" },
       },
       {
+        ref: websiteRef,
         field: "#partner-website",
         rules: [
           { rule: "required" },
@@ -65,11 +79,13 @@ const ApplyModal: React.FC = () => {
         config: { errorsContainer: ".error-container-partner-website" },
       },
       {
+        ref: bioRef,
         field: "#partner-bio",
         rules: [{ rule: "required" }, { rule: "minLength", value: 10 }],
         config: { errorsContainer: ".error-container-partner-bio" },
       },
       {
+        ref: businessRef,
         field: "#partner-business_category",
         rules: [
           { rule: "required" },
@@ -88,6 +104,7 @@ const ApplyModal: React.FC = () => {
         config: { errorsContainer: ".error-container-partner-business" },
       },
       {
+        ref: productsRef,
         field: "#partner-products_services",
         rules: [
           { rule: "required" },
@@ -110,26 +127,13 @@ const ApplyModal: React.FC = () => {
     ]
   );
 
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const countryRef = useRef<HTMLSelectElement>(null);
-  const websiteRef = useRef<HTMLInputElement>(null);
-  const bioRef = useRef<HTMLTextAreaElement>(null);
-  const businessRef = useRef<HTMLSelectElement>(null);
-  const productsRef = useRef<HTMLSelectElement>(null);
-
   useEffect(() => {
     const listener = async () => {
-      console.log("LISTENER [BEGIN]");
       setLoading(true);
       if (!(await revalidate())) {
-        console.log("LISTENER [INVALID]");
         setLoading(false);
         return;
       }
-      console.log("LISTENER [AXIOS]");
 
       const name = nameRef.current?.value;
       const email = emailRef.current?.value;
@@ -174,31 +178,6 @@ const ApplyModal: React.FC = () => {
       submitButton?.removeEventListener("click", listener);
     };
   }, [revalidate]);
-
-  useEffect(() => {
-    const listener = (id: string) => async (e: any) => {
-      validateField(`#${id}`);
-    };
-
-    const inputRefs = [nameRef, emailRef, websiteRef, bioRef];
-    const selectRefs = [countryRef, businessRef, productsRef];
-
-    inputRefs.map((ref) => {
-      ref.current?.addEventListener("keyup", listener(ref.current.id));
-    });
-    selectRefs.map((ref) => {
-      ref.current?.addEventListener("change", listener(ref.current.id));
-    });
-
-    return () => {
-      inputRefs.map((ref) => {
-        ref.current?.removeEventListener("keyup", listener(ref.current.id));
-      });
-      selectRefs.map((ref) => {
-        ref.current?.removeEventListener("change", listener(ref.current.id));
-      });
-    };
-  }, [validateField]);
 
   return (
     <div

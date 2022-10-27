@@ -9,26 +9,24 @@ interface iProps {
 
 const DropALine: React.FC<iProps> = ({ question }) => {
   const [loading, setLoading] = useState(false);
-  const { formIsValid, validateField } = useJustValidate("dropaline-form", [
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const { formIsValid } = useJustValidate("dropaline-form", [
     {
+      ref: nameRef,
       field: "#dropaline-form-name",
       rules: [{ rule: "required" }, { rule: "minLength", value: 3 }],
       config: { errorsContainer: ".error-container-name" },
     },
     {
+      ref: descriptionRef,
       field: "#dropaline-form-description",
       rules: [{ rule: "required" }, { rule: "minLength", value: 20 }],
       config: { errorsContainer: ".error-container-dropaline_description" },
     },
   ]);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
-
-  const sendQuestion = () => {
-    console.log("handleSendQuestion");
-  };
 
   useEffect(() => {
     const listener = async (e: any) => {
@@ -75,27 +73,6 @@ const DropALine: React.FC<iProps> = ({ question }) => {
       buttonRef.current?.removeEventListener("click", listener);
     };
   }, [question]);
-
-  useEffect(() => {
-    const listener = (id: string) => async (e: any) => {
-      validateField(`#${id}`);
-    };
-    nameRef.current?.addEventListener("keyup", listener("dropaline-form-name"));
-    descriptionRef.current?.addEventListener(
-      "keyup",
-      listener("dropaline-form-description")
-    );
-    return () => {
-      nameRef.current?.removeEventListener(
-        "keyup",
-        listener("dropaline-form-name")
-      );
-      descriptionRef.current?.removeEventListener(
-        "keyup",
-        listener("dropaline-form-description")
-      );
-    };
-  }, [validateField]);
 
   return (
     <div id="dropaline" uk-modal="esc-close: false; bg-close: false">

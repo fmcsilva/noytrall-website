@@ -43,13 +43,13 @@ const Hero: React.FC = () => {
               >
                 <div className="uk-width-auto">
                   <a
-                    className="uk-visible uk-hidden@s uk-button uk-button-primary uk-button-large uk-border-pill"
+                    className="uk-hidden@s uk-button uk-button-primary uk-button-large uk-border-pill"
                     data-uk-toggle="target: #modal-apply-partner"
                   >
                     Apply Now
                   </a>
                   <a
-                    className="uk-visible@s uk-hidden@m uk-button uk-button-primary uk-button-large uk-border-pill"
+                    className="uk-visible@s uk-button uk-button-primary uk-button-large uk-border-pill"
                     data-uk-toggle="target: #modal-apply-partner"
                   >
                     Apply to be a Community Partner
@@ -146,13 +146,13 @@ const FillDetails: React.FC = () => {
               us, you must tell us a little about your business.
             </p>
             <a
-              className="uk-visible uk-hidden@s uk-button uk-button-primary uk-button-large uk-border-pill"
+              className="uk-hidden@s uk-button uk-button-primary uk-button-large uk-border-pill"
               data-uk-toggle="target: #modal-apply-partner"
             >
               Apply Now
             </a>
             <a
-              className="uk-visible@s uk-hidden@m uk-button uk-button-primary uk-button-large uk-border-pill"
+              className="uk-visible@s uk-button uk-button-primary uk-button-large uk-border-pill"
               data-uk-toggle="target: #modal-apply-partner"
             >
               Apply to be a Community Partner

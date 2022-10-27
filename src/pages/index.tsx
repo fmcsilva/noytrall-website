@@ -87,8 +87,10 @@ const reducer = (state: tState, action: tAction): tState => {
 };
 
 const Hero: React.FC = () => {
+  const emailRef = React.useRef<HTMLInputElement>(null);
   const { formIsValid } = useJustValidate("notify-form", [
     {
+      ref: emailRef,
       field: "#notify-email",
       rules: [
         {
@@ -166,6 +168,7 @@ const Hero: React.FC = () => {
                           data-uk-icon="icon: mail"
                         ></span>
                         <input
+                          ref={emailRef}
                           disabled={isLoading}
                           value={email}
                           onChange={handleChange}

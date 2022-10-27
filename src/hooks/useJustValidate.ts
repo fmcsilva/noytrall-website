@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 const useJustValidate = (
   formId: string,
   fields: {
+    ref?: React.RefObject<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >;
     field: string;
     rules: FieldRuleInterface[];
     config?: FieldConfigInterface | undefined;
@@ -34,6 +37,27 @@ const useJustValidate = (
       };
     }
   }, [justValidate]);
+
+  useEffect(() => {
+    if (!justValidate) return;
+    const validateField = async (field: string) => {
+      const valid = await justValidate?.revalidateField(field);
+      return valid || false;
+    };
+    const listener = (field: string) => async (e: any) => {
+      validateField(`${field}`);
+    };
+    fields.forEach(({ field, ref }) => {
+      ref?.current?.addEventListener("keyup", listener(field));
+      ref?.current?.addEventListener("change", listener(field));
+    });
+    return () => {
+      fields.forEach(({ field, ref }) => {
+        ref?.current?.removeEventListener("keyup", listener(field));
+        ref?.current?.removeEventListener("change", listener(field));
+      });
+    };
+  }, [justValidate, fields]);
 
   const validateField = async (field: string) => {
     const valid = await justValidate?.revalidateField(field);

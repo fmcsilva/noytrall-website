@@ -29,31 +29,37 @@ const EstimateSavingsModal: React.FC = () => {
   const energyBillRef = useRef<HTMLInputElement>(null);
   const { formIsValid } = useJustValidate(FORM_ID, [
     {
+      ref: roomRef,
       field: `#${ROOM_ID}`,
-      rules: [{ rule: "required" }],
+      rules: [{ rule: "required" }, { rule: "number" }],
       config: { errorsContainer: `.${errorContainer(ROOM_ID)}` },
     },
     {
+      ref: occupationRef,
       field: `#${OCCUPANCY_ID}`,
       rules: [{ rule: "required" }, { rule: "number" }],
       config: { errorsContainer: `.${errorContainer(OCCUPANCY_ID)}` },
     },
     {
+      ref: waterConsumptionRef,
       field: `#${WATER_CONSUMPTION_ID}`,
       rules: [{ rule: "required" }, { rule: "number" }],
       config: { errorsContainer: `.${errorContainer(WATER_CONSUMPTION_ID)}` },
     },
     {
+      ref: waterBillRef,
       field: `#${WATER_BILL_ID}`,
       rules: [{ rule: "required" }, { rule: "number" }],
       config: { errorsContainer: `.${errorContainer(WATER_BILL_ID)}` },
     },
     {
+      ref: energyConsumptionRef,
       field: `#${ENERGY_CONSUMPTION_ID}`,
       rules: [{ rule: "required" }, { rule: "number" }],
       config: { errorsContainer: `.${errorContainer(ENERGY_CONSUMPTION_ID)}` },
     },
     {
+      ref: energyBillRef,
       field: `#${ENERGY_BILL_ID}`,
       rules: [{ rule: "required" }, { rule: "number" }],
       config: { errorsContainer: `.${errorContainer(ENERGY_BILL_ID)}` },

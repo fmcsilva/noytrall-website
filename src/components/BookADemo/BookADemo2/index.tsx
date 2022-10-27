@@ -1,5 +1,5 @@
 import { isString } from "lodash";
-import React, { useEffect, useMemo, useReducer } from "react";
+import React, { useEffect, useMemo, useReducer, useRef } from "react";
 import UIkit from "uikit";
 import useJustValidate from "../../../hooks/useJustValidate";
 import { COUNTRIES } from "../../../utils/countries";
@@ -89,8 +89,15 @@ const BookADemo2: React.FC = () => {
     accommodationType,
     country,
   } = state;
+
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const countryRef = useRef<HTMLSelectElement>(null);
+  const businessRef = useRef<HTMLSelectElement>(null);
+  const managementRef = useRef<HTMLSelectElement>(null);
+  const accommodationRef = useRef<HTMLSelectElement>(null);
   const { formIsValid } = useJustValidate(FORM_ID, [
     {
+      ref: phoneRef,
       field: `#${PHONE_ID}`,
       rules: [
         {
@@ -107,6 +114,7 @@ const BookADemo2: React.FC = () => {
       },
     },
     {
+      ref: countryRef,
       field: `#${COUNTRY_ID}`,
       rules: [
         {
@@ -124,6 +132,7 @@ const BookADemo2: React.FC = () => {
       },
     },
     {
+      ref: businessRef,
       field: `#${BUSINESS_ID}`,
       rules: [
         {
@@ -141,6 +150,7 @@ const BookADemo2: React.FC = () => {
       },
     },
     {
+      ref: accommodationRef,
       field: `#${ACCOMMODATION_ID}`,
       rules: [
         {
@@ -158,6 +168,7 @@ const BookADemo2: React.FC = () => {
       },
     },
     {
+      ref: managementRef,
       field: `#${MANAGEMENT_ID}`,
       rules: [
         {
@@ -178,10 +189,7 @@ const BookADemo2: React.FC = () => {
   const { updateBook2: updateData } = useBookDemoDataDispatch();
   useEffect(() => {
     const input = document.querySelector(`#${PHONE_ID}`);
-    if (input)
-      intlTelInput(input, {
-        // any initialisation options go here
-      });
+    if (input) intlTelInput(input, {});
   }, []);
 
   const ids = useMemo(() => {
@@ -230,21 +238,37 @@ const BookADemo2: React.FC = () => {
       });
       updateData(obj);
 
-      const nextIdModal = "modal-book-demo-calendar";
-      const modal = document.getElementById(nextIdModal);
+      const nextModalId = "modal-book-demo-calendar";
+      const modal = document.getElementById(nextModalId);
       if (modal) {
         UIkit.modal(modal).show();
       }
     };
 
-    const b = document.getElementById("goto-confirm-book-demo");
-    b?.addEventListener("click", func);
+    const gotoPrevious = () => {
+      console.log("PREVIOUS");
+      const previousModalId = "modal-book-demo-step-1";
+      const modal = document.getElementById(previousModalId);
+      console.log("modal", modal);
+      if (modal) {
+        UIkit.modal(modal).show();
+      }
+    };
+
+    const buttonGotoPrevious = document.getElementById(
+      "book-demo-setp-2-goto-previous"
+    );
+    buttonGotoPrevious?.addEventListener("click", gotoPrevious);
+
+    const buttonGotoNext = document.getElementById("goto-confirm-book-demo");
+    buttonGotoNext?.addEventListener("click", func);
 
     const form = document.getElementById(FORM_ID);
     form?.addEventListener("submit", func);
 
     return () => {
-      b?.removeEventListener("click", func);
+      buttonGotoPrevious?.removeEventListener("click", gotoPrevious);
+      buttonGotoNext?.removeEventListener("click", func);
       form?.removeEventListener("submit", func);
     };
   }, [formIsValid, ids]);
@@ -252,7 +276,7 @@ const BookADemo2: React.FC = () => {
   return (
     <div
       id="modal-book-demo-step-2"
-      uk-modal="esc-close: false; bg-close: false; stack: false;"
+      uk-modal="esc-close: false; bg-close: false; stack: true;"
       style={{ zIndex: 10001 }}
     >
       <div className="uk-modal-dialog uk-margin-auto-vertical">
@@ -287,6 +311,7 @@ const BookADemo2: React.FC = () => {
                     <i className="las la-lg la-mobile"></i>
                   </span>
                   <input
+                    ref={phoneRef}
                     className="uk-input uk-form-width-medium"
                     id={PHONE_ID}
                     type="text"
@@ -305,6 +330,7 @@ const BookADemo2: React.FC = () => {
                 </label>
                 <div className="uk-form-controls uk-inline">
                   <select
+                    ref={countryRef}
                     defaultValue={country || ""}
                     className="uk-select uk-form-width-large"
                     id={COUNTRY_ID}
@@ -332,6 +358,7 @@ const BookADemo2: React.FC = () => {
                 </label>
                 <div className="uk-form-controls uk-inline">
                   <select
+                    ref={businessRef}
                     defaultValue={businessType || ""}
                     className="uk-select uk-form-width-large"
                     id={BUSINESS_ID}
@@ -354,6 +381,7 @@ const BookADemo2: React.FC = () => {
                 <label className="uk-form-label">Accommodation Type</label>
                 <div className="uk-form-controls uk-inline">
                   <select
+                    ref={accommodationRef}
                     defaultValue={accommodationType || ""}
                     disabled={businessType !== "Accommodation Business"}
                     className="uk-select uk-form-width-large"
@@ -377,6 +405,7 @@ const BookADemo2: React.FC = () => {
                 <label className="uk-form-label">Management Type</label>
                 <div className="uk-form-controls uk-inline">
                   <select
+                    ref={managementRef}
                     defaultValue={managementType || ""}
                     disabled={businessType !== "Accommodation Business"}
                     className="uk-select uk-form-width-large"
@@ -398,9 +427,17 @@ const BookADemo2: React.FC = () => {
             </div>
           </div>
           <div className="uk-modal-footer uk-text-right">
+            {/* <button
+              id="book-demo-setp-2-goto-previous"
+              className="uk-button uk-button-default uk-border-pill uk-modal-close uk-margin-right"
+              // data-uk-toggle="target: #modal-book-demo-step-1"
+            >
+              Previous
+            </button> */}
             <a
               href="#modal-book-demo-step-1"
               className="uk-button uk-button-default uk-border-pill uk-modal-close uk-margin-right"
+              // data-uk-toggle="target: #modal-book-demo-step-1"
             >
               Previous
             </a>

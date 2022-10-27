@@ -8,7 +8,6 @@ import useBookDemoDataState from "./context/BookDemoData/hooks/useBookDemoDataSt
 
 const BookADemoWrapped: React.FC = () => {
   const { book1Confirmed } = useBookDemoDataState();
-  console.log("book1Confirmed", book1Confirmed);
 
   return (
     <Fragment>

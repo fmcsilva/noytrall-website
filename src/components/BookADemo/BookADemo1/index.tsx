@@ -40,6 +40,7 @@ const BookADemo1: React.FC = () => {
   const websiteRef = useRef<HTMLInputElement>(null);
   const { formIsValid } = useJustValidate(FORM_ID, [
     {
+      ref: nameRef,
       field: `#${NAME_ID}`,
       rules: [
         {
@@ -53,7 +54,6 @@ const BookADemo1: React.FC = () => {
                 .split("")
                 .includes(normalizeString(c));
             });
-            console.log("l", l);
             return l.length === 0;
           },
           errorMessage: "Invalid character",
@@ -69,6 +69,7 @@ const BookADemo1: React.FC = () => {
       },
     },
     {
+      ref: emailRef,
       field: `#${EMAIL_ID}`,
       rules: [
         {
@@ -85,6 +86,7 @@ const BookADemo1: React.FC = () => {
       },
     },
     {
+      ref: jobTitleRef,
       field: `#${JOB_TITLE_ID}`,
       rules: [
         {
@@ -100,11 +102,13 @@ const BookADemo1: React.FC = () => {
       config: { errorsContainer: ".error-container-jobtitle" },
     },
     {
+      ref: hotelNameRef,
       field: `#${HOTEL_NAME_ID}`,
       rules: [{ rule: "minLength", value: 3 }],
       config: { errorsContainer: ".error-container-hotelname" },
     },
     {
+      ref: websiteRef,
       field: `#${WEBSITE_ID}`,
       rules: [
         { rule: "customRegexp", value: urlRegex, errorMessage: "Invalid URL" },
@@ -139,9 +143,26 @@ const BookADemo1: React.FC = () => {
 
       updateData(obj);
 
+      // const currentModalId = "modal-book-demo-step-1";
+      // const currentModal = document.getElementById(currentModalId);
+
+      // if (currentModal) {
+      //   // @ts-ignore
+      //   UIkit.util.on(currentModal, "hide", (e: any) => {
+      //     console.log("e", e);
+      //     const nextIdModal = "modal-book-demo-step-2";
+      //     const modal = document.getElementById(nextIdModal);
+      //     if (modal) {
+      //       UIkit.modal(modal).show();
+      //       UIkit.modal(modal).show();
+      //     }
+      //   });
+      // }
+
       const nextIdModal = "modal-book-demo-step-2";
       const modal = document.getElementById(nextIdModal);
       if (modal) {
+        // UIkit.modal(currentModal).hide();
         UIkit.modal(modal).show();
       }
     };
