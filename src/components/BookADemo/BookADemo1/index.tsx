@@ -49,10 +49,11 @@ const BookADemo1: React.FC = () => {
           validator: (value) => {
             if (isBoolean(value)) return value;
             const l = value.split("").filter((c) => {
-              return !"abcdefghijklmnopqrstucwxyz -ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+              return !"abcdefghijklmnopqrstuvwxyz -ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 .split("")
                 .includes(normalizeString(c));
             });
+            console.log("l", l);
             return l.length === 0;
           },
           errorMessage: "Invalid character",
@@ -113,7 +114,7 @@ const BookADemo1: React.FC = () => {
       },
     },
   ]);
-  const { updateData } = useBookDemoDataDispatch();
+  const { updateBook1: updateData } = useBookDemoDataDispatch();
 
   useEffect(() => {
     const func = async () => {

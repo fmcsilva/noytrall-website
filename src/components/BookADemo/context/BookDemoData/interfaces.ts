@@ -1,5 +1,5 @@
 export namespace nBookDemoData {
-  export interface iStateData {
+  export interface iBookDemoData {
     name: string;
     email: string;
     hotelName: string;
@@ -10,6 +10,12 @@ export namespace nBookDemoData {
     businessType: string;
     accommodationType: string;
     managementType: string;
+  }
+
+  export interface iStateData {
+    bookDemoData: iBookDemoData;
+    book1Confirmed: boolean;
+    book2Confirmed: boolean;
   }
 
   export interface iState {
@@ -23,7 +29,9 @@ export namespace nBookDemoData {
   }
 
   export type tAction =
-    | { type: "set data"; data: Partial<iStateData> }
+    | { type: "set data"; data: iStateData }
+    | { type: "set book 1"; data: Partial<iBookDemoData> }
+    | { type: "set book 2"; data: Partial<iBookDemoData> }
     | { type: "resolved" }
     | { type: "rejected"; error: string }
     | { type: "pending" };

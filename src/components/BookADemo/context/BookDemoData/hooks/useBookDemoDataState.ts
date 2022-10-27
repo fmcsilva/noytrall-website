@@ -10,12 +10,11 @@ const useBookDemoDataState = () => {
     );
 
   const {
-    data: { name, email },
+    data,
+    data: { bookDemoData, book1Confirmed, book2Confirmed },
   } = state;
 
-  console.log("state.data", state.data);
-
-  return { name, email };
+  return { bookDemoData, book1Confirmed, book2Confirmed };
 };
 
 export default useBookDemoDataState;

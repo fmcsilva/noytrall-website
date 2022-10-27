@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from "react";
+import BookADemo1 from "../../BookADemo1";
 import { nBookDemoData } from "./interfaces";
 
 const BookDemoDataDispatchContext = React.createContext<
@@ -14,16 +15,20 @@ const LS_DATA = "__book-demo__";
 
 const initialState: nBookDemoData.iState = {
   data: {
-    name: "",
-    email: "",
-    hotelName: "",
-    jobTitle: "",
-    website: "",
-    phoneNumber: { country: "", number: "" },
-    country: "",
-    businessType: "",
-    accommodationType: "",
-    managementType: "",
+    bookDemoData: {
+      name: "",
+      email: "",
+      hotelName: "",
+      jobTitle: "",
+      website: "",
+      phoneNumber: { country: "", number: "" },
+      country: "",
+      businessType: "",
+      accommodationType: "",
+      managementType: "",
+    },
+    book1Confirmed: false,
+    book2Confirmed: false,
   },
   status: "idle",
   error: null,
@@ -37,6 +42,22 @@ const reducer = (
     case "set data": {
       const data = { ...state.data, ...action.data };
       localStorage.setItem(LS_DATA, JSON.stringify(data));
+      return { ...state, data, status: "resolved", error: null };
+    }
+    case "set book 1": {
+      const data = {
+        ...state.data,
+        book1Confirmed: true,
+        bookDemoData: { ...state.data.bookDemoData, ...action.data },
+      };
+      return { ...state, data, status: "resolved", error: null };
+    }
+    case "set book 2": {
+      const data = {
+        ...state.data,
+        book2Confirmed: true,
+        bookDemoData: { ...state.data.bookDemoData, ...action.data },
+      };
       return { ...state, data, status: "resolved", error: null };
     }
     case "resolved": {

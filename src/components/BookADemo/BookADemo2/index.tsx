@@ -175,7 +175,7 @@ const BookADemo2: React.FC = () => {
       },
     },
   ]);
-  const { updateData } = useBookDemoDataDispatch();
+  const { updateBook2: updateData } = useBookDemoDataDispatch();
   useEffect(() => {
     const input = document.querySelector(`#${PHONE_ID}`);
     if (input)
