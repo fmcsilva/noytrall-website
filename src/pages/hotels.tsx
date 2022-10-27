@@ -232,7 +232,7 @@ const Content: React.FC = () => {
           </div>
         </div>
 
-        <div className="uk-child-width-1-2@l" uk-grid>
+        <div className="uk-child-width-1-2@l" data-uk-grid>
           <div className="uk-padding">
             <div className="uk-label uk-label-primary uk-background-muted">
               <span className="uk-text-muted">Improve</span>
@@ -671,7 +671,7 @@ const Interaction: React.FC = () => {
             <a
               className="uk-button uk-button-primary uk-button-large uk-border-pill"
               href="#modal-simulator-stack"
-              uk-toggle
+              data-uk-toggle
             >
               Estimate savings now
             </a>
