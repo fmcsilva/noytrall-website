@@ -1,9 +1,10 @@
 import { isBoolean, isString } from "lodash";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import UIkit from "uikit";
 import useJustValidate from "../../../hooks/useJustValidate";
 import { urlRegex } from "../../../utils/regex";
 import { normalizeString } from "../../../utils/strings";
+import useBookDemoDataDispatch from "../context/BookDemoData/hooks/useBookDemoDataDispatch";
 
 const JOB_TITLES: string[] = [
   "Owner",
@@ -24,10 +25,22 @@ const JOB_TITLES: string[] = [
   "Other",
 ];
 
+const FORM_ID = "book-demo-step-1-form";
+const NAME_ID = "book-demo-step-1-form-name";
+const EMAIL_ID = "book-demo-step-1-form-email";
+const JOB_TITLE_ID = "book-demo-step-1-form-jobtitle";
+const HOTEL_NAME_ID = "book-demo-step-1-form-hotelname";
+const WEBSITE_ID = "book-demo-step-1-form-website";
+
 const BookADemo1: React.FC = () => {
-  const { formIsValid } = useJustValidate("book-demo-step-1-form", [
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const jobTitleRef = useRef<HTMLSelectElement>(null);
+  const hotelNameRef = useRef<HTMLInputElement>(null);
+  const websiteRef = useRef<HTMLInputElement>(null);
+  const { formIsValid } = useJustValidate(FORM_ID, [
     {
-      field: "#book-demo-step-1-form-name",
+      field: `#${NAME_ID}`,
       rules: [
         {
           rule: "required",
@@ -56,7 +69,7 @@ const BookADemo1: React.FC = () => {
       },
     },
     {
-      field: "#book-demo-step-1-form-email",
+      field: `#${EMAIL_ID}`,
       rules: [
         {
           rule: "required",
@@ -72,7 +85,7 @@ const BookADemo1: React.FC = () => {
       },
     },
     {
-      field: "#book-demo-step-1-form-jobtitle",
+      field: `#${JOB_TITLE_ID}`,
       rules: [
         {
           validator: (value) =>
@@ -87,12 +100,12 @@ const BookADemo1: React.FC = () => {
       config: { errorsContainer: ".error-container-jobtitle" },
     },
     {
-      field: "#book-demo-step-1-form-hotelname",
+      field: `#${HOTEL_NAME_ID}`,
       rules: [{ rule: "minLength", value: 3 }],
       config: { errorsContainer: ".error-container-hotelname" },
     },
     {
-      field: "#book-demo-step-1-form-website",
+      field: `#${WEBSITE_ID}`,
       rules: [
         { rule: "customRegexp", value: urlRegex, errorMessage: "Invalid URL" },
       ],
@@ -101,10 +114,31 @@ const BookADemo1: React.FC = () => {
       },
     },
   ]);
+  const { updateData } = useBookDemoDataDispatch();
 
   useEffect(() => {
-    const func = () => {
-      if (!formIsValid()) return;
+    const func = async () => {
+      if (!(await formIsValid())) return;
+
+      const obj: Record<string, any> = {};
+
+      [
+        { key: "name", id: NAME_ID },
+        { id: EMAIL_ID, key: "email" },
+        { id: HOTEL_NAME_ID, key: "hotelName" },
+        { id: JOB_TITLE_ID, key: "jobTitle" },
+        { id: WEBSITE_ID, key: "website" },
+      ].forEach(({ key, id }) => {
+        const elem = document.getElementById(id) as
+          | HTMLSelectElement
+          | HTMLInputElement;
+        const value = elem.value;
+
+        obj[key] = value;
+      });
+
+      updateData(obj);
+
       const nextIdModal = "modal-book-demo-step-2";
       const modal = document.getElementById(nextIdModal);
       if (modal) {
@@ -115,7 +149,7 @@ const BookADemo1: React.FC = () => {
     const b = document.getElementById("goto-book-demo-2");
     b?.addEventListener("click", func);
 
-    const form = document.getElementById("book-demo-step-1-form");
+    const form = document.getElementById(FORM_ID);
     form?.addEventListener("submit", func);
 
     return () => {
@@ -127,11 +161,11 @@ const BookADemo1: React.FC = () => {
   return (
     <div
       id="modal-book-demo-step-1"
-      uk-modal="esc-close: true; bg-close: true;  stack: true;"
+      uk-modal="esc-close: false; bg-close: false;  stack: true;"
       style={{ zIndex: 10000 }}
     >
       <div className="uk-modal-dialog uk-margin-auto-vertical">
-        <form action="#" id="book-demo-step-1-form" className="uk-form-stacked">
+        <form action="#" id={FORM_ID} className="uk-form-stacked">
           <button
             className="uk-modal-close-default"
             type="button"
@@ -155,10 +189,11 @@ const BookADemo1: React.FC = () => {
                     <i className="las la-lg la-user"></i>
                   </span>
                   <input
+                    ref={nameRef}
                     className="uk-input uk-form-width-large"
                     type="text"
                     placeholder="Name"
-                    id="book-demo-step-1-form-name"
+                    id={NAME_ID}
                   />
                 </div>
                 <div className="error-container-name"></div>
@@ -171,8 +206,9 @@ const BookADemo1: React.FC = () => {
                     <i className="las la-lg la-envelope-open"></i>
                   </span>
                   <input
+                    ref={emailRef}
                     className="uk-input uk-form-width-large"
-                    id="book-demo-step-1-form-email"
+                    id={EMAIL_ID}
                     type="text"
                     placeholder="Email Address"
                   />
@@ -181,11 +217,17 @@ const BookADemo1: React.FC = () => {
               </div>
 
               <div className="uk-margin">
-                <label className="uk-form-label">Job Title (optional)</label>
+                <label className="uk-form-label">
+                  Job Title{" "}
+                  <span className="uk-badge uk-background-secondary uk-margin-small-left">
+                    optional
+                  </span>
+                </label>
                 <div className="uk-form-controls uk-inline">
                   <select
+                    ref={jobTitleRef}
                     className="uk-select uk-form-width-large"
-                    id="book-demo-step-1-form-jobtitle"
+                    id={JOB_TITLE_ID}
                     placeholder="Job Title"
                     defaultValue={""}
                   >
@@ -201,14 +243,20 @@ const BookADemo1: React.FC = () => {
               </div>
 
               <div className="uk-margin">
-                <label className="uk-form-label">Hotel name (optional)</label>
+                <label className="uk-form-label">
+                  Hotel name{" "}
+                  <span className="uk-badge uk-background-secondary uk-margin-small-left">
+                    optional
+                  </span>
+                </label>
                 <div className="uk-form-controls uk-inline">
                   <span className="uk-form-icon">
                     <i className="las la-lg la-hotel"></i>
                   </span>
                   <input
+                    ref={hotelNameRef}
                     className="uk-input uk-form-width-large"
-                    id="book-demo-step-1-form-hotelname"
+                    id={HOTEL_NAME_ID}
                     type="text"
                     placeholder="Hotel Name"
                   />
@@ -217,14 +265,20 @@ const BookADemo1: React.FC = () => {
               </div>
 
               <div className="uk-margin">
-                <label className="uk-form-label">Website (optional)</label>
+                <label className="uk-form-label">
+                  Website{" "}
+                  <span className="uk-badge uk-background-secondary uk-margin-small-left">
+                    optional
+                  </span>
+                </label>
                 <div className="uk-form-controls uk-inline">
                   <span className="uk-form-icon">
                     <i className="las la-lg la-globe"></i>
                   </span>
                   <input
+                    ref={websiteRef}
                     className="uk-input uk-form-width-large"
-                    id="book-demo-step-1-form-website"
+                    id={WEBSITE_ID}
                     type="text"
                     placeholder="Website"
                   />

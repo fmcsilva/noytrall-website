@@ -4,3 +4,4 @@ node_modules/
 public
 src/gatsby-types.d.ts
 /css2
+package-lock.json

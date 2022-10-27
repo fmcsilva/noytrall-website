@@ -6,6 +6,7 @@ import Header from "./Header";
 
 import "../css/uikit.min.css";
 import "../css/custom-style-noy.css";
+
 import "../css/parsley.css";
 import "../css/trust-content.css";
 import "../css/header.css";
@@ -30,7 +31,7 @@ class MainLayout extends React.Component {
         <Helmet>
           <title>For Accommodations. noytrall. Stay Smart.</title>
 
-          <link rel="shortcut icon" href="favicon.ico" />
+          {/* <link rel="shortcut icon" href="favicon.ico" /> */}
 
           <meta charset="utf-8" />
 

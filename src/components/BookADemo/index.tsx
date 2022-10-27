@@ -3,15 +3,16 @@ import BookADemo1 from "./BookADemo1";
 import BookADemo2 from "./BookADemo2";
 import BookADemoCalendar from "./BookADemoCalendar";
 import BookADemoSuccess from "./BookADemoSuccess";
+import { BookDemoDataContextProvider } from "./context/BookDemoData";
 
 const BookADemo: React.FC = () => {
   return (
-    <Fragment>
+    <BookDemoDataContextProvider>
       <BookADemo1 />
       <BookADemo2 />
       <BookADemoCalendar />
       <BookADemoSuccess />
-    </Fragment>
+    </BookDemoDataContextProvider>
   );
 };
 

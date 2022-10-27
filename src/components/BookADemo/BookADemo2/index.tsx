@@ -1,9 +1,16 @@
 import { isString } from "lodash";
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useMemo, useReducer } from "react";
 import UIkit from "uikit";
 import useJustValidate from "../../../hooks/useJustValidate";
 import { COUNTRIES } from "../../../utils/countries";
 import { isValidPhoneNumber } from "../../../utils/regex";
+
+import intlTelInput from "intl-tel-input";
+
+import "intl-tel-input/build/css/intlTelInput.css";
+
+import "./styles.css";
+import useBookDemoDataDispatch from "../context/BookDemoData/hooks/useBookDemoDataDispatch";
 
 const BUSINESS_TYPES = [
   "Accommodation Business",
@@ -35,6 +42,13 @@ const ACCOMMODATION_TYPES = [
   "Country Retreat",
   "Other",
 ];
+
+const FORM_ID = "book-demo-step-2-form";
+const PHONE_ID = "book-demo-step-2-phone";
+const BUSINESS_ID = "book-demo-step-2-business";
+const MANAGEMENT_ID = "book-demo-step-2-management";
+const COUNTRY_ID = "book-demo-step-2-country";
+const ACCOMMODATION_ID = "book-demo-step-2-accommodation";
 
 interface iState {
   phoneNumber?: string;
@@ -75,116 +89,115 @@ const BookADemo2: React.FC = () => {
     accommodationType,
     country,
   } = state;
-  const { formIsValid, justValidate } = useJustValidate(
-    "book-demo-step-2-form",
-    [
-      {
-        field: "#book-demo-step-2-phone",
-        rules: [
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? isValidPhoneNumber(value)
-                  : false
-                : true,
-          },
-        ],
-        config: {
-          errorsContainer: ".error-container-phone",
+  const { formIsValid } = useJustValidate(FORM_ID, [
+    {
+      field: `#${PHONE_ID}`,
+      rules: [
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? isValidPhoneNumber(value)
+                : false
+              : true,
         },
+      ],
+      config: {
+        errorsContainer: ".error-container-phone",
       },
-      {
-        field: "#book-demo-step-2-country",
-        rules: [
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? COUNTRIES.map(({ code }) => code).includes(value)
-                  : false
-                : true,
-            errorMessage: "Invalid job title",
-          },
-        ],
-        config: {
-          errorsContainer: ".error-container-country",
+    },
+    {
+      field: `#${COUNTRY_ID}`,
+      rules: [
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? COUNTRIES.map(({ code }) => code).includes(value)
+                : false
+              : true,
+          errorMessage: "Invalid job title",
         },
+      ],
+      config: {
+        errorsContainer: ".error-container-country",
       },
-      {
-        field: "#book-demo-step-2-business",
-        rules: [
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? BUSINESS_TYPES.includes(value)
-                  : false
-                : true,
-            errorMessage: "Invalid job title",
-          },
-        ],
-        config: {
-          errorsContainer: ".error-container-business",
+    },
+    {
+      field: `#${BUSINESS_ID}`,
+      rules: [
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? BUSINESS_TYPES.includes(value)
+                : false
+              : true,
+          errorMessage: "Invalid job title",
         },
+      ],
+      config: {
+        errorsContainer: ".error-container-business",
       },
-      {
-        field: "#book-demo-step-2-accommodation",
-        rules: [
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? ACCOMMODATION_TYPES.includes(value)
-                  : false
-                : true,
-            errorMessage: "Invalid accommodation",
-          },
-        ],
-        config: {
-          errorsContainer: ".error-container-accommodation",
+    },
+    {
+      field: `#${ACCOMMODATION_ID}`,
+      rules: [
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? ACCOMMODATION_TYPES.includes(value)
+                : false
+              : true,
+          errorMessage: "Invalid accommodation",
         },
+      ],
+      config: {
+        errorsContainer: ".error-container-accommodation",
       },
-      {
-        field: "#book-demo-step-2-management",
-        rules: [
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? MANAGEMENT_TYPE.includes(value)
-                  : false
-                : true,
-            errorMessage: "Invalid management",
-          },
-        ],
-        config: {
-          errorsContainer: ".error-container-management",
+    },
+    {
+      field: `#${MANAGEMENT_ID}`,
+      rules: [
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? MANAGEMENT_TYPE.includes(value)
+                : false
+              : true,
+          errorMessage: "Invalid management",
         },
+      ],
+      config: {
+        errorsContainer: ".error-container-management",
       },
-    ]
-  );
+    },
+  ]);
+  const { updateData } = useBookDemoDataDispatch();
+  useEffect(() => {
+    const input = document.querySelector(`#${PHONE_ID}`);
+    if (input)
+      intlTelInput(input, {
+        // any initialisation options go here
+      });
+  }, []);
+
+  const ids = useMemo(() => {
+    return [
+      { id: PHONE_ID, key: "phoneNumber" },
+      { id: COUNTRY_ID, key: "country" },
+      { id: BUSINESS_ID, key: "businessType" },
+      { id: ACCOMMODATION_ID, key: "accommodationType" },
+      { id: MANAGEMENT_ID, key: "managementType" },
+    ];
+  }, []);
 
   useEffect(() => {
-    // if (!justValidate) return;
     const listener = (key: string, field: string) => (e: any) => {
-      // console.log("justValidate", justValidate);
-      // if (justValidate) {
-      //   justValidate.revalidateField(`#${field}`).then((isSuccess) => {
-      //     console.log("isSuccess", isSuccess);
-      //     dispatch({ type: "change", key, value: e.target.value });
-      // });
-      // } else {
       dispatch({ type: "change", key, value: e.target.value });
-      // }
     };
-    const ids = [
-      { id: "book-demo-step-2-phone", key: "phoneNumber" },
-      { id: "book-demo-step-2-country", key: "country" },
-      { id: "book-demo-step-2-business", key: "businessType" },
-      { id: "book-demo-step-2-accommodation", key: "accommodationType" },
-      { id: "book-demo-step-2-management", key: "managementType" },
-    ];
 
     ids.forEach(({ id, key }) => {
       document
@@ -199,11 +212,24 @@ const BookADemo2: React.FC = () => {
           ?.removeEventListener("change", listener(key, id));
       });
     };
-  }, []);
+  }, [ids]);
 
   useEffect(() => {
     const func = () => {
       if (!formIsValid()) return;
+
+      const obj: Record<string, any> = {};
+
+      ids.forEach(({ key, id }) => {
+        const elem = document.getElementById(id) as
+          | HTMLSelectElement
+          | HTMLInputElement;
+        const value = elem.value;
+
+        obj[key] = value;
+      });
+      updateData(obj);
+
       const nextIdModal = "modal-book-demo-calendar";
       const modal = document.getElementById(nextIdModal);
       if (modal) {
@@ -214,25 +240,23 @@ const BookADemo2: React.FC = () => {
     const b = document.getElementById("goto-confirm-book-demo");
     b?.addEventListener("click", func);
 
-    const form = document.getElementById("book-demo-step-2-form");
+    const form = document.getElementById(FORM_ID);
     form?.addEventListener("submit", func);
 
     return () => {
       b?.removeEventListener("click", func);
       form?.removeEventListener("submit", func);
     };
-  }, [formIsValid]);
-
-  const handleChange = (e: any) => {};
+  }, [formIsValid, ids]);
 
   return (
     <div
       id="modal-book-demo-step-2"
-      uk-modal="esc-close: true; bg-close: true; stack: true;"
+      uk-modal="esc-close: false; bg-close: false; stack: true;"
       style={{ zIndex: 10001 }}
     >
       <div className="uk-modal-dialog uk-margin-auto-vertical">
-        <form action="#" id="book-demo-step-2-form" className="uk-form-stacked">
+        <form action="#" id={FORM_ID} className="uk-form-stacked">
           <button
             className="uk-modal-close-default"
             type="button"
@@ -252,14 +276,19 @@ const BookADemo2: React.FC = () => {
               </div>
 
               <div className="uk-margin">
-                <label className="uk-form-label">Phone Number (optional)</label>
+                <label className="uk-form-label">
+                  Phone Number{" "}
+                  <span className="uk-badge uk-background-secondary uk-margin-small-left">
+                    optional
+                  </span>
+                </label>
                 <div className="uk-form-controls uk-inline">
                   <span className="uk-form-icon">
                     <i className="las la-lg la-mobile"></i>
                   </span>
                   <input
                     className="uk-input uk-form-width-medium"
-                    id="book-demo-step-2-phone"
+                    id={PHONE_ID}
                     type="text"
                     placeholder="Phone Number"
                   />
@@ -268,13 +297,17 @@ const BookADemo2: React.FC = () => {
               </div>
 
               <div className="uk-margin">
-                <label className="uk-form-label">Country (optional)</label>
+                <label className="uk-form-label">
+                  Country{" "}
+                  <span className="uk-badge uk-background-secondary uk-margin-small-left">
+                    optional
+                  </span>
+                </label>
                 <div className="uk-form-controls uk-inline">
                   <select
-                    onChange={handleChange}
-                    value={country || ""}
+                    defaultValue={country || ""}
                     className="uk-select uk-form-width-large"
-                    id="book-demo-step-2-country"
+                    id={COUNTRY_ID}
                     placeholder="Country"
                   >
                     <option disabled value="">
@@ -292,14 +325,16 @@ const BookADemo2: React.FC = () => {
 
               <div className="uk-margin">
                 <label className="uk-form-label">
-                  Business Type (optional)
+                  Business Type{" "}
+                  <span className="uk-badge uk-background-secondary uk-margin-small-left">
+                    optional
+                  </span>
                 </label>
                 <div className="uk-form-controls uk-inline">
                   <select
-                    onChange={handleChange}
-                    value={businessType || ""}
+                    defaultValue={businessType || ""}
                     className="uk-select uk-form-width-large"
-                    id="book-demo-step-2-business"
+                    id={BUSINESS_ID}
                     placeholder="Business Type"
                   >
                     <option value="" disabled>
@@ -319,11 +354,10 @@ const BookADemo2: React.FC = () => {
                 <label className="uk-form-label">Accommodation Type</label>
                 <div className="uk-form-controls uk-inline">
                   <select
-                    onChange={handleChange}
-                    value={accommodationType || ""}
+                    defaultValue={accommodationType || ""}
                     disabled={businessType !== "Accommodation Business"}
                     className="uk-select uk-form-width-large"
-                    id="book-demo-step-2-accommodation"
+                    id={ACCOMMODATION_ID}
                     placeholder="Accommodation Category"
                   >
                     <option value="" disabled>
@@ -343,10 +377,10 @@ const BookADemo2: React.FC = () => {
                 <label className="uk-form-label">Management Type</label>
                 <div className="uk-form-controls uk-inline">
                   <select
-                    value={managementType || ""}
+                    defaultValue={managementType || ""}
                     disabled={businessType !== "Accommodation Business"}
                     className="uk-select uk-form-width-large"
-                    id="book-demo-step-2-management"
+                    id={MANAGEMENT_ID}
                     placeholder="Management Type"
                   >
                     <option value="" disabled>
@@ -372,8 +406,6 @@ const BookADemo2: React.FC = () => {
             </a>
             <button
               id="goto-confirm-book-demo"
-              // type="submit"
-              // data-uk-toggle="target: #modal-book-demo-success"
               className="uk-button uk-button-primary uk-border-pill"
             >
               Pick a date and time

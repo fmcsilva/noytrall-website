@@ -45,7 +45,7 @@ const Header: React.FC<tProps> = ({}) => {
             <div className="uk-navbar-left">
               <a
                 className="uk-navbar-toggle uk-hidden@m"
-                uk-navbar-toggle-icon
+                data-uk-navbar-toggle-icon
                 data-uk-toggle="target: #offmenuid"
               ></a>
 
