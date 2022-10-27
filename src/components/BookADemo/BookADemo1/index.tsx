@@ -44,7 +44,6 @@ const BookADemo1: React.FC = () => {
       rules: [
         {
           rule: "required",
-          errorMessage: "Name is required",
         },
         {
           validator: (value) => {
@@ -161,7 +160,7 @@ const BookADemo1: React.FC = () => {
   return (
     <div
       id="modal-book-demo-step-1"
-      uk-modal="esc-close: false; bg-close: false;  stack: true;"
+      uk-modal="esc-close: false; bg-close: false;  stack: false;"
       style={{ zIndex: 10000 }}
     >
       <div className="uk-modal-dialog uk-margin-auto-vertical">

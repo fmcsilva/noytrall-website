@@ -19,6 +19,7 @@
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "gatsby": "^4.20.0",
+    "intl-tel-input": "^17.0.19",
     "just-validate": "^3.8.1",
     "lodash": "^4.17.21",
     "react": "^18.1.0",
@@ -28,6 +29,7 @@
     "uikit": "^3.15.2"
   },
   "devDependencies": {
+    "@types/intl-tel-input": "^17.0.5",
     "@types/node": "^17.0.45",
     "@types/react": "^18.0.16",
     "@types/react-dom": "^18.0.6",

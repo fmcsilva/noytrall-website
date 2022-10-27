@@ -1,42 +1,43 @@
 import React, { useEffect, useRef } from "react";
-import Layout from "../components/layout";
 
-import metrics from "../images/Metrics-bro.png";
-import stats from "../images/Site Stats-bro.png";
-import awards from "../images/Awards-bro.png";
-import socialMedia from "../images/Social media-bro.png";
-import happyEarth from "../images/Happy Earth-bro.png";
-import pipeline from "../images/Pipeline maintenance-bro.png";
-import riotc5 from "../images/rio-do-prado-tc-5.jpg";
-import riotc6 from "../images/rio-do-prado-tc-6.jpg";
-import riotc4 from "../images/rio-do-prado-tc-4.jpg";
+import metrics from "../../images/Metrics-bro.png";
+import stats from "../../images/Site Stats-bro.png";
+import awards from "../../images/Awards-bro.png";
+import socialMedia from "../../images/Social media-bro.png";
+import happyEarth from "../../images/Happy Earth-bro.png";
+import pipeline from "../../images/Pipeline maintenance-bro.png";
+import riotc5 from "../../images/rio-do-prado-tc-5.jpg";
+import riotc6 from "../../images/rio-do-prado-tc-6.jpg";
+import riotc4 from "../../images/rio-do-prado-tc-4.jpg";
 
 import {
   Chart,
   ChartConfiguration,
   ChartConfigurationCustomTypesPerDataset,
-  ChartTypeRegistry,
   registerables,
 } from "chart.js";
 
 import { Bar } from "react-chartjs-2";
 
-import Menu from "../components/Menu";
+import Menu from "../../components/Menu";
+import EstimateSavingsModal from "./EstimateSavingsModal";
+import MainLayout from "../../components/layout";
 
 Chart.register(...registerables);
 
 const Hotels: React.FC = () => {
   return (
-    <Layout>
+    <MainLayout>
       <Menu />
-      <Modal />
+      <EstimateSavingsModal />
+      {/* <Modal /> */}
       <Hero />
       <Content />
       <TrustContent />
       <Interaction />
       <FAQS />
       <GetStarted />
-    </Layout>
+    </MainLayout>
   );
 };
 
