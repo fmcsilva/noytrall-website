@@ -94,7 +94,7 @@ const Header: React.FC<tProps> = ({}) => {
               <div className="uk-navbar-item">
                 <a
                   className="uk-button uk-button-default uk-button-primary uk-border-pill"
-                  data-uk-toggle="target: #modal-book-demo-step-1"
+                  data-uk-toggle="target: #modal-book-demo-calendar"
                 >
                   Book a demo
                 </a>

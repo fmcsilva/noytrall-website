@@ -1,75 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import useBookDemoDataState from "../context/BookDemoData/hooks/useBookDemoDataState";
+import React from "react";
 
 const BookADemoCalendar: React.FC = () => {
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const [loading, setLoading] = useState(false);
-  const { bookDemoData: data } = useBookDemoDataState();
-
-  useEffect(() => {
-    function isCalendlyEvent(e: any) {
-      return (
-        e.origin === "https://calendly.com" &&
-        e.data.event &&
-        e.data.event.indexOf("calendly.") === 0
-      );
-    }
-
-    window.addEventListener("message", function (e) {
-      if (isCalendlyEvent(e)) {
-        const {
-          data: { event, payload },
-        } = e;
-
-        if (event === "date_and_time_selected") {
-          // @ts-ignore
-          if (document.getElementById("full_name_input"))
-            // @ts-ignore
-            document.getElementById("full_name_input").value = data.name;
-          // @ts-ignore
-          if (document.getElementById("email_input"))
-            // @ts-ignore
-            document.getElementById("email_input").value = data.email;
-        } else if (event === "calendly.event_scheduled") {
-          setLoading(true);
-          axios
-            .post("/website/schedule-meeting", {
-              ...data,
-              calendly: payload,
-            })
-            .then((res) => {
-              setLoading(false);
-              console.log("res", res);
-            })
-            .catch((err) => {
-              setLoading(false);
-            });
-        }
-      }
-    });
-  }, [data]);
-
-  useEffect(() => {
-    if (!closeRef) return;
-
-    const listener = () => {
-      window.location.reload();
-    };
-
-    closeRef.current?.addEventListener("click", listener);
-
-    return () => {
-      closeRef.current?.removeEventListener("click", listener);
-    };
-  }, []);
-
-  const calendlyAccount = "marco-noytrall";
-  // const calendlyAccount = "francisco__silva";
-
-  const dataUrl = `https://calendly.com/${calendlyAccount}/30min?hide_landing_page_details=1&hide_event_type_details=1&hide_gdpr_banner=1&primary_color=40bfb4${
-    data.name ? `&name=${data.name.replace(" ", "%20")}` : ""
-  }${data.email ? `&email=${data.email}` : ""}`;
+  const calendly =
+    "https://calendly.com/marco-noytrall/30min-demo?hide_landing_page_details=1&hide_event_type_details=1&hide_gdpr_banner=1&primary_color=40bfb4";
+  // const calendly = "https://calendly.com/francisco__silva/30min";
 
   return (
     <div
@@ -80,7 +14,6 @@ const BookADemoCalendar: React.FC = () => {
       <div className="uk-modal-dialog">
         <form id="modal-book-demo-calendar-form" className="uk-form-stacked">
           <button
-            ref={closeRef}
             className="uk-modal-close-default"
             type="button"
             data-uk-close
@@ -95,7 +28,7 @@ const BookADemoCalendar: React.FC = () => {
               <div
                 id="book-a-demo-calendly"
                 className="calendly-inline-widget"
-                data-url={`https://calendly.com/${calendlyAccount}/30min?hide_landing_page_details=1&hide_event_type_details=1&hide_gdpr_banner=1&primary_color=40bfb4`}
+                data-url={calendly}
                 style={{ minWidth: "320px", height: "630px" }}
               ></div>
               <script

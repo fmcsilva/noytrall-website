@@ -40,7 +40,6 @@ const IndexPage = () => {
       <DownloadTheApp />
       <AvailableHotels />
       <Statistics />
-      <Reviews />
     </Layout>
   );
 };
