@@ -107,11 +107,10 @@ const Content: React.FC = () => {
               </h2>
 
               <h4 className="uk-text-muted uk-margin-remove">
-                Monitor <strong>water</strong> and
-                <strong>energy</strong> consumption 24/7, whether the room is
-                free or occupied. See what is happening in
-                <strong>real-time</strong> and operate on cloud-based
-                IoT-connected room data.
+                Monitor <strong>water</strong> and <strong>energy</strong>{" "}
+                consumption 24/7, whether the room is free or occupied. See what
+                is happening in<strong> real-time</strong> and operate on
+                cloud-based IoT-connected room data.
               </h4>
             </div>
           </div>
@@ -407,12 +406,11 @@ const TrustContent: React.FC = () => {
 
             <h4 className="uk-margin-remove uk-text-muted">
               Manage your stays and allow your guests to monitor their
-              consumptions by having your smart rooms integrated with your PMS
+              consumptions by having your smart rooms integrated with your PMS.
               <i
                 className="las la-lx la-info-circle uk-text-primary"
                 uk-tooltip="title: see availibitity; pos: top-left"
               ></i>
-              .
             </h4>
           </div>
         </div>
