@@ -29,6 +29,8 @@ class MainLayout extends React.Component {
       <div>
         <Helmet>
           <title>{this.props.title}</title>
+          <meta name="description" content={this.props.title} />
+
           <meta charset="utf-8" />
 
           <meta name="viewport" content="width=device-width, initial-scale=1" />

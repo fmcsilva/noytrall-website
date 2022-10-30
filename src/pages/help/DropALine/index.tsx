@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import useJustValidate from "../../hooks/useJustValidate";
-import { notification } from "../../utils/notification";
+import useJustValidate from "../../../hooks/useJustValidate";
+import { notification } from "../../../utils/notification";
 
 interface iProps {
   question: string | null;

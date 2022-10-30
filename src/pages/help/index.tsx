@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import DropALine from "../../components/DropALine";
+import React, { Fragment, useState } from "react";
+import DropALine from "./DropALine";
 import Layout from "../../components/layout";
 
 import Menu from "../../components/Menu";
