@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useReducer, useEffect } from "react";
-import useGlobalState from "../../../../context/GlobalContext/hooks/useGlobalState";
+import useGlobalState from "../GlobalContext/hooks/useGlobalState";
 import { nHelp } from "./interfaces";
 
 const HelpDispatchContext = React.createContext<
@@ -93,3 +93,4 @@ const HelpContextProvider: React.FC<nHelp.iContextProps> = ({ children }) => {
 };
 
 export { HelpContextProvider, HelpDispatchContext, HelpStateContext };
+export default HelpContextProvider;

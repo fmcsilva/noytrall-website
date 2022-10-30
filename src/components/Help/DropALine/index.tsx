@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import useJustValidate from "../../../hooks/useJustValidate";
 import { notification } from "../../../utils/notification";
-import useHelpState from "../context/HelpContext/hooks/useHelpState";
+import useHelpState from "../../../context/HelpContext/hooks/useHelpState";
 
 interface iProps {
   questionId: string | null;

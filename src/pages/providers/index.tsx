@@ -4,7 +4,7 @@ import DownloadTheApp from "../../components/DownloadTheApp";
 import Layout from "../../components/layout";
 
 import Menu from "../../components/Menu";
-import CommunityPartnerModal from "./CommunityPartnerModal";
+import CommunityPartnerModal from "../../components/Provider/CommunityPartnerModal";
 
 const Providers: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
-import { HelpDispatchContext } from "../";
-import { iQuestion } from "../../../../../models/question";
+import { HelpDispatchContext } from "..";
+import { iQuestion } from "../../../models/question";
 import { nHelp } from "../interfaces";
 import useHelpState from "./useHelpState";
 

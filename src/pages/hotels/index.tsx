@@ -20,7 +20,7 @@ import {
 import { Bar } from "react-chartjs-2";
 
 import Menu from "../../components/Menu";
-import EstimateSavingsModal from "./EstimateSavingsModal";
+import EstimateSavingsModal from "../../components/Hotel/EstimateSavingsModal";
 import MainLayout from "../../components/layout";
 
 Chart.register(...registerables);

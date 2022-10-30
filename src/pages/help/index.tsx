@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
-import DropALine from "./DropALine";
+import DropALine from "../../components/Help/DropALine";
 import Layout from "../../components/layout";
 
 import Menu from "../../components/Menu";
-import { HelpContextProvider } from "./context/HelpContext";
-import useHelpState from "./context/HelpContext/hooks/useHelpState";
+import { HelpContextProvider } from "../../context/HelpContext";
+import useHelpState from "../../context/HelpContext/hooks/useHelpState";
 import axios from "axios";
-import useHelpDispatch from "./context/HelpContext/hooks/useHelpDispatch";
+import useHelpDispatch from "../../context/HelpContext/hooks/useHelpDispatch";
 import { notification } from "../../utils/notification";
 
 const Help: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { HelpStateContext } from "../";
+import { HelpStateContext } from "..";
 
 const useHelpState = () => {
   const state = React.useContext(HelpStateContext);

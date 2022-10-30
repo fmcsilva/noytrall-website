@@ -1,4 +1,4 @@
-import { iQuestion, tQuestionId } from "../../../../models/question";
+import { iQuestion, tQuestionId } from "../../models/question";
 
 export namespace nHelp {
   export type tQuestions = Record<tQuestionId, iQuestion>;
