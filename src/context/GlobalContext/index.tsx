@@ -44,6 +44,7 @@ const GlobalContextProvider: React.FC<nGlobal.iContextProps> = ({
 
   useEffect(() => {
     axios.defaults.baseURL = endpoint();
+    dispatch({ type: "resolved" });
   }, []);
 
   return (

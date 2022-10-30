@@ -2,22 +2,31 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import useJustValidate from "../../../hooks/useJustValidate";
 import { notification } from "../../../utils/notification";
+import useHelpState from "../context/HelpContext/hooks/useHelpState";
 
 interface iProps {
-  question: string | null;
+  questionId: string | null;
 }
 
-const DropALine: React.FC<iProps> = ({ question }) => {
+const DropALine: React.FC<iProps> = ({ questionId }) => {
+  const { getQuestionInfo } = useHelpState();
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const { formIsValid } = useJustValidate("dropaline-form", [
     {
       ref: nameRef,
       field: "#dropaline-form-name",
       rules: [{ rule: "required" }, { rule: "minLength", value: 3 }],
+      config: { errorsContainer: ".error-container-name" },
+    },
+    {
+      ref: emailRef,
+      field: "#dropaline-form-email",
+      rules: [{ rule: "required" }, { rule: "email" }],
       config: { errorsContainer: ".error-container-name" },
     },
     {
@@ -40,39 +49,51 @@ const DropALine: React.FC<iProps> = ({ question }) => {
         ) as HTMLInputElement;
         const name = nameInput.value;
 
+        const emailInput = document.getElementById(
+          "dropaline-form-email"
+        ) as HTMLInputElement;
+        const email = emailInput.value;
+
         const descriptionInput = document.getElementById(
           "dropaline-form-description"
         ) as HTMLInputElement;
         const description = descriptionInput.value;
-        axios
-          .post("/website/support-question/not-helpful", {
-            question,
-            name,
-            description,
-          })
-          .then((res) => {
-            console.log("res", res);
-            notification("Noytrall appreciates your feedback.");
-          })
-          .catch((err) => {
-            console.log("err", err);
-            notification(
-              "We couldn't process your feedback. Please try again."
-            );
-          })
-          .finally(() => {
-            setLoading(false);
-          });
+        const questionInfo = getQuestionInfo(questionId);
+        if (questionInfo) {
+          const { question } = questionInfo;
+          axios
+            .post(`/website/support-question/${questionId}/not-helpful`, {
+              question,
+              name,
+              email,
+              description,
+            })
+            .then((res) => {
+              notification("Noytrall appreciates your feedback.");
+            })
+            .catch((err) => {
+              notification(
+                "We couldn't process your feedback. Please try again."
+              );
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        } else {
+          setLoading(false);
+        }
       }
     };
 
-    formRef.current?.addEventListener("submit", listener);
-    buttonRef.current?.addEventListener("click", listener);
-    return () => {
-      formRef.current?.removeEventListener("submit", listener);
-      buttonRef.current?.removeEventListener("click", listener);
-    };
-  }, [question]);
+    if (questionId) {
+      formRef.current?.addEventListener("submit", listener);
+      buttonRef.current?.addEventListener("click", listener);
+      return () => {
+        formRef.current?.removeEventListener("submit", listener);
+        buttonRef.current?.removeEventListener("click", listener);
+      };
+    }
+  }, [questionId]);
 
   return (
     <div id="dropaline" uk-modal="esc-close: false; bg-close: false">
@@ -108,6 +129,22 @@ const DropALine: React.FC<iProps> = ({ question }) => {
                 />
               </div>
               <div className="error-container-name"></div>
+            </div>
+
+            <div className="uk-margin">
+              <label className="uk-form-label">Email</label>
+              <div className="uk-form-controls uk-inline">
+                <span className="uk-form-icon">
+                  <i className="las la-lg la-envelope-open"></i>
+                </span>
+                <input
+                  ref={emailRef}
+                  className="uk-input uk-form-width-large"
+                  id="dropaline-form-email"
+                  type="text"
+                  placeholder="john@domain.com"
+                />
+              </div>
             </div>
 
             <div className="uk-margin">

@@ -3,13 +3,20 @@ import DropALine from "./DropALine";
 import Layout from "../../components/layout";
 
 import Menu from "../../components/Menu";
+import { HelpContextProvider } from "./context/HelpContext";
+import useHelpState from "./context/HelpContext/hooks/useHelpState";
+import axios from "axios";
+import useHelpDispatch from "./context/HelpContext/hooks/useHelpDispatch";
+import { notification } from "../../utils/notification";
 
 const Help: React.FC = () => {
   return (
     <Layout title="Help and Support. noytrall. Stay Smart.">
-      <Menu />
-      <Hero />
-      <Content />
+      <HelpContextProvider>
+        <Menu />
+        <Hero />
+        <Content />
+      </HelpContextProvider>
     </Layout>
   );
 };
@@ -33,6 +40,7 @@ const Hero: React.FC = () => {
 };
 
 type tViewContentQuestion = {
+  _id: string;
   question: string;
   answer: string[];
 };
@@ -55,30 +63,35 @@ const views: tView[] = [
         title: "Reservations",
         questions: [
           {
-            question: "How can I start to use noytrall",
+            _id: "1",
+            question: "How can I start to use noytrall?",
             answer: [
               `To get started, sign-up through our app. It's free and easy to use. Of course, we will need to know more about you, but we will ask you for your data safely along the way.`,
             ],
           },
           {
+            _id: "2",
             question: "Can I book from noytrall?",
             answer: [
               "Not yet, but we are working to help guests find the best sustainable travel options",
             ],
           },
           {
+            _id: "3",
             question: "How can I access my reservation?",
             answer: [
               "As a guest, making a reservation with an accommodation, you should receive a confirmation e-mail. In addition, you will find an access code that will enable you to monitor your consumption and accompany your stay.",
             ],
           },
           {
+            _id: "4",
             question: "I can't find my access code. What should I do?",
             answer: [
               "If you can't find your access code, you can ask your accommodation to resend it directly to you.",
             ],
           },
           {
+            _id: "5",
             question:
               "How do I get more information about accommodation amenities",
             answer: [
@@ -91,12 +104,14 @@ const views: tView[] = [
         title: "Gamification & Rewards",
         questions: [
           {
+            _id: "6",
             question: "How does the reward system work?",
             answer: [
               "We measure energy and water consumption and correspond them to greenhouse gas emissions. Then, we compare the consumptions and resulting emissions with the accommodation average values, tourism reference data, and the values required to achieve tourism sustainable goals. The results evaluate the impact of a stay. According to your impact, we will give you points. The more sustainable a stay is, the more points you will get. Then you can exchange your points for rewards.",
             ],
           },
           {
+            _id: "7",
             question: "How can I exchange rewards using points?",
             answer: [
               `You can access sustainable products and services from
@@ -106,6 +121,7 @@ const views: tView[] = [
             ],
           },
           {
+            _id: "8",
             question: "How does the gamification system work?",
             answer: [
               `The gamification system has Quests and Competitions to
@@ -139,6 +155,7 @@ const views: tView[] = [
       {
         questions: [
           {
+            _id: "9",
             question: "How does noytrall rate accommodations?",
             answer: [
               `The behaviour of each guest will contribute to changing an
@@ -155,6 +172,7 @@ const views: tView[] = [
         title: "About the service",
         questions: [
           {
+            _id: "10",
             question: "Why we are creating a sustainable community?",
             answer: [
               `Sustainability is a balance between environmental,
@@ -169,6 +187,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "11",
             question: "Is my accommodation suitable for noytrall services?",
             answer: [
               `Our mission is to help tourism transition towards
@@ -181,6 +200,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "12",
             question: "What services does noytrall provide to accommodations?",
             answer: [
               `Monitorização de energia, água, (resíduos e biomassa),
@@ -191,6 +211,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "13",
             question: "Can noytrall develop specific solutions?",
             answer: [
               `noytrall develops carbon monitoring, tracking and
@@ -202,8 +223,8 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
-            question: `Can noytrall services be integrated with third-party
-          services?`,
+            _id: "14",
+            question: `Can noytrall services be integrated with third-party services?`,
             answer: [
               `Yes, you can find services we are integrated with
           <a href="#">here</a>. Customers can request new
@@ -211,6 +232,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "15",
             question: "How much will noytrall services cost?",
             answer: [
               `Dependendo das instalações do hotel. Visita técnica para
@@ -224,10 +246,12 @@ improve all pillars of tourism sustainability.`,
         title: "About the Sustainability Platform",
         questions: [
           {
+            _id: "16",
             question: "What type of information does noytrall provide?",
             answer: [``],
           },
           {
+            _id: `17`,
             question: `What type of information can be managed in the
           sustainability platform?`,
             answer: [],
@@ -238,6 +262,7 @@ improve all pillars of tourism sustainability.`,
         title: "bout the gamification system",
         questions: [
           {
+            _id: "18",
             question: "How does the gamification system work?",
             answer: [
               `The gamification system has Quests and Competitions to
@@ -256,6 +281,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "19",
             question: "What type of rewards can be made available?",
             answer: [
               `As long as it's sustainable, any product or service from a
@@ -273,6 +299,7 @@ improve all pillars of tourism sustainability.`,
       {
         questions: [
           {
+            _id: "20",
             question: "Why we are creating a sustainable community?",
             answer: [
               `Sustainability is a balance between environmental,
@@ -287,6 +314,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "21",
             question: "What is needed to become a sustainable partner?",
             answer: [
               `Anyone offering sustainable products or services can
@@ -297,6 +325,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "22",
             question: "Can I bring my network to the community?",
             answer: [
               `Yes. Expanding the community is a great way to increase
@@ -311,6 +340,7 @@ improve all pillars of tourism sustainability.`,
         title: "About the gamification system",
         questions: [
           {
+            _id: "23",
             question: "How does the gamification system work?",
             answer: [
               `The gamification system has Quests and Competitions to
@@ -325,6 +355,7 @@ improve all pillars of tourism sustainability.`,
             ],
           },
           {
+            _id: "24",
             question: "What type of rewards can be made available?",
             answer: [
               `As long as it's sustainable, any product or service from a
@@ -340,10 +371,30 @@ improve all pillars of tourism sustainability.`,
 ];
 
 const Content: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [activeView, setActiveView] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
+  const { getQuestionInfo } = useHelpState();
+  const { updateQuestionsInfo } = useHelpDispatch();
 
   const renderView = () => {
+    const handleQuestionWasHelpful =
+      (questionId: string, question: string) => () => {
+        setLoading(true);
+        axios
+          .post(`website/support-question/${questionId}/helpful`, { question })
+          .then((res) => {
+            updateQuestionsInfo(res.data.data);
+            notification("Noytrall appreciates your feedback.");
+          })
+          .catch((err) => {
+            notification(
+              "We couldn't process your feedback. Please try again."
+            );
+          })
+          .finally(() => setLoading(false));
+      };
+
     return views[activeView].content?.map(({ title, questions }, i) => {
       return (
         <div
@@ -352,7 +403,8 @@ const Content: React.FC = () => {
         >
           <h4>{title}</h4>
           <ul data-uk-accordion>
-            {questions.map(({ question, answer }) => {
+            {questions.map(({ _id, question, answer }) => {
+              const info = getQuestionInfo(_id);
               return (
                 <li key={question}>
                   <a
@@ -381,7 +433,7 @@ const Content: React.FC = () => {
                               If not{" "}
                               <a
                                 data-uk-toggle="target: #dropaline"
-                                onClick={() => setSelectedQuestion(question)}
+                                onClick={() => setSelectedQuestion(_id)}
                               >
                                 drop us a line
                               </a>
@@ -391,6 +443,10 @@ const Content: React.FC = () => {
                           <div>
                             <div className="uk-text-right@m">
                               <button
+                                onClick={handleQuestionWasHelpful(
+                                  _id,
+                                  question
+                                )}
                                 className="uk-button uk-button-default uk-button-small uk-border-pill"
                                 type="button"
                               >
@@ -400,14 +456,15 @@ const Content: React.FC = () => {
                                 className="uk-button uk-button-default uk-button-small uk-border-pill"
                                 type="button"
                                 uk-toggle="target: #dropaline"
-                                onClick={() => setSelectedQuestion(question)}
+                                onClick={() => setSelectedQuestion(_id)}
                               >
                                 No
                               </button>
                             </div>
                             <div className="uk-text-right@m uk-margin-small">
                               <span className="uk-text-muted uk-text-small">
-                                X found this helpful
+                                {info ? info.helpful.total : "0"} found this
+                                helpful
                               </span>
                             </div>
                           </div>
@@ -449,7 +506,7 @@ const Content: React.FC = () => {
 
   return (
     <Fragment>
-      <DropALine question={selectedQuestion} />
+      <DropALine questionId={selectedQuestion} />
       <div id="maincontent" className="uk-section uk-section-default">
         <div className="uk-container uk-container-xsmall">
           <div>
