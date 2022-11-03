@@ -19,8 +19,15 @@ const errorContainer = (id: string) => {
   return `error-container-${id}`;
 };
 
+const ROOM_KEY = "room";
+const OCCUPANCY_KEY = "occupancy";
+const WATER_CONSUMPTION_KEY = "waterConsumption";
+const WATER_BILL_KEY = "waterBill";
+const ENERGY_CONSUMPTION_KEY = "energyConsumption";
+const ENERGY_BILL_KEY = "energyBill";
+
 const EstimateSavingsModal: React.FC = () => {
-  const [state, setState] = useState<Record<string, any>>({});
+  const [state, setState] = useState<Record<string, string>>({});
   const roomRef = useRef<HTMLInputElement>(null);
   const occupationRef = useRef<HTMLInputElement>(null);
   const waterConsumptionRef = useRef<HTMLInputElement>(null);
@@ -70,14 +77,14 @@ const EstimateSavingsModal: React.FC = () => {
     const listener = async () => {
       if (!(await formIsValid())) return;
 
-      const obj: Record<string, any> = {};
+      const obj: Record<string, string> = {};
 
       [
         { id: ROOM_ID, key: "room" },
         { id: OCCUPANCY_ID, key: "occupancy" },
         { id: WATER_CONSUMPTION_ID, key: "waterConsumption" },
         { id: WATER_BILL_ID, key: "waterBill" },
-        { id: ENERGY_CONSUMPTION_ID, key: "eergyConsumption" },
+        { id: ENERGY_CONSUMPTION_ID, key: "energyConsumption" },
         { id: ENERGY_BILL_ID, key: "energyBill" },
       ].forEach(({ key, id }) => {
         const elem = document.getElementById(id) as
@@ -182,7 +189,7 @@ const EstimateSavingsModal: React.FC = () => {
                       type="text"
                       placeholder="0"
                       ref={occupationRef}
-                    />
+                    />{" "}
                     %
                   </div>
                   {errorDiv(OCCUPANCY_ID)}
@@ -198,7 +205,7 @@ const EstimateSavingsModal: React.FC = () => {
 
                 <div className="uk-margin">
                   <label className="uk-form-label">
-                    Average annual water consumption
+                    Average annual water consumption{" "}
                     <i
                       className="las la-lg la-info-circle uk-text-primary"
                       uk-tooltip="title: Hello World; pos: right"
@@ -219,7 +226,7 @@ const EstimateSavingsModal: React.FC = () => {
                       id={WATER_CONSUMPTION_ID}
                       type="text"
                       placeholder="0"
-                    />
+                    />{" "}
                     m<sup>3</sup>
                   </div>
                   {errorDiv(WATER_CONSUMPTION_ID)}
@@ -227,7 +234,7 @@ const EstimateSavingsModal: React.FC = () => {
 
                 <div className="uk-margin">
                   <label className="uk-form-label">
-                    Average annual water bill value
+                    Average annual water bill value{" "}
                     <i
                       className="las la-lg la-info-circle uk-text-primary"
                       uk-tooltip="title: Hello World; pos: right"
@@ -248,7 +255,7 @@ const EstimateSavingsModal: React.FC = () => {
                       id={WATER_BILL_ID}
                       type="text"
                       placeholder="0"
-                    />
+                    />{" "}
                     €
                   </div>
                   {errorDiv(WATER_BILL_ID)}
@@ -264,7 +271,7 @@ const EstimateSavingsModal: React.FC = () => {
 
                 <div className="uk-margin">
                   <label className="uk-form-label">
-                    Average annual energy consumption
+                    Average annual energy consumption{" "}
                     <i
                       className="las la-lg la-info-circle uk-text-primary"
                       uk-tooltip="title: Hello World; pos: right"
@@ -285,7 +292,7 @@ const EstimateSavingsModal: React.FC = () => {
                       id={ENERGY_CONSUMPTION_ID}
                       type="text"
                       placeholder="0"
-                    />
+                    />{" "}
                     kWh
                   </div>
                   {errorDiv(ENERGY_CONSUMPTION_ID)}
@@ -293,7 +300,7 @@ const EstimateSavingsModal: React.FC = () => {
 
                 <div className="uk-margin">
                   <label className="uk-form-label">
-                    Average annual energy bill value
+                    Average annual energy bill value{" "}
                     <i
                       className="las la-lg la-info-circle uk-text-primary"
                       uk-tooltip="title: Hello World; pos: right"
@@ -314,7 +321,7 @@ const EstimateSavingsModal: React.FC = () => {
                       id={ENERGY_BILL_ID}
                       type="text"
                       placeholder="0"
-                    />
+                    />{" "}
                     €
                   </div>
                   {errorDiv(ENERGY_BILL_ID)}
@@ -345,8 +352,38 @@ const EstimateSavingsModal: React.FC = () => {
   };
 
   const successModal = useMemo(() => {
-    const savePerRoom = 256;
-    const saveAllRooms = 20256;
+    let numberOfRooms: number = eval(state[ROOM_KEY]);
+    let averageMonthly_occupancyRate: number = eval(state[OCCUPANCY_KEY]);
+    let averageMonthly_waterConsumption: number = eval(
+      state[WATER_CONSUMPTION_KEY]
+    );
+    let averageMonthly_waterBill: number = eval(state[WATER_BILL_KEY]);
+    let averageMonthly_energyConsumption: number = eval(
+      state[ENERGY_CONSUMPTION_KEY]
+    );
+    let averageMonthly_energyBill: number = eval(state[ENERGY_BILL_KEY]);
+
+    let non = 30 * numberOfRooms * averageMonthly_occupancyRate;
+    let averageMonthly_waterPrice =
+      averageMonthly_waterBill / averageMonthly_waterConsumption;
+    let averageMonthly_energyPrice =
+      averageMonthly_energyBill / averageMonthly_energyConsumption;
+    let nwc = averageMonthly_waterConsumption / non;
+    let nec = averageMonthly_energyConsumption / non;
+
+    let gwc = eval("0.1");
+    let gec = eval("22");
+
+    let dwc = nwc - gwc;
+    let dec = nec - gec;
+
+    let saved_waterConsumption = dwc * averageMonthly_waterPrice;
+    let saved_energyConsumption = dec * averageMonthly_energyPrice;
+
+    let ts = (saved_waterConsumption + saved_energyConsumption) * 30;
+
+    const savePerRoom = ts * 12;
+    const saveAllRooms = savePerRoom * numberOfRooms;
 
     return (
       <div
@@ -401,7 +438,7 @@ const EstimateSavingsModal: React.FC = () => {
 
             <a
               className="uk-button uk-button-primary uk-border-pill"
-              data-uk-toggle="target: #modal-book-demo-step-1"
+              data-uk-toggle="target: #modal-book-demo-calendar"
             >
               Book a demo
             </a>

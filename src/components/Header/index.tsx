@@ -45,7 +45,15 @@ const Header: React.FC<tProps> = ({}) => {
           className=""
           uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky"
         >
-          <nav className="uk-navbar-container uk-navbar-muted" data-uk-navbar>
+          <nav
+            className="uk-navbar-container uk-navbar-muted"
+            data-uk-navbar
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
             <div className="uk-navbar-left">
               <a
                 className="uk-navbar-toggle uk-hidden@m"
