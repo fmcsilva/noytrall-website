@@ -6,11 +6,8 @@ import Header from "./Header";
 
 import "../css/uikit.min.css";
 import "../css/custom-style-noy.css";
-
-import "../css/parsley.css";
-import "../css/trust-content.css";
-import "../css/header.css";
 import "../css/notification.css";
+
 import { GlobalContextProvider } from "../context/GlobalContext";
 import Menu from "./Menu";
 import BookADemo from "./BookADemo";

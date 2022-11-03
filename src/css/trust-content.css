@@ -1,9 +1,0 @@
-.trust-content {
-    display: grid; gap: 1px; grid-template-columns: repeat(5, 1fr)
-  }
-  
-@media only screen and (max-width: 600px) {
-  .trust-content {
-    display:block
-  }
-}

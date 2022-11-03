@@ -3,14 +3,25 @@ import React, { useEffect, useRef, useState } from "react";
 import useJustValidate from "../../../hooks/useJustValidate";
 import { notification } from "../../../utils/notification";
 import useHelpState from "../../../context/HelpContext/hooks/useHelpState";
+import UIkit from "uikit";
+import useHelpQuestions from "../../../hooks/useHelpQuestions";
+import { tQuestionId } from "../../../models/question";
 
 interface iProps {
   questionId: string | null;
+  onExit(question: tQuestionId): void;
+  setLoading(loading: boolean): void;
+  loading: boolean;
 }
 
-const DropALine: React.FC<iProps> = ({ questionId }) => {
+const DropALine: React.FC<iProps> = ({
+  questionId,
+  onExit,
+  loading,
+  setLoading,
+}) => {
+  // const [loading, setLoading] = useState(false);
   const { getQuestionInfo } = useHelpState();
-  const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -27,7 +38,7 @@ const DropALine: React.FC<iProps> = ({ questionId }) => {
       ref: emailRef,
       field: "#dropaline-form-email",
       rules: [{ rule: "required" }, { rule: "email" }],
-      config: { errorsContainer: ".error-container-name" },
+      config: { errorsContainer: ".error-container-email" },
     },
     {
       ref: descriptionRef,
@@ -36,56 +47,55 @@ const DropALine: React.FC<iProps> = ({ questionId }) => {
       config: { errorsContainer: ".error-container-dropaline_description" },
     },
   ]);
+  const { saveNotHelpfulQuestion } = useHelpQuestions();
 
   useEffect(() => {
-    const listener = async (e: any) => {
-      setLoading(true);
-      if (!(await formIsValid())) {
-        setLoading(false);
-        return;
-      } else {
-        const nameInput = document.getElementById(
-          "dropaline-form-name"
-        ) as HTMLInputElement;
-        const name = nameInput.value;
-
-        const emailInput = document.getElementById(
-          "dropaline-form-email"
-        ) as HTMLInputElement;
-        const email = emailInput.value;
-
-        const descriptionInput = document.getElementById(
-          "dropaline-form-description"
-        ) as HTMLInputElement;
-        const description = descriptionInput.value;
-        const questionInfo = getQuestionInfo(questionId);
-        if (questionInfo) {
-          const { question } = questionInfo;
-          axios
-            .post(`/website/support-question/${questionId}/not-helpful`, {
-              question,
-              name,
-              email,
-              description,
-            })
-            .then((res) => {
-              notification("Noytrall appreciates your feedback.");
-            })
-            .catch((err) => {
-              notification(
-                "We couldn't process your feedback. Please try again."
-              );
-            })
-            .finally(() => {
-              setLoading(false);
-            });
-        } else {
-          setLoading(false);
-        }
-      }
-    };
-
     if (questionId) {
+      const listener = async (e: any) => {
+        setLoading(true);
+        if (!(await formIsValid())) {
+          setLoading(false);
+          return;
+        } else {
+          const nameInput = document.getElementById(
+            "dropaline-form-name"
+          ) as HTMLInputElement;
+          const name = nameInput.value;
+
+          const emailInput = document.getElementById(
+            "dropaline-form-email"
+          ) as HTMLInputElement;
+          const email = emailInput.value;
+
+          const descriptionInput = document.getElementById(
+            "dropaline-form-description"
+          ) as HTMLInputElement;
+          const description = descriptionInput.value;
+          const questionInfo = getQuestionInfo(questionId);
+          if (questionInfo) {
+            const { question } = questionInfo;
+            axios
+              .post(`/website/support-question/${questionId}/not-helpful`, {
+                question,
+                name,
+                email,
+                description,
+              })
+              .then((res) => {
+                notification("Noytrall appreciates your feedback.");
+                onExit(questionId);
+              })
+              .catch((err) => {
+                notification(
+                  "We couldn't process your feedback. Please try again."
+                );
+                setLoading(false);
+              });
+          } else {
+            setLoading(false);
+          }
+        }
+      };
       formRef.current?.addEventListener("submit", listener);
       buttonRef.current?.addEventListener("click", listener);
       return () => {
@@ -93,7 +103,7 @@ const DropALine: React.FC<iProps> = ({ questionId }) => {
         buttonRef.current?.removeEventListener("click", listener);
       };
     }
-  }, [questionId]);
+  }, [questionId, saveNotHelpfulQuestion]);
 
   return (
     <div id="dropaline" uk-modal="esc-close: false; bg-close: false">
@@ -145,6 +155,7 @@ const DropALine: React.FC<iProps> = ({ questionId }) => {
                   placeholder="john@domain.com"
                 />
               </div>
+              <div className="error-container-email"></div>
             </div>
 
             <div className="uk-margin">

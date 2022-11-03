@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import DropALine from "../../components/Help/DropALine";
 import Layout from "../../components/layout";
 
@@ -8,6 +8,9 @@ import useHelpState from "../../context/HelpContext/hooks/useHelpState";
 import axios from "axios";
 import useHelpDispatch from "../../context/HelpContext/hooks/useHelpDispatch";
 import { notification } from "../../utils/notification";
+import useHelpQuestions from "../../hooks/useHelpQuestions";
+import UIkit from "uikit";
+import { tQuestionId } from "../../models/question";
 
 const Help: React.FC = () => {
   return (
@@ -371,11 +374,19 @@ improve all pillars of tourism sustainability.`,
 ];
 
 const Content: React.FC = () => {
-  const [loading, setLoading] = useState(false);
   const [activeView, setActiveView] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
   const { getQuestionInfo } = useHelpState();
   const { updateQuestionsInfo } = useHelpDispatch();
+  const {
+    saveHelpfulQuestion,
+    questionIsHelpful,
+    questionsEvaluation,
+    isLoading,
+    setLoading,
+    dispatch,
+    saveNotHelpfulQuestion,
+  } = useHelpQuestions();
 
   const renderView = () => {
     const handleQuestionWasHelpful =
@@ -386,6 +397,7 @@ const Content: React.FC = () => {
           .then((res) => {
             updateQuestionsInfo(res.data.data);
             notification("Noytrall appreciates your feedback.");
+            saveHelpfulQuestion(questionId);
           })
           .catch((err) => {
             notification(
@@ -394,19 +406,20 @@ const Content: React.FC = () => {
           })
           .finally(() => setLoading(false));
       };
-
     return views[activeView].content?.map(({ title, questions }, i) => {
       return (
         <div
-          key={title}
+          key={questions.map(({ _id }) => _id).join("-")}
           className={i === views.length ? "" : "uk-margin-medium-top"}
         >
           <h4>{title}</h4>
           <ul data-uk-accordion>
             {questions.map(({ _id, question, answer }) => {
               const info = getQuestionInfo(_id);
+              const isHelpful = questionIsHelpful(_id);
+
               return (
-                <li key={question}>
+                <li key={_id}>
                   <a
                     className="uk-accordion-title uk-text-default uk-text-primary"
                     href="#"
@@ -447,16 +460,30 @@ const Content: React.FC = () => {
                                   _id,
                                   question
                                 )}
-                                className="uk-button uk-button-default uk-button-small uk-border-pill"
+                                className={`uk-button uk-button-${
+                                  isHelpful ? "primary" : "default"
+                                } uk-button-small uk-border-pill`}
                                 type="button"
+                                style={{
+                                  ...(isHelpful
+                                    ? { pointerEvents: "none" }
+                                    : {}),
+                                }}
                               >
                                 Yes
                               </button>
                               <button
-                                className="uk-button uk-button-default uk-button-small uk-border-pill"
+                                className={`uk-button uk-button-${
+                                  isHelpful === false ? "primary" : "default"
+                                } uk-button-small uk-border-pill`}
                                 type="button"
                                 uk-toggle="target: #dropaline"
                                 onClick={() => setSelectedQuestion(_id)}
+                                style={{
+                                  ...(isHelpful === false
+                                    ? { pointerEvents: "none" }
+                                    : {}),
+                                }}
                               >
                                 No
                               </button>
@@ -496,7 +523,7 @@ const Content: React.FC = () => {
           >
             {view}
           </a>
-          <a className="uk-visible@s" href="#" onClick={() => setActiveView(i)}>
+          <a className="uk-visible@s" onClick={() => setActiveView(i)}>
             {view}
           </a>
         </li>
@@ -504,9 +531,19 @@ const Content: React.FC = () => {
     });
   };
 
+  const onNotHelpful = (questionId: tQuestionId) => {
+    const modalDiv = document.getElementById("dropaline");
+    if (modalDiv) UIkit.modal(modalDiv).hide();
+    saveNotHelpfulQuestion(questionId);
+  };
+
   return (
     <Fragment>
-      <DropALine questionId={selectedQuestion} />
+      <DropALine
+        {...{ loading: isLoading, setLoading }}
+        questionId={selectedQuestion}
+        onExit={onNotHelpful}
+      />
       <div id="maincontent" className="uk-section uk-section-default">
         <div className="uk-container uk-container-xsmall">
           <div>

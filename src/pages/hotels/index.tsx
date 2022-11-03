@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 import metrics from "../../images/Metrics-bro.png";
 import stats from "../../images/Site Stats-bro.png";
@@ -30,7 +30,6 @@ const Hotels: React.FC = () => {
     <MainLayout title="For Accommodations. noytrall. Stay Smart.">
       <Menu />
       <EstimateSavingsModal />
-      {/* <Modal /> */}
       <Hero />
       <Content />
       <TrustContent />
@@ -64,7 +63,7 @@ const Hero: React.FC = () => {
                 <div className="uk-width-auto">
                   <a
                     className="uk-button uk-button-primary uk-button-large uk-border-pill"
-                    data-uk-toggle="target: #modal-book-demo-step-1"
+                    data-uk-toggle="target: #modal-book-demo-calendar"
                   >
                     Book a demo
                   </a>
@@ -759,12 +758,12 @@ const FAQS: React.FC = () => {
                   <p>
                     For us to make a financial estimate we must know the number
                     of rooms you pretend to install noytrall into. You can
-                    either
-                    <a href="#modal-book-demo-step-1" data-uk-toggle>
+                    either{" "}
+                    <a href="#modal-book-demo-calendar" data-uk-toggle>
                       book a demo
-                    </a>
+                    </a>{" "}
                     and have our sales team contact you for an online meeting,
-                    or you can contact us directly by email to
+                    or you can contact us directly by email to{" "}
                     <a href="mailto:sales@noytrall.com">sales@noytrall.com</a>.
                   </p>
                 </div>
@@ -824,7 +823,7 @@ const GetStarted: React.FC = () => {
             <div className="uk-margin-large">
               <a
                 className="uk-button uk-button-primary uk-button-large uk-border-pill"
-                data-uk-toggle="target: #modal-book-demo-step-1"
+                data-uk-toggle="target: #modal-book-demo-calendar"
               >
                 Book your demo now
               </a>
