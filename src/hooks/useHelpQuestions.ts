@@ -119,6 +119,12 @@ const useHelpQuestions = () => {
   const setLoading = (loading: boolean) =>
     dispatch({ type: loading ? "pending" : "resolved" });
 
+const questionIsEvaluated = (questionId: tQuestionId) => {
+  return questionsEvaluation[questionId]
+  ? true
+  : false;
+}
+
   return {
     saveEvalQuesiton,
     saveHelpfulQuestion,
@@ -127,6 +133,7 @@ const useHelpQuestions = () => {
     questionIsHelpful,
     setLoading,
     dispatch,
+    questionIsEvaluated,
     isLoading: state.status === "pending",
   };
 };

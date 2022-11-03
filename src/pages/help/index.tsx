@@ -386,6 +386,7 @@ const Content: React.FC = () => {
     setLoading,
     dispatch,
     saveNotHelpfulQuestion,
+    questionIsEvaluated,
   } = useHelpQuestions();
 
   const renderView = () => {
@@ -417,6 +418,7 @@ const Content: React.FC = () => {
             {questions.map(({ _id, question, answer }) => {
               const info = getQuestionInfo(_id);
               const isHelpful = questionIsHelpful(_id);
+              const isEvaluated = questionIsEvaluated(_id);
 
               return (
                 <li key={_id}>
@@ -460,12 +462,13 @@ const Content: React.FC = () => {
                                   _id,
                                   question
                                 )}
+                                disabled={isHelpful === false}
                                 className={`uk-button uk-button-${
                                   isHelpful ? "primary" : "default"
                                 } uk-button-small uk-border-pill`}
                                 type="button"
                                 style={{
-                                  ...(isHelpful
+                                  ...(isEvaluated
                                     ? { pointerEvents: "none" }
                                     : {}),
                                 }}
@@ -473,6 +476,7 @@ const Content: React.FC = () => {
                                 Yes
                               </button>
                               <button
+                                disabled={isHelpful === true}
                                 className={`uk-button uk-button-${
                                   isHelpful === false ? "primary" : "default"
                                 } uk-button-small uk-border-pill`}
@@ -480,7 +484,7 @@ const Content: React.FC = () => {
                                 uk-toggle="target: #dropaline"
                                 onClick={() => setSelectedQuestion(_id)}
                                 style={{
-                                  ...(isHelpful === false
+                                  ...(isEvaluated
                                     ? { pointerEvents: "none" }
                                     : {}),
                                 }}
