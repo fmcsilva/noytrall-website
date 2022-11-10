@@ -33,99 +33,96 @@ const ApplyModal: React.FC = () => {
   const bioRef = useRef<HTMLTextAreaElement>(null);
   const businessRef = useRef<HTMLSelectElement>(null);
   const productsRef = useRef<HTMLSelectElement>(null);
-  const { revalidate, validateField } = useJustValidate(
-    "modal-apply-partner-form",
-    [
-      {
-        ref: nameRef,
-        field: "#partner-name",
-        rules: [{ rule: "required" }, { rule: "minLength", value: 3 }],
-        config: { errorsContainer: ".error-container-partner-name" },
-      },
-      {
-        ref: emailRef,
-        field: "#partner-email",
-        rules: [{ rule: "required" }, { rule: "email" }],
-        config: { errorsContainer: ".error-container-partner-email" },
-      },
-      {
-        ref: countryRef,
-        field: "#partner-country",
-        rules: [
-          { rule: "required" },
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? COUNTRIES.map(({ code }) => code).includes(value)
-                  : false
-                : true,
-            errorMessage: "Invalid country",
-          },
-        ],
-        config: { errorsContainer: ".error-container-partner-country" },
-      },
-      {
-        ref: websiteRef,
-        field: "#partner-website",
-        rules: [
-          { rule: "required" },
-          {
-            rule: "customRegexp",
-            value: urlRegex,
-            errorMessage: "Invalid URL",
-          },
-        ],
-        config: { errorsContainer: ".error-container-partner-website" },
-      },
-      {
-        ref: bioRef,
-        field: "#partner-bio",
-        rules: [{ rule: "required" }, { rule: "minLength", value: 10 }],
-        config: { errorsContainer: ".error-container-partner-bio" },
-      },
-      {
-        ref: businessRef,
-        field: "#partner-business_category",
-        rules: [
-          { rule: "required" },
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? BUSSINESS_CATEGORIES.map(
-                      ({ category }) => category
-                    ).includes(value)
-                  : false
-                : true,
-            errorMessage: "Invalid business category",
-          },
-        ],
-        config: { errorsContainer: ".error-container-partner-business" },
-      },
-      {
-        ref: productsRef,
-        field: "#partner-products_services",
-        rules: [
-          { rule: "required" },
-          {
-            validator: (value) =>
-              value
-                ? isString(value)
-                  ? PRODUCTS_SERVICES.map(({ service }) => service).includes(
-                      value
-                    )
-                  : false
-                : true,
-            errorMessage: "Invalid product or service",
-          },
-        ],
-        config: {
-          errorsContainer: ".error-container-partner-products_services",
+  const { revalidate, refresh } = useJustValidate("modal-apply-partner-form", [
+    {
+      ref: nameRef,
+      field: "#partner-name",
+      rules: [{ rule: "required" }, { rule: "minLength", value: 3 }],
+      config: { errorsContainer: ".error-container-partner-name" },
+    },
+    {
+      ref: emailRef,
+      field: "#partner-email",
+      rules: [{ rule: "required" }, { rule: "email" }],
+      config: { errorsContainer: ".error-container-partner-email" },
+    },
+    {
+      ref: countryRef,
+      field: "#partner-country",
+      rules: [
+        { rule: "required" },
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? COUNTRIES.map(({ code }) => code).includes(value)
+                : false
+              : true,
+          errorMessage: "Invalid country",
         },
+      ],
+      config: { errorsContainer: ".error-container-partner-country" },
+    },
+    {
+      ref: websiteRef,
+      field: "#partner-website",
+      rules: [
+        { rule: "required" },
+        {
+          rule: "customRegexp",
+          value: urlRegex,
+          errorMessage: "Invalid URL",
+        },
+      ],
+      config: { errorsContainer: ".error-container-partner-website" },
+    },
+    {
+      ref: bioRef,
+      field: "#partner-bio",
+      rules: [{ rule: "required" }, { rule: "minLength", value: 10 }],
+      config: { errorsContainer: ".error-container-partner-bio" },
+    },
+    {
+      ref: businessRef,
+      field: "#partner-business_category",
+      rules: [
+        { rule: "required" },
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? BUSSINESS_CATEGORIES.map(({ category }) => category).includes(
+                    value
+                  )
+                : false
+              : true,
+          errorMessage: "Invalid business category",
+        },
+      ],
+      config: { errorsContainer: ".error-container-partner-business" },
+    },
+    {
+      ref: productsRef,
+      field: "#partner-products_services",
+      rules: [
+        { rule: "required" },
+        {
+          validator: (value) =>
+            value
+              ? isString(value)
+                ? PRODUCTS_SERVICES.map(({ service }) => service).includes(
+                    value
+                  )
+                : false
+              : true,
+          errorMessage: "Invalid product or service",
+        },
+      ],
+      config: {
+        errorsContainer: ".error-container-partner-products_services",
       },
-    ]
-  );
+    },
+  ]);
 
   useEffect(() => {
     const listener = async () => {
@@ -142,6 +139,13 @@ const ApplyModal: React.FC = () => {
       const bio = bioRef.current?.value;
       const business = businessRef.current?.value;
       const product = productsRef.current?.value;
+      if (nameRef.current) nameRef.current.value = "";
+      if (emailRef.current) emailRef.current.value = "";
+      if (countryRef.current) countryRef.current.value = "";
+      if (websiteRef.current) websiteRef.current.value = "";
+      if (bioRef.current) bioRef.current.value = "";
+      if (businessRef.current) businessRef.current.value = "";
+      if (productsRef.current) productsRef.current.value = "";
 
       axios
         .post("/website/partner-application", {
@@ -171,13 +175,37 @@ const ApplyModal: React.FC = () => {
     const submitButton = document.getElementById(
       "modal-apply-partner-form-submit"
     );
-
     submitButton?.addEventListener("click", listener);
 
     return () => {
       submitButton?.removeEventListener("click", listener);
     };
   }, [revalidate]);
+
+  useEffect(() => {
+    const close = () => {
+      if (nameRef.current) nameRef.current.value = "";
+      if (emailRef.current) emailRef.current.value = "";
+      if (countryRef.current) countryRef.current.value = "";
+      if (websiteRef.current) websiteRef.current.value = "";
+      if (bioRef.current) bioRef.current.value = "";
+      if (businessRef.current) businessRef.current.value = "";
+      if (productsRef.current) productsRef.current.value = "";
+      refresh();
+      const modal = document.getElementById("modal-apply-partner");
+      if (modal) UIkit.modal(modal).hide();
+    };
+
+    const closeButton = document.getElementById("modal-apply-partner-close");
+    closeButton?.addEventListener("click", close);
+    const close2Button = document.getElementById("modal-apply-partner-close2");
+    close2Button?.addEventListener("click", close);
+
+    return () => {
+      closeButton?.removeEventListener("click", close);
+      close2Button?.removeEventListener("click", close);
+    };
+  }, [refresh]);
 
   return (
     <div
@@ -193,6 +221,7 @@ const ApplyModal: React.FC = () => {
         >
           {!loading && (
             <button
+              id="modal-apply-partner-close"
               className="uk-modal-close-default"
               type="button"
               data-uk-close
@@ -347,11 +376,13 @@ const ApplyModal: React.FC = () => {
           </div>
 
           <div className="uk-modal-footer uk-text-right">
-            {!loading && (
-              <a className="uk-button uk-button-link uk-modal-close uk-margin-right">
-                close
-              </a>
-            )}
+            <button
+              disabled={loading}
+              id="modal-apply-partner-close2"
+              className="uk-button uk-button-link uk-modal-close uk-margin-right"
+            >
+              close
+            </button>
             <button
               disabled={loading}
               id="modal-apply-partner-form-submit"

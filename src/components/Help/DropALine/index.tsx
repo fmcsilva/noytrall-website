@@ -7,6 +7,10 @@ import UIkit from "uikit";
 import useHelpQuestions from "../../../hooks/useHelpQuestions";
 import { tQuestionId } from "../../../models/question";
 
+const MODAL_ID = "dropaline";
+const MODAL_CLOSE_ID = "dropaline-close";
+const MODAL_CLOSE2_ID = "dropaline-close2";
+
 interface iProps {
   questionId: string | null;
   onExit(question: tQuestionId): void;
@@ -27,7 +31,7 @@ const DropALine: React.FC<iProps> = ({
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const { formIsValid } = useJustValidate("dropaline-form", [
+  const { formIsValid, refresh } = useJustValidate("dropaline-form", [
     {
       ref: nameRef,
       field: "#dropaline-form-name",
@@ -105,15 +109,40 @@ const DropALine: React.FC<iProps> = ({
     }
   }, [questionId, saveNotHelpfulQuestion]);
 
+  useEffect(() => {
+    const listener = () => {
+      if (buttonRef.current) buttonRef.current.value = "";
+      if (formRef.current) formRef.current.value = "";
+      if (nameRef.current) nameRef.current.value = "";
+      if (emailRef.current) emailRef.current.value = "";
+      if (descriptionRef.current) descriptionRef.current.value = "";
+      refresh();
+      const modal = document.getElementById(MODAL_ID);
+      if (modal) UIkit.modal(modal).hide();
+    };
+
+    const closeButton = document.getElementById(MODAL_CLOSE_ID);
+    closeButton?.addEventListener("click", listener);
+    const close2Button = document.getElementById(MODAL_CLOSE2_ID);
+    close2Button?.addEventListener("click", listener);
+
+    return () => {
+      closeButton?.removeEventListener("click", listener);
+      close2Button?.removeEventListener("click", listener);
+    };
+  }, [refresh]);
+
   return (
-    <div id="dropaline" uk-modal="esc-close: false; bg-close: false">
+    <div id={MODAL_ID} uk-modal="esc-close: false; bg-close: false">
       <div className="uk-modal-dialog">
         <button
+          id={MODAL_CLOSE_ID}
           className="uk-modal-close-default"
           type="button"
-          data-uk-close
           disabled={loading}
+          data-uk-close
         ></button>
+
         <div className="uk-modal-header">
           <h2 className="uk-modal-title">Get support</h2>
         </div>
@@ -177,12 +206,12 @@ const DropALine: React.FC<iProps> = ({
           </form>
         </div>
         <div className="uk-modal-footer uk-text-right">
-          <a
-            href="#modal-simulator-1-4"
+          <button
+            id={MODAL_CLOSE2_ID}
             className="uk-button uk-button-link uk-modal-close uk-margin-right"
           >
             Cancel
-          </a>
+          </button>
           <button
             disabled={loading}
             ref={buttonRef}

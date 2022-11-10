@@ -3,7 +3,7 @@ import {
   FieldConfigInterface,
   FieldRuleInterface,
 } from "just-validate/dist/modules/interfaces";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useJustValidate = (
   formId: string,
@@ -38,26 +38,33 @@ const useJustValidate = (
     }
   }, [justValidate]);
 
+  const fieldListener = useCallback(
+    (field: string) => {
+      const validateField = async (field: string) => {
+        const valid = await justValidate?.revalidateField(field);
+        return valid || false;
+      };
+      return async (e: any) => {
+        validateField(`${field}`);
+      };
+    },
+    [justValidate]
+  );
+
   useEffect(() => {
     if (!justValidate) return;
-    const validateField = async (field: string) => {
-      const valid = await justValidate?.revalidateField(field);
-      return valid || false;
-    };
-    const listener = (field: string) => async (e: any) => {
-      validateField(`${field}`);
-    };
+
     fields.forEach(({ field, ref }) => {
-      ref?.current?.addEventListener("keyup", listener(field));
-      ref?.current?.addEventListener("change", listener(field));
+      ref?.current?.addEventListener("keyup", fieldListener(field));
+      ref?.current?.addEventListener("change", fieldListener(field));
     });
     return () => {
       fields.forEach(({ field, ref }) => {
-        ref?.current?.removeEventListener("keyup", listener(field));
-        ref?.current?.removeEventListener("change", listener(field));
+        ref?.current?.removeEventListener("keyup", fieldListener(field));
+        ref?.current?.removeEventListener("change", fieldListener(field));
       });
     };
-  }, [justValidate, fields]);
+  }, [justValidate, fields, fieldListener]);
 
   const validateField = async (field: string) => {
     const valid = await justValidate?.revalidateField(field);
@@ -82,7 +89,34 @@ const useJustValidate = (
     return valid;
   };
 
-  return { formIsValid, justValidate, validateField, revalidate };
+  const refresh = async () => {
+    console.log('"REFRESH"', "REFRESH");
+    justValidate?.refresh();
+  };
+
+  const removeListeners = () => {
+    fields.forEach(({ field, ref }) => {
+      ref?.current?.removeEventListener("keyup", fieldListener(field));
+      ref?.current?.removeEventListener("change", fieldListener(field));
+    });
+  };
+
+  const addListeners = () => {
+    fields.forEach(({ field, ref }) => {
+      ref?.current?.addEventListener("keyup", fieldListener(field));
+      ref?.current?.addEventListener("change", fieldListener(field));
+    });
+  };
+
+  return {
+    formIsValid,
+    justValidate,
+    validateField,
+    revalidate,
+    refresh,
+    addListeners,
+    removeListeners,
+  };
 };
 
 export default useJustValidate;
